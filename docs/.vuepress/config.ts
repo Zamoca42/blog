@@ -1,22 +1,15 @@
 import { defineUserConfig } from "vuepress";
-import { defaultTheme } from "@vuepress/theme-default";
+import theme from "./theme.js";
 
 export default defineUserConfig({
-  title: "Zamoca Space",
-  description: "Today I Learn",
-  theme: defaultTheme({
-    // set config here
-    navbar: [
-      // NavbarItem
-      { text: "TS", link: "/TS/" },
-      { text: "Nest", link: "/Nest/" },
-      { text: "Python", link: "/Python/" },
-      // NavbarGroup
-      {
-        text: "Info",
-        children: [{ text: "Github", link: "https://github.com/Zamoca42" }],
-      },
-      // string - page file path
-    ],
-  }),
+  base: "/",
+
+  lang: "en-US",
+  title: "Docs Demo",
+  description: "A docs demo for vuepress-theme-hope",
+
+  theme,
+
+  // Enable it with pwa
+  // shouldPrefetch: false,
 });
