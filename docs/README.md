@@ -6,14 +6,15 @@ bgImage: https://theme-hope-assets.vuejs.press/bg/6-light.svg
 bgImageDark: https://theme-hope-assets.vuejs.press/bg/6-dark.svg
 bgImageStyle:
   background-attachment: fixed
-heroText: Project name
-tagline: You can place the description of the project here.
+heroFullScreen: true
+heroText: Zamoca Space
+tagline: 개발 공부, 고민을 기록하는 기술 블로그입니다
 actions:
-  - text: GitHub
+  - text: Feedback
     link: ./demo/
 
-  - text: Projects
-    link: ./guide/
+  - text: GitHub
+    link: https://github.com/zamoca42
 
 highlights:
   # - header: Easy to install
@@ -169,7 +170,7 @@ highlights:
   #       details: RTL layout, print support, fullscreen button, etc.
   #       link: https://theme-hope.vuejs.press/guide/interface/others.html
 
-  - header: New features
+  - header: Blog Topics
     # image: /assets/image/features.svg
     # image: /assets/image/markdown.svg
     # bgImage: https://theme-hope-assets.vuejs.press/bg/1-light.svg
@@ -177,35 +178,20 @@ highlights:
     bgImage: https://theme-hope-assets.vuejs.press/bg/2-light.svg
     bgImageDark: https://theme-hope-assets.vuejs.press/bg/2-dark.svg
     features:
-      - title: Pageviews and Comments
-        icon: comment-dots
-        details: Start pageview statistics and comment support with Waline
-        link: https://theme-hope.vuejs.press/guide/feature/comment.html
+      - title: JavaScript
+        # icon:
+        details: JavaScript 관련 공부 및 링크 모음
+        link: ./Nest/
 
-      - title: Article Information
-        icon: circle-info
-        details: Add author, writing date, reading time, word count and other information to your article
-        link: https://theme-hope.vuejs.press/guide/feature/page-info.html
-
-      - title: Article Encryption
-        icon: lock
-        details: Encrypt you articles based on page links, so that only the one you want could see them
-        link: https://theme-hope.vuejs.press/guide/feature/encrypt.html
-
-      - title: Search
-        icon: search
-        details: Support docsearch and client search
-        link: https://theme-hope.vuejs.press/guide/feature/search.html
-
-      - title: Copy Code Blocks
-        icon: copy
-        details: Copy codes with one click in code blocks
-        link: https://theme-hope.vuejs.press/guide/feature/copy-code.html
-
-      - title: Image Preview
-        icon: image
-        details: Support viewing, zooming, sharing your page images like a gallery
-        link: https://theme-hope.vuejs.press/guide/feature/photo-swipe.html
+      - title: Python
+        # icon:
+        details: Python 관련 공부 및 링크 모음
+        link: ./Nest/
+      
+      - title: Etc
+        # icon:
+        details: 회고 및 소주제 모음
+        link: ./Etc      
 
 #   - header: Blogging
 #     description: Create personal blog with theme
