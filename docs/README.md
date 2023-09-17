@@ -10,10 +10,10 @@ heroFullScreen: true
 heroText: Zamoca Space
 tagline: 개발 공부, 고민을 기록하는 기술 블로그입니다
 actions:
-  - text: Feedback
-    link: ./demo/
+  # - text: Feedback
+  #   link: ./demo/
 
-  - text: GitHub
+  - text: Profile
     link: https://github.com/zamoca42
 
 highlights:
