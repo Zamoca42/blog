@@ -1,21 +1,17 @@
 import { sidebar } from "vuepress-theme-hope";
 
 export default sidebar({
-  "/": [
+  "/Nest/": [
     "",
+    "middle",
+    "start",
     {
-      text: "Demo",
-      icon: "laptop-code",
-      prefix: "demo/",
-      link: "demo/",
-      children: "structure",
+      text: "Nest",
+      prefix: "Test/",
+      collapsible: true,
+      children: ["README", "2-start"],
     },
-    {
-      text: "Docs",
-      icon: "book",
-      prefix: "guide/",
-      children: "structure",
-    },
-    "slides",
   ],
+  "/Etc/": [""],
+  "/Project/": [""],
 });

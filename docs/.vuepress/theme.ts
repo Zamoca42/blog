@@ -1,20 +1,20 @@
 import { hopeTheme } from "vuepress-theme-hope";
-import navbar from "./navbar.js";
-import sidebar from "./sidebar.js";
+import navbar from "./navbar";
+import sidebar from "./sidebar";
 
 export default hopeTheme({
   hostname: "https://vuepress-theme-hope-docs-demo.netlify.app",
 
   author: {
-    name: "Mr.Hope",
-    url: "https://mister-hope.com",
+    name: "추연규",
+    url: "https://github.com/zamoca42",
   },
 
   iconAssets: "fontawesome-with-brands",
 
-  logo: "/logo.svg",
+  // logo: "/logo.svg",
 
-  repo: "vuepress-theme-hope/vuepress-theme-hope",
+  repo: "zamoca42/blog",
 
   docsDir: "src",
 
@@ -24,9 +24,15 @@ export default hopeTheme({
   // sidebar
   sidebar,
 
+  navbarLayout: {
+    start: ["Brand"],
+    center: ["Links"],
+    end: ["Language", "Repo", "Outlook", "Search"],
+  },
+
   footer: "Default footer",
 
-  displayFooter: true,
+  displayFooter: false,
 
   encrypt: {
     config: {
