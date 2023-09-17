@@ -27,7 +27,7 @@ export default hopeTheme({
   navbarLayout: {
     start: ["Brand"],
     center: ["Links"],
-    end: ["Language", "Repo", "Outlook", "Search"],
+    end: ["Search", "Repo"],
   },
 
   footer: "Default footer",
@@ -45,6 +45,7 @@ export default hopeTheme({
   },
 
   plugins: {
+
     // You should generate and use your own comment service
     comment: {
       provider: "Giscus",
