@@ -188,7 +188,7 @@ highlights:
         details: Python 관련 공부 및 링크 모음
         link: ./Nest/
       
-      - title: Etc
+      - title: etc.
         # icon:
         details: 회고 및 소주제 모음
         link: ./Etc      

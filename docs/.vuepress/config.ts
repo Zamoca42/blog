@@ -11,6 +11,16 @@ export default defineUserConfig({
       isSearchable: (page) => page.path !== "/",
     }),
   ],
+  head: [
+    [
+      "link",
+      {
+        rel: "pretendard",
+        href: "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css",
+        crosorigin: "",
+      },
+    ],
+  ],
   // Enable it with pwa
   // shouldPrefetch: false,
 });

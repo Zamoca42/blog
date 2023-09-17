@@ -1,5 +1,5 @@
 ---
-title: Etc
+title: etc.
 comment: false
 ---
 
