@@ -28,7 +28,7 @@ git merge post
 
 ![FastForwardMerge](https://github.com/Zamoca42/blog/assets/96982072/535ff5bc-07b0-4375-9c47-3126a8dd2782)
 
-브랜치 분기 후 다른 브랜치에 아무런 커밋이 없다면 merge 할 때 fast-Forward 방식으로 merge
+브랜치 분기 후 다른 브랜치에 아무런 커밋이 없다면 merge 할 때 fast-forward 방식으로 merge
 
 별도의 merge 기록 없이 원래 브랜치에서 작업한 것처럼 HEAD만 이동
 
