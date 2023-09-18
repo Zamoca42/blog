@@ -52,7 +52,7 @@ solution(id_list, report, k)
 result > [2, 1, 1, 0]
 ```
 
-## 다른 사람의 코드
+#### 다른 사람의 코드
 
 ```python
 def solution(id_list, report, k):
