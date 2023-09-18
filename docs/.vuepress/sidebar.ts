@@ -12,4 +12,5 @@ export default sidebar({
   ],
   "/Etc/": [""],
   "/Project/": [""],
+  "/DB/": ["", "sql"],
 });
