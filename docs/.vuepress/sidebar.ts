@@ -11,5 +11,13 @@ export default sidebar({
       collapsible: true,
       children: "structure",
     },
+    {
+      text: "git",
+      prefix: "Git/",
+      collapsible: true,
+      children: "structure",
+    },
+    "github-flow",
+    "git-flow",
   ],
 });
