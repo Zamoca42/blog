@@ -1,7 +1,15 @@
 import { sidebar } from "vuepress-theme-hope";
 
 export default sidebar({
-  "/DB/": "structure",
+  "/DB/": [
+    "",
+    {
+      text: "SQL 첫걸음",
+      prefix: "SQL/",
+      collapsible: true,
+      children: "structure",
+    },
+  ],
   "/JS_TS/": [
     "",
     {
