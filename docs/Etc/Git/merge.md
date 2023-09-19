@@ -37,3 +37,7 @@ git merge post
 ![FastForwardMergeWith_no_ff](https://github.com/Zamoca42/blog/assets/96982072/8589cfc7-278a-4fbd-a08f-605b148e89d3)
 
 로컬에서 merge Pull Request와 같이 merge commit을 만들고 싶다면 `--no-ff` 옵션 추가
+
+## 참고 링크
+
+:pushpin: [Typical, FastForward, no_ff merge images](https://www.bogotobogo.com/DevOps/SCM/Git/Git_GitHub_Fast-Forward_Merge.php)
