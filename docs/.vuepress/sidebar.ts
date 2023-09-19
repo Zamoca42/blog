@@ -1,8 +1,16 @@
 import { sidebar } from "vuepress-theme-hope";
 
 export default sidebar({
-  "/JS_TS/": "structure",
   "/DB/": "structure",
+  "/JS_TS/": [
+    "",
+    {
+      text: "NestJS",
+      prefix: "NestJS/",
+      collapsible: true,
+      children: "structure",
+    },
+  ],
   "/Etc/": [
     "",
     {
