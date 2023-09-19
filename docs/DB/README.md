@@ -10,4 +10,4 @@ next: false
 
 ### 목차
 
-- [SQL 첫걸음](./sql.md)
+- [SQL 첫걸음](./SQL/sql.md)
