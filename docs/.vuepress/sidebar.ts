@@ -18,6 +18,12 @@ export default sidebar({
       collapsible: true,
       children: "structure",
     },
+    {
+      text: "모던 자바스크립트 딥다이브",
+      prefix: "JavaScript/",
+      collapsible: true,
+      children: "structure",
+    },
   ],
   "/Etc/": [
     "",
