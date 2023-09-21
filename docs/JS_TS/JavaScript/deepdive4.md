@@ -75,3 +75,6 @@ var score = 80;
 score = 90;
 ```
 `var` 키워드로 선언된 변수는 값을 재할당 가능, `const`는 재할당 불가능
+
+## 참고 링크
+:pushpin: [가비지 컬렉션 - 코어 자바스크립트](https://ko.javascript.info/garbage-collection)
