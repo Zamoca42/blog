@@ -3,8 +3,6 @@ title: 로그인 구현하기
 order: 2
 ---
 
-
-
 React Admin에서 로그인 페이지를 만들고 Nest의 인증 모듈과 연결했을 때의 화면입니다.
 
 ![로그인 화면](https://github.com/Zamoca42/blog/assets/96982072/9218fafc-bc81-4780-b22b-4274e3f3ec6b)
@@ -221,8 +219,8 @@ export class AuthController {
   @UseGuards(AuthGuard('local'))
   @HttpCode(HttpStatus.OK)
   @Post('login')
-  async login(@Body() reqUser: LoginRequestDto): Promise<LoginResponseDto> {
-    return this.authService.validateUser(reqUser.username, reqUser.password);
+  async login(@Request() req) {
+    return req.user;
   }
 }
 ```
@@ -239,7 +237,7 @@ export class AuthController {
 
 ## 정리
 
-![](https://github.com/Zamoca42/blog/assets/96982072/9791d296-88c8-4e40-a178-c22e423c6f78)
+![](https://github.com/Zamoca42/blog/assets/96982072/4d5bc910-71f6-464c-8a86-275688421138)
 
 로그인을 구현하면서 구성을 플로우차트로 정리했습니다.
 
