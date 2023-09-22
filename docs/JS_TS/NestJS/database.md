@@ -1,6 +1,6 @@
 ---
 title: 데이터베이스 연결하기
-order: 3
+order: 4
 ---
 
 Nest에서는 TypeORM, Prisma, Mongoose 등 Node.js의 database 관련 라이브러리와 ORM을 지원하기 때문에 SQL이나 NoSQL 데이터베이스 모두 쉽게 연결할 수 있습니다.
@@ -88,13 +88,6 @@ export const customerSchema = new Schema(
         type: "global",
       },
     },
-    marketing_information_agree_date: String,
-  },
-  {
-    timestamps: {
-      createdAt: "create_time",
-      updatedAt: "update_time",
-    },
   }
 );
 ```
@@ -134,24 +127,13 @@ export const customerMetaSchema = new Schema(
       type: String,
       hashKey: true,
     },
-    lastSignInTime: Date,
-    businessAddress: String,
     businessName: String,
     businessItem: String,
-    accountStatus: String,
-    job: String,
-    age: Number,
-  },
-  {
-    timestamps: {
-      createdAt: "createTime",
-      updatedAt: null,
-    },
   }
 );
 ```
 
-고객메타정보 스키마를 설정했습니다. 고객메타정보 스키마는 유저아이디(id), 마지막 접속시간, 사업 이름, 업종, 주소 등을 저장합니다.
+고객메타정보 스키마를 설정했습니다. 고객메타정보 스키마는 유저아이디(id), 사업 이름, 업종을 저장합니다.
 
 고객정보(customer) 스키마와는 유저아이디를 저장하는것만 같고 컨벤션(convention)과 필드가 다른데 다음 주제인 DTO에서 설명해보겠습니다.
 
@@ -171,10 +153,6 @@ export class Customer extends Item {
   user_id: string;
   email: string;
   phone_number: string;
-  marketing_information_agree_date: string;
-  personal_data_retention_period: Date;
-  create_time: Date;
-  update_time: Date;
 }
 
 export const createCustomerModel = (tablePrefix: string): Model<Customer> => {
@@ -192,13 +170,8 @@ import { Model } from "dynamoose/dist/Model";
 
 export class CustomerMeta extends Item {
   id: string;
-  lastSignInTime: Date;
-  businessAddress: string;
   businessName: string;
   businessItem: string;
-  accountStatus: string;
-  job: string;
-  age: number;
 }
 
 export const createCustomerMetaModel = (
