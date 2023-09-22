@@ -1,4 +1,9 @@
 ---
+head:
+  - - meta
+    - name: google-site-verification
+      content: ka-TLuEzIOz8Aaetf7YDeK2TFMsAgwJe2MmzC0L4sRU
+
 home: true
 title: Home
 # heroImage: /logo.svg
