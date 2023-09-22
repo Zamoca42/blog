@@ -75,6 +75,8 @@ export class LoginResponseDto {
 
 하지만 데이터 검증이 완전히 작동하려면 main.ts에서 설정이 필요합니다.
 
+**main.ts**
+
 ```typescript
 import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
@@ -100,7 +102,6 @@ bootstrap();
 다른 모듈이 생성되더라도 따로 설정해줄 필요없이 validation이 가능합니다.
 
 - [Global-scoped-pipes](https://docs.nestjs.com/pipes#global-scoped-pipes)
-
 
 `ValidationPipe`는 validator가 작동할 때 어떻게 동작할지 설정할 수 있습니다.
 
