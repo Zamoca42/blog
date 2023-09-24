@@ -180,4 +180,4 @@ export class GetCustomerResponseDto extends CustomerDto {
 
 앞서 서비스 로직에서 `plainToClass`를 사용했기 때문에 DTO에서 내보낼 객체는 `@Expose()`로 또는 `@Exclude()`로 제외시킬 수도 있습니다.
 
-또 [`@Expose()`](https://github.com/typestack/class-transformer#exposing-properties-with-different-names)의 옵션으로 다른이름으로 변환해서 내보내는 것도 가능합니다
+또 [`@Expose()`](https://github.com/typestack/class-transformer#exposing-properties-with-different-names)의 옵션으로 컨벤션이 다르다면 컨벤션을 일치시킬 수 있습니다.

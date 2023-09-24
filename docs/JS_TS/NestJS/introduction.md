@@ -53,13 +53,3 @@ $ nest new 프로젝트 이름
 ```
 
 `nest new` 명령어를 사용하면 타입스크립트를 기본 언어로 프로젝트가 만들어집니다.
-
-다음 주제부터는 공식문서를 참고하여 회원 관리페이지를 만들어보겠습니다.
-
-## 참고 링크
-
-프로젝트에서 생성된 `module`, `service`, `controller`의 역할은 공식문서를 참고바랍니다
-
-:pushpin: [module](https://docs.nestjs.com/modules)
-:pushpin: [service](https://docs.nestjs.com/providers)
-:pushpin: [controller](https://docs.nestjs.com/controllers)
