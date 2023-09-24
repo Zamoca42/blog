@@ -29,7 +29,7 @@ export default sidebar({
     "",
     {
       text: "코딩 테스트",
-      prefix: "Codingtest/",
+      prefix: "CodingTest/",
       collapsible: true,
       children: "structure",
     },
