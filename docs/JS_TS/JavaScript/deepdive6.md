@@ -101,6 +101,8 @@ var string = hello; // hello를 변수로 인식
 
 자바스크립트의 문자열은 원시 타입이며, 변경 불가능한 값(Immutable value)이다.
 
+:pushpin: [객체와 변경불가성(Immutability)](https://poiemaweb.com/js-immutability)
+
 ## 6.3 템플릿 리터럴
 
 ES6부터 템플릿 리터럴(Template literal)이라고 하는 새로운 문자열 표기법이 도입되었다.
