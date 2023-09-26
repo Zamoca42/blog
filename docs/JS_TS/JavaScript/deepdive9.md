@@ -231,4 +231,80 @@ Boolean([]) //-> true
 
 ## 9.4 단축 평가
 
+## 9.4.1 논리 연산자를 사용한 단축 평가
 
+```js
+'Cat' && 'Dog' //-> 'Dog'
+```
+
+논리곱(&&) 연산자는 두 개의 피연산자 모두 true로 평가될 때 true를 반환한다.
+논리곱 연산자는 좌항에서 우항으로 평가가 진행되면서 두 번째 피연산자가 논리 연산의 결과를 결정한다.
+
+즉 문자열 'Dog'를 그대로 반환한다.
+
+```js
+'Cat' || 'Dog' //-> 'Cat'
+```
+
+논리합(||) 연산자는 두 개의 피연산자 중 하나만 true로 평가되어도 true를 반환한다.
+논리합 연산자는 두 번째 피연산자까지 평가해 보지 않아도 위 표현식을 평가할 수 있다.
+
+즉 문자열 'Cat'을 그대로 반환한다.
+
+단축평가는 표현식을 평가하는 도중에 평가 결과가 확정된 경우 나머지 평가 과정을 생략하는 것을 말한다
+
+|표현식| 평가 결과|
+|:--|:--|
+|true \|\| anything| true|
+|false \|\| anything| anything|
+|true && anything| anything|
+|false && anything| false|
+
+단축 평가를 사용하면 if문을 대체할 수 있고, 다음과 같은 상황에서 유용하게 사용된다.
+
+- 객체를 가리키기를 기대하는 변수가 null 또는 undefined가 아닌지 확인하고 프로퍼티를 참조
+
+```js
+var elem = null;
+
+var value = elem && elem.value; //-> null
+```
+
+- 함수 매개변수에 기본값을 설정할 때
+
+```js
+function getStringLength(str){
+    str = str || '';
+    return str.length;
+}
+
+getStringLength(); //-> 0
+getStringLength('hi'); //-> 2
+
+// ES6의 매개변수의 기본값 설정
+function getStringLength(str = ''){
+    return str.length;
+}
+```
+
+### 9.4.2 옵셔널 체이닝 연산자
+
+ES11(ECMAScript2020)에서 도입된 옵셔널 체이닝 연산자 ?.는 좌항의 피연산자가 null 또는 undefined인 경우 undefined를 반환하고, 그렇지 않으면 우항의 프로퍼티 참조를 이어간다
+
+```js
+var elem = null;
+
+var value = elem?.value;
+console.log(value); // undefined
+```
+
+옵셔널 체이닝 연산자가 도입되기 이전에는 논리 연산자 &&을 사용하여 변수가 null 또는 undefined인지 확인했다.
+
+### 9.4.3 null 병합 연산자
+
+ES11(ECMAScript2020)에서 도입된 null 병합 연산자 ??는 좌항의 피연산자가 null 또는 undefined인 경우 우항의 피연사자를 반환하고, 그렇지 않으면 좌항의 피연산자를 반환한다.
+
+```js
+var foo = null ?? 'default string';
+console.log(foo); // 'default string'
+```
