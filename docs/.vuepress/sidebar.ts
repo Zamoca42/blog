@@ -25,7 +25,7 @@ export default sidebar({
       children: "structure",
     },
   ],
-  "/Etc/": [
+  "/etc/": [
     "",
     {
       text: "코딩 테스트",
