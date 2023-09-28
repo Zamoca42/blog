@@ -13,21 +13,20 @@ title: 8. 제어문
 ```javascript
 // 블록문
 {
-    var foo = 10;
+  var foo = 10;
 }
 
 // 제어문
 var x = 1;
 
 if (x < 10) {
-    x++;
+  x++;
 }
 
 // 함수 선언문
 function sum(a, b) {
-    return a + b;
+  return a + b;
 }
-
 ```
 
 ## 2. 조건문
@@ -42,9 +41,9 @@ if ... else 문은 주어진 조건식의 평가 결과, 즉 논리적 참 또�
 
 ```javascript
 if (조건식) {
-    // true면 여기서 실행
+  // true면 여기서 실행
 } else {
-    // false면 여기서 실행
+  // false면 여기서 실행
 }
 ```
 
@@ -54,11 +53,11 @@ if (조건식) {
 
 ```javascript
 if (조건식1) {
-    // 조건식1이 참이면 여기서 실행
+  // 조건식1이 참이면 여기서 실행
 } else if (조건식2) {
-    // 조건식2가 참이면 여기서 실행
+  // 조건식2가 참이면 여기서 실행
 } else {
-    // 조건식1과 2가 모두 거짓이면 여기서 실행
+  // 조건식1과 2가 모두 거짓이면 여기서 실행
 }
 ```
 
@@ -70,7 +69,7 @@ var kind;
 
 // if 문
 if (num > 0) {
-    kind = '양수';
+  kind = "양수";
 }
 
 console.log(kind); //양수
@@ -78,19 +77,19 @@ console.log(kind); //양수
 // if ... else 문
 
 if (num > 0) {
-    kind = '양수';
+  kind = "양수";
 } else {
-    kind = '음수';
+  kind = "음수";
 }
 console.log(kind); // 양수
 
 // if...else if 문
 if (num > 0) {
-    kind = '양수';
+  kind = "양수";
 } else if (num < 0) {
-    kind = '음수';
+  kind = "음수";
 } else {
-    kind = '영';
+  kind = "영";
 }
 console.log(kind); // 양수
 ```
@@ -101,9 +100,9 @@ console.log(kind); // 양수
 var num = 2;
 var kind;
 
-if (num > 0) kind = '양수';
-else if (num < 0) kind = '음수';
-else kind = '영';
+if (num > 0) kind = "양수";
+else if (num < 0) kind = "음수";
+else kind = "영";
 
 console.log(kind); //양수
 ```
@@ -114,10 +113,11 @@ if ... else문은 삼항 조건 연산자로 바꿔 쓸 수 있다.
 var num = 2;
 var kind;
 
-if (x % 2) { // 2 % 2는 0이다. 이때 0은 false로 타입 변환 된다.
-    result = '홀수';
+if (x % 2) {
+  // 2 % 2는 0이다. 이때 0은 false로 타입 변환 된다.
+  result = "홀수";
 } else {
-    result = '짝수';
+  result = "짝수";
 }
 
 console.log(result); // 짝수
@@ -130,7 +130,7 @@ var x = 2;
 
 // 0은 false로 취급된다.
 
-var result = x % 2 ? '홀수' : '짝수';
+var result = x % 2 ? "홀수" : "짝수";
 console.log(result); // 짝수
 ```
 
@@ -139,7 +139,7 @@ console.log(result); // 짝수
 ```js
 var num = 2;
 
-var kind = num ? (num > 0 ? '양수': '음수'): '영';
+var kind = num ? (num > 0 ? "양수" : "음수") : "영";
 console.log(kind); // 양수
 ```
 
@@ -152,14 +152,14 @@ default 문은 선택사항이다.
 
 ```js
 switch (표현식) {
-    case 표현식1:
-        // 실행문
-        break
-    case 표현식2:
-        // 실행문
-        break
-    default:
-        // case와 일치하는 문이 없을 때 실행
+  case 표현식1:
+    // 실행문
+    break;
+  case 표현식2:
+    // 실행문
+    break;
+  default:
+  // case와 일치하는 문이 없을 때 실행
 }
 ```
 
@@ -206,9 +206,9 @@ for문 내에 for 문을 중첩해 사용할 수 있다. 다음은 두 개의 �
 
 ```js
 for (var i = 1; i <= 6; i++) {
-    for (var j = 1; j <= 6; j++) {
-        if (i + j === 6 ) console.log(`[${i}, ${j}]`);
-    }
+  for (var j = 1; j <= 6; j++) {
+    if (i + j === 6) console.log(`[${i}, ${j}]`);
+  }
 }
 ```
 
@@ -229,8 +229,8 @@ while 문은 반복 횟수가 불명확할 때 주로 사용한다.
 var count = 0;
 
 while (count < 3) {
-    console.log(count); // 0 1 2
-    count++;
+  console.log(count); // 0 1 2
+  count++;
 }
 ```
 
@@ -246,9 +246,9 @@ while (true) {...}
 var count = 0;
 
 while (true) {
-    console.log(count);
-    count++;
-    if (count === 3) break;
+  console.log(count);
+  count++;
+  if (count === 3) break;
 } // 0 1 2
 ```
 
@@ -267,16 +267,16 @@ break문은 반복문을 더 이상 진행하지 않아도 될 때 불필요한 
 다음은 문자열에서 특정 문자의 인덱스(위치)를 검색하는 예다.
 
 ```js
-var string = 'Hello World.';
-var search = 'l';
+var string = "Hello World.";
+var search = "l";
 var index;
 
 for (var i = 0; i < string.length; i++) {
-    // 문자열의 개별문자가 'l'이면
-    if (string[i] === search) {
-        index = i;
-        break; // 탈출
-    }
+  // 문자열의 개별문자가 'l'이면
+  if (string[i] === search) {
+    index = i;
+    break; // 탈출
+  }
 }
 
 console.log(index); // 2
@@ -290,30 +290,27 @@ console.log(string.indexOf(search)); // 2
 countinue 문은 반복문의 코드 블록 실행을 현 지점에서 중단하고 반복문의 증감식으로 실행 흐름을 이동시킨다.
 
 ```js
-var string = 'Hello World.';
-var search = 'l';
+var string = "Hello World.";
+var search = "l";
 var count = 0;
 
 // 문자열은 유사 배열이므로 for 문으로 순회할 수 있다.
 for (var i = 0; i < string.length; i++) {
-    if (string[i] !== search) continue;
-    count++;
+  if (string[i] !== search) continue;
+  count++;
 }
 
 console.log(count); // 3
 
 // String.prototype.match 메서드를 사용해도 같은 동작을 한다.
-const regexp = new RegExp(search, 'g');
+const regexp = new RegExp(search, "g");
 console.log(string.match(regexp).length); // 3
 ```
 
 위 예제의 for 문은 다음 코드와 동일하게 동작한다.
+
 ```js
 for (var i = 0; i < string.length; i++) {
-    if (string[i] === search) count++;
+  if (string[i] === search) count++;
 }
 ```
-
-
-
-

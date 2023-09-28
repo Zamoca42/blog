@@ -4,7 +4,7 @@ title: 6. 데이터 타입
 
 자바스크립트의 모든 값은 데이터 타입을 갖는다. 데이터 타입(Data type)은 값의 종류를 말한다.
 
-자바스크립트(ES6)은 7개의 데이터 타입을 제공하고 
+자바스크립트(ES6)은 7개의 데이터 타입을 제공하고
 원시 타입(Primitive type)과 객체 타입(Object/Reference type)으로 분류할 수 있다.
 
 <table>
@@ -71,22 +71,22 @@ ECMAScript사양에 따르면 숫자 타입의 값은 [배정밀도 64비트 부
 ```javascript
 console.log(10 / 0); // Infinity
 console.log(10 / -0); // -Infinity
-console.log(1 * 'String'); // NaN
+console.log(1 * "String"); // NaN
 ```
 
 :pushpin: 자바스크립트는 대소문자를 구별하므로 `NaN`을 NAN, Nan, nan으로 표현하면 변수로 인식해 에러가 발생
 
 ## 2. 문자열 타입
 
-문자열(String) 타입은 텍스트 데이터를 나타내는데 사용한다. 
+문자열(String) 타입은 텍스트 데이터를 나타내는데 사용한다.
 문자열은 0개 이상의 16비트 유니코드 문자(UTF-16)의 집합으로 전 세계 대부분의 문자를 표현할 수 있다.
 
-문자열은 작은따옴표('), 큰따옴표("), 백틱(\`)으로 텍스트를 감싼다. 
+문자열은 작은따옴표('), 큰따옴표("), 백틱(\`)으로 텍스트를 감싼다.
 
 ```javascript
 var string;
 
-string = '문자열';
+string = "문자열";
 string = "문자열";
 string = `문자열`;
 string = '작은 따옴표로 감싼 문자열 내의 "큰따옴표"는 문자열로 인식된다.';
@@ -131,8 +131,8 @@ console.log(template);
 ### 3.2. 표현식 삽입
 
 ```javascript
-var first = 'Ung-mo';
-var last = 'Lee';
+var first = "Ung-mo";
+var last = "Lee";
 
 console.log(`My name is ${first} ${last}`);
 ```
@@ -174,7 +174,7 @@ console.log(`1 + 2 = ${1 + 2}`);
 자바스크립트 엔진은 누구도 참조하는 메모리 공간에 대해 가비지 컬렉션을 수행할 것이다.
 
 ```javascript
-var foo = 'Lee';
+var foo = "Lee";
 
 foo = null;
 ```
@@ -184,23 +184,23 @@ foo = null;
 ```html
 <!DOCTYPE html>
 <html>
-    <body>
-        <script>
-            var element = document.querySelector('.myClass');
-            // HTML 문서에 myClass 클래스를 갖는 요소가 없다면 null을 반환한다
-            console.log(element); // null
-        </script>
-    </body>
+  <body>
+    <script>
+      var element = document.querySelector(".myClass");
+      // HTML 문서에 myClass 클래스를 갖는 요소가 없다면 null을 반환한다
+      console.log(element); // null
+    </script>
+  </body>
 </html>
 ```
 
 ## 7. 심벌 타입
 
-심벌은 ES6에서 추가된 7번째 타입으로, 변경 불가능한 원시 타입의 값으로 다른 값과 중복되지 않는 유일무이한 값이다. 
+심벌은 ES6에서 추가된 7번째 타입으로, 변경 불가능한 원시 타입의 값으로 다른 값과 중복되지 않는 유일무이한 값이다.
 따라서 주로 이름이 충돌할 위험이 없는 객체의 유일한 프로퍼티 키를 만들기 위해 사용한다.
 
 ```javascript
-var key = Symbol('key');
+var key = Symbol("key");
 
 console.log(typeof key); // symbol
 
@@ -208,7 +208,7 @@ console.log(typeof key); // symbol
 var obj = {};
 
 // 이름이 충돌할 위험이 없는 유일무이한 값인 심벌을 프로퍼티 키로 사용한다
-obj[key] = 'value';
+obj[key] = "value";
 console.log(obj[key]); //value
 ```
 
@@ -224,7 +224,7 @@ console.log(obj[key]); //value
 ### 9.1. 데이터 타입에 의한 메모리 공간의 확보와 참조
 
 메모리에 값을 저장하려면 먼저 확보해야 할 메모리 공간의 크기를 결정해야한다.
-만약 숫자 타입 값 100을 저장하려면 자바스크립트 엔진은 리터럴 100을 숫자 타입의 값으로 해석하고 100을 저장하기 위해 메모리 공간을 확보한다. 
+만약 숫자 타입 값 100을 저장하려면 자바스크립트 엔진은 리터럴 100을 숫자 타입의 값으로 해석하고 100을 저장하기 위해 메모리 공간을 확보한다.
 그 다음 100을 2진수로 저장한다.
 
 <img width="666" alt="" src="https://github.com/Zamoca42/blog/assets/96982072/8156627b-47d5-4e3e-b9e7-351c8bf65a8b">
@@ -245,7 +245,7 @@ console.log(obj[key]); //value
 
 ## 10. 동적 타이핑
 
-C나 자바같은 정적 타입 언어는 변수를 선언할 때 변수에 할당할 수 있는 값의 종류, 즉 데이터 타입을 사전에 선언해야한다. 
+C나 자바같은 정적 타입 언어는 변수를 선언할 때 변수에 할당할 수 있는 값의 종류, 즉 데이터 타입을 사전에 선언해야한다.
 이를 명시적 타입 선언이라 한다.
 
 ```c
@@ -268,7 +268,7 @@ console.log(typeof foo); // undefined
 foo = 3;
 console.log(typeof foo); // number
 
-foo = 'Hello';
+foo = "Hello";
 console.log(typeof foo); // string
 
 foo = true;
@@ -286,7 +286,7 @@ console.log(typeof foo); // object
 foo = [];
 console.log(typeof foo); // object
 
-foo = function() {}; 
+foo = function () {};
 console.log(typeof foo); // function
 ```
 
