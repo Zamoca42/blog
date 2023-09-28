@@ -1,26 +1,26 @@
 import { sidebar } from "vuepress-theme-hope";
 
 export default sidebar({
-  "/DB/": [
+  "/db/": [
     "",
     {
       text: "SQL 첫걸음",
-      prefix: "SQL/",
+      prefix: "sql/",
       collapsible: true,
       children: "structure",
     },
   ],
-  "/JS_TS/": [
+  "/js-ts/": [
     "",
     {
       text: "NestJS",
-      prefix: "NestJS/",
+      prefix: "nest-js/",
       collapsible: true,
       children: "structure",
     },
     {
       text: "모던 자바스크립트 딥다이브",
-      prefix: "JavaScript/",
+      prefix: "deepdive/",
       collapsible: true,
       children: "structure",
     },
@@ -29,13 +29,13 @@ export default sidebar({
     "",
     {
       text: "코딩 테스트",
-      prefix: "CodingTest/",
+      prefix: "coding-test/",
       collapsible: true,
       children: "structure",
     },
     {
       text: "git",
-      prefix: "Git/",
+      prefix: "git/",
       collapsible: true,
       children: "structure",
     },
