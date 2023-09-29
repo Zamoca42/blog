@@ -1,0 +1,9 @@
+**/.git
+**/node_modules
+**/.github
+**/.husky
+**/.vscode
+dist
+package.json
+package-lock.json
+commitlint.config.js
