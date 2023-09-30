@@ -7,3 +7,7 @@ dist
 package.json
 package-lock.json
 commitlint.config.js
+src
+.cache
+.temp
+public
