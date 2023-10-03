@@ -12,7 +12,7 @@ export default hopeTheme({
 
   iconAssets: "fontawesome-with-brands",
 
-  // logo: "/logo.svg",
+  logo: "favicon-green2/favicon.ico",
 
   repo: "zamoca42/blog",
 
@@ -50,10 +50,11 @@ export default hopeTheme({
     // You should generate and use your own comment service
     comment: {
       provider: "Giscus",
-      repo: "vuepress-theme-hope/giscus-discussions",
-      repoId: "R_kgDOG_Pt2A",
+      repo: "zamoca42/blog",
+      repoId: "R_kgDOKUTHQw",
       category: "Announcements",
-      categoryId: "DIC_kwDOG_Pt2M4COD69",
+      categoryId: "DIC_kwDOKUTHQ84CZ0Ei",
+      mapping: "og:title"
     },
 
     // All features are enabled for demo, only preserve features you need here
