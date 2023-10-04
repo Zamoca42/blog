@@ -173,7 +173,7 @@ console.log(Object.getOwnPropertyDescriptor(person, "fullName"));
 
 :::info 프로토타입(prototype)
 
-> :pin: [프로토타입 설명 영상 - 코딩애플](https://youtu.be/wUgmzvExL_E?si=LPjjWjA5Hb3iA4wr)
+> :pushpin: [프로토타입 설명 영상 - 코딩애플](https://youtu.be/wUgmzvExL_E?si=LPjjWjA5Hb3iA4wr)
 
 프로토타입은 어떤 객체의 상위(부모)객체 역할을 하는 객체다. 프로토타입은 하위(자식)객체에게 자신의 프로퍼티와 메서드를 상속한다. 프로토타입을 상속받은 하위 객체는 자신의 프로퍼티 또는 메서드인 것처럼 자유롭게 사용할 수 있다.
 
