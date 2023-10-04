@@ -73,7 +73,7 @@ function square(number) {
 console.dir(square);
 ```
 
-![그림 18-1. 함수 객체의 프로퍼티]()
+![그림 18-1. 함수 객체의 프로퍼티](https://github.com/Zamoca42/blog/assets/96982072/4366580f-c9b0-4227-bc1e-9c2cd3f99a5a)
 
 square 함수의 모든 프로퍼티의 어트리뷰트를 `Object.getOwnPropertyDescriptors` 메서드로 확인해 보면 다음과 같다.
 
@@ -123,7 +123,7 @@ console.log(multiply(1, 2, 3)); // 2
 
 선언된 매개변수의 개수보다 인수를 적게 전달했을 경우 인수가 전달되지 않은 매개변수는 `undefined`로 초기화된 상태를 유지한다. 매개변수의 개수보다 인수를 더 많이 전달한 경우 초과된 인수는 무시된다.
 
-![그림 18-2. arguments 객체의 프로퍼티]()
+![그림 18-2. arguments 객체의 프로퍼티](https://github.com/Zamoca42/blog/assets/96982072/8b4077ee-1e71-43db-a787-dffc51993881)
 
 arguments 객체의 callee 프로퍼티는 호출되어 arguments 객체를 생성한 함수, 즉 함수 자신을 가리키고 arguments 객체의 length 프로퍼티는 인수의 개수를 가리킨다.
 
