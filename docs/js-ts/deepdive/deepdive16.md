@@ -10,7 +10,6 @@ ECMAScript 사양에 등장하는 이중 대괄호(`[[...]]`)으로 감싼 이�
 
 ![그림 16-1. 내부 슬롯과 내부 메서드](https://github.com/Zamoca42/blog/assets/96982072/3f224dcd-f0d8-42f5-a713-7dded3781068)
 
-
 내부 슬롯과 내부 메서드는 ECMAScript 사양에 정의된 대로 구현되어 자바스크립트 엔진에서 실제로 동작하지만
 엔진의 내부 로직이므로 원칙적으로 직접적으로 접근하거나 호출할 수 있는 방법을 제공하지 않는다.
 단, 일부에 한하여 간접적으로 접근할 수 있는 수단을 제공하기는 한다.
@@ -173,6 +172,9 @@ console.log(Object.getOwnPropertyDescriptor(person, "fullName"));
 4. 접근자 프로퍼티 `fullName`의 프로퍼티 어트리뷰트 `[[Get]]`을 호출하여 결과 반환
 
 :::info 프로토타입(prototype)
+
+> :pushpin: [프로토타입 설명 영상 - 코딩애플](https://youtu.be/wUgmzvExL_E?si=LPjjWjA5Hb3iA4wr)
+
 프로토타입은 어떤 객체의 상위(부모)객체 역할을 하는 객체다. 프로토타입은 하위(자식)객체에게 자신의 프로퍼티와 메서드를 상속한다. 프로토타입을 상속받은 하위 객체는 자신의 프로퍼티 또는 메서드인 것처럼 자유롭게 사용할 수 있다.
 
 프로토타입 체인은 프로토타입 단방향 링크드 리스트 형태로 연결되어 있는 상속 구조를 말한다.
@@ -480,6 +482,6 @@ console.log(Object.isFrozen(person)); // true
 // 중첩 객체까지 동결한다.
 console.log(Object.isFrozen(person.address)); // true
 
-person.address.city = 'Busan'; // 무시
+person.address.city = "Busan"; // 무시
 console.log(person); // {name: "Lee", address: {city: "Seoul"}}
 ```

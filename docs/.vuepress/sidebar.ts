@@ -39,6 +39,12 @@ export default sidebar({
       collapsible: true,
       children: "structure",
     },
+    {
+      text: "회고",
+      prefix: "retrospect/",
+      collapsible: true,
+      children: "structure",
+    },
     "github-flow",
     "git-flow",
   ],

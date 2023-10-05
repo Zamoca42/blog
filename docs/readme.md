@@ -16,7 +16,7 @@ heroText: Zamoca Space
 tagline: 개발 공부, 고민을 기록하는 기술 블로그입니다
 actions:
   - text: Feedback
-    link: https://github.com/Zamoca42/blog/issues/7
+    link: https://github.com/Zamoca42/blog/discussions/categories/general
 
   - text: Profile
     link: https://github.com/zamoca42
@@ -35,11 +35,11 @@ highlights:
         # icon:
         details: Database 관련 공부 및 링크 모음
         link: ./Nest/
-      
+
       - title: etc.
         # icon:
         details: 회고 및 소주제 모음
-        link: ./Etc      
+        link: ./Etc
 
 copyright: false
 footer: Theme by <a href="https://theme-hope.vuejs.press/" target="_blank">VuePress Theme Hope</a> | MIT Licensed, Copyright © 2019-present Mr.Hope
