@@ -40,7 +40,7 @@ ohoo-studio-admin
     ∟ package.json
 ```
 
-### Lerna
+### 1.1.Lerna
 
 npm의 workspace 기능을 통해서 `MonoRepo`로 구성할 수 있습니다.
 거기에 더해 Lerna는 `MonoRepo`를 사용을 편리하게해주는 도구입니다. 예를 들어, 공통된 패키지가 있다면 최상위 package.json으로 한번에 이동시킬 수 있습니다.
@@ -50,15 +50,13 @@ npm의 workspace 기능을 통해서 `MonoRepo`로 구성할 수 있습니다.
 
 ## 2. NestJS
 
-### NestJS를 선택한 이유
-
 이번 프로젝트에서 Django와 NestJS 중에 NestJS를 사용하게 되었습니다. 처음 제안해주신 내용으로는 Django에서 기본으로 제공되는 admin을 이용해서 프로젝트 전체를 구성하는 것이였습니다.
 하지만 admin의 레이아웃을 수정해야하고 관련문서도 잘 나와있지 않아서 Django admin으로 구성했을 때의 장점을 잘 느낄 수 없었습니다.
 
 그래서 NestJS로 선택했습니다. 프레임워크에서 제공되는 기능이 기술문서에 자세히 나와있어서 필요한 기능을 빠르게 구현할 수 있을거라고 생각했습니다.
 추후 다른분께서 프로젝트를 이어나갈 수도 있다고 생각해 구조적일수록 시간이 지나서도 보기쉽고 안정적인 구성이 가능할거 같습니다.
 
-### 서비스 로직 분리
+### 2.1.서비스 로직 분리
 
 NestJS에서 권장하는 설계에 따라서 서비스를 분리하여 인증, 회원 정보, 구독 정보를 나눠서 작성했습니다.
 `auth`, `customer`, `customer-plan`으로 3개의 모듈로 나눴는데 각각 별개의 기능을 담당하기 때문에 기능에 집중해서 구현할 수 있었습니다.
@@ -102,7 +100,7 @@ import { CustomerPlanModule } from "./customer-plan/customer-plan.module";
 export class AppModule {}
 ```
 
-### TypeScript
+### 2.2.TypeScript
 
 NestJS를 선택하게되면서 NestJS에서 기본으로 사용하는 TypeScript도 자연스럽게 선택하게 되었습니다.
 자바스크립트의 유연한 타입변환에 익숙했는데 타입스크립트에 적응하는 과정이 힘들었습니다.
@@ -147,12 +145,12 @@ export class CustomerDto extends ExcludeCustomerDto {
 }
 ```
 
-### class-transformer
+### 2.3.class-transformer
 
 TypeScript에서 리터럴 객체를 클래스 인스턴스로 변환하는 작업에 [class-transformer](https://github.com/typestack/class-transformer#class-transformer)를 사용했습니다.
 중첩 객체를 변환하거나 서로 컨벤션이 다른 객체를 한가지로 변환하는 경우에도 유용하게 사용할 수 있었습니다.
 
-#### `plainToClass`
+#### 1.`plainToClass`
 
 `plainToClass`를 이용해서 리터럴 객체를 클래스 인스턴스로 한번에 변환해줄 수 있었습니다.
 기본적으로 클래스 속성으로 선언되어있으면 변환 대상으로 자동으로 인지합니다.
@@ -188,7 +186,7 @@ export class CustomerController {
 }
 ```
 
-#### 스네이크 케이스 -> 카멜 케이스
+#### 2.스네이크 케이스 -> 카멜 케이스
 
 class-transformer는 일반적으로 `@Expose()` 데코레이터를 기반으로 프로퍼티를 변환할지 말지 결정합니다.
 반대로 제외할 프로퍼티는 `@Exlude()` 데코레이터를 사용할 수 있습니다.
@@ -232,7 +230,7 @@ class ExcludeCustomerDto {
 
 하나의 프로퍼티에만 지정해줄 수도 있지만 제외할 프로퍼티가 여러 개라면 클래스 위에 지정하면 한번에 변환에서 제외할 수 있습니다.
 
-#### 중첩 객체 변환
+#### 3.중첩 객체 변환
 
 데이터베이스 안의 중첩 객체가 있는 인스턴스를 변환하려는 경우 `@Type()` 데코레이터를 사용해서 변환이 가능합니다.
 중첩 객체는 인식을 못하기 때문에 각 프로퍼티에 설정된 객체 타입을 명시적으로 작성해야합니다.
@@ -292,7 +290,7 @@ aws-sdk에 비해 DB와 연결하는 방법이 비교적 간단했습니다.
 전체 프로젝트를 제가 해보는 것이다 보니 프론트 페이지를 만들어야 했는데 React Admin를 사용해서 빠르게 만들기로 했습니다.
 로그인 페이지는 이미 컴포넌트로 구현되어있기 때문에 `<Admin>` 컴포넌트에 `requireAuth` props를 사용한다면 바로 로그인 페이지를 사용할 수 있었습니다.
 
-```js
+```ts
 const App = () => (
   <UserContextProvider>
     <PlanContextProvider>
