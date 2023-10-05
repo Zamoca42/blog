@@ -12,7 +12,7 @@ export default hopeTheme({
 
   iconAssets: "fontawesome-with-brands",
 
-  logo: "favicon-green2/favicon.ico",
+  logo: "favicon.ico",
 
   repo: "zamoca42/blog",
 
