@@ -14,6 +14,8 @@ export default hopeTheme({
 
   logo: "favicon.ico",
 
+  favicon: "favicon.ico",
+
   repo: "zamoca42/blog",
 
   docsDir: "src",
