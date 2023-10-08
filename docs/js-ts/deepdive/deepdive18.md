@@ -31,7 +31,7 @@ const decrease = function (num) {
 // 2. 함수는 객체에 저장할 수 있다.
 const auxs = { increase, decrease };
 
-// 3. 함수의 매개변수에게 전달할 수 있다.
+// 3. 함수의 매개변수에 전달할 수 있다.
 // 4. 함수의 반환값으로 사용할 수 있다.
 function makeCounter(aux) {
   let num = 0;

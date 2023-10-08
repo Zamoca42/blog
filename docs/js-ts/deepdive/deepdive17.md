@@ -306,7 +306,8 @@ new foo();
 
 ### 2.5. constructor와 non-constructor의 구분
 
-자바스크립트 엔진은 함수 정의를 평가하여 함수 객체를 생성할 때 함수 정의 방식에 따라 함수를 constructor와 non-constructor로 구분한다.
+자바스크립트 엔진은 함수 정의를 평가하여 함수 객체를 생성할 때 함수 정의 방식에 따라 함수를 
+constructor와 non-constructor로 구분한다.
 
 - constructor: 함수 선언문, 함수 표현식, 클래스(클래스도 함수다)
 - non-constructor: 메서드(ES6 메서드 축약 표현), 화살표 함수
