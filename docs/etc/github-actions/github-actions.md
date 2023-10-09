@@ -98,9 +98,9 @@ jobs:
 
 ## Secret 등록
 
-워크플로우를 실행하는 과정에서 AWS의 EC2나 S3에 접근해서 배포하려면 AWS의 계정에서 발급한 액세스 키가 필요합니다.
-액세스 키는 AWS에 접근할 수 있는 권한이기 때문에 직접 키를 노출하면 보안 이슈가 발생할 수 있습니다.
-따라서 Github Secret을 이용해 액세스 키를 저장한 다음 환경변수처럼 불러와서 워크플로우에 사용할 수 있습니다.
+워크플로우를 실행하는 과정에서 AWS의 EC2나 S3에 접근해서 배포하려면 AWS의 계정에서 발급한 액세스 키와 비밀 키가 필요합니다. 액세스 키는 AWS에 접근할 수 있는 권한이기 때문에 직접 키를 노출하면 보안 이슈가 발생할 수 있습니다.
+리포지토리의 설정에 Secret을 이용해 액세스 키를 저장하면 키와 비밀키를 노출하지 않고 
+워크플로우에서 사용할 수 있습니다.
 
 ![Actions를 사용할 리포지토리에서 Secrets 환경변수 등록](https://github.com/Zamoca42/vue-django-blog/assets/96982072/52f8a752-7904-465f-8961-0626e14f99e8)
 
@@ -108,9 +108,35 @@ jobs:
 
 AWS에서 키 발급하고 screts에 등록하기까지 다음과 같은 과정이 필요합니다.
 
-### 1. AWS IAM
+### AWS IAM
 
-### 2. 권한 정책에 Github Actions에 사용할 권한 추가
+![AWS IAM 화면](https://github.com/Zamoca42/blog/assets/96982072/ea717df0-4361-4ef3-90e9-8d22e770fa70)
 
-### 3. 키와 액세스 키를 Github 레포지토리 리포지토리 Actions에 등록
+AWS IAM에 들어가서 사용자 생성을 누릅니다.
 
+![세부 정보 지정](https://github.com/Zamoca42/blog/assets/96982072/7e83067c-6732-47be-b95e-9b5c586f6da0)
+
+권한 이름에 적당한 이름을 적고 다음을 눌러 권한 정책을 설정하는 화면으로 넘어갑니다.
+
+### 권한 정책에 Github Actions에 사용할 권한 추가
+
+![여기서 필요한 보안 정책을 지정할 수 있습니다.](https://github.com/Zamoca42/blog/assets/96982072/b10b6bff-d7e6-4260-8dda-882ece558eaa)
+
+AWS 배포에 필요한 보안 권한을 지정합니다. 우선 S3만 지정해보겠습니다.
+
+![S3 모든 접근 권한 정책을 설정](https://github.com/Zamoca42/blog/assets/96982072/0ca596b4-0a6a-40ec-bce0-a89440e6697e)
+
+`AmazonS3FullAccess`를 설정하면 S3에 대한 모든 권한을 사용할 수 있습니다.
+만약에 EC2에 배포하려면 `AmazonEC2FullAccess`와 같은 권한이 필요합니다.
+
+![이제 액세스키를 발급받으면 끝](https://github.com/Zamoca42/blog/assets/96982072/1c36ec63-ee17-4282-a9c4-0b79dd1302b2)
+
+액세스 키 만들기를 눌러서 나오는 액세스 키와 액세스 비밀 키를 리포지토리의 Secrets에 등록해줍니다.
+
+![액세스 키는 AWS_ACCESS_KEY_ID, 비밀 키는 AWS_SECRET_ACCESS_KEY로 등록](https://github.com/Zamoca42/blog/assets/96982072/013e9fc2-7607-42fa-8c7b-783b08f321ff)
+
+### 키와 액세스 키를 Github 레포지토리 리포지토리 Actions에 등록
+
+![](https://github.com/Zamoca42/blog/assets/96982072/c4e70695-9fa6-4603-831e-9c741bd35b20)
+
+액세스키와 비밀키, 지역까지 등록하면 AWS에 배포할 준비는 끝납니다.
