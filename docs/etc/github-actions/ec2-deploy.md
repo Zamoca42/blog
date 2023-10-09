@@ -1,5 +1,5 @@
 ---
-title: EC2에 Django 배포하기
+title: EC2에 Django 서버 배포하기
 order: 3
 ---
 

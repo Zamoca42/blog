@@ -1,5 +1,5 @@
 ---
-title: GitHub Actions 사용해서 배포 자동화 하기
+title: GitHub Actions
 order: 2
 ---
 
