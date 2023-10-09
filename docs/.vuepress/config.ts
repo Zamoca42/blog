@@ -1,6 +1,7 @@
 import { defineUserConfig } from "vuepress";
 import theme from "./theme.js";
 import { searchPlugin } from "@vuepress/plugin-search";
+import { googleAnalyticsPlugin } from "@vuepress/plugin-google-analytics";
 
 export default defineUserConfig({
   base: "/blog/",
@@ -9,6 +10,9 @@ export default defineUserConfig({
   plugins: [
     searchPlugin({
       isSearchable: (page) => page.path !== "/",
+    }),
+    googleAnalyticsPlugin({
+      id: "G-CESFSZCSP4",
     }),
   ],
   head: [
