@@ -12,7 +12,7 @@ export default hopeTheme({
 
   iconAssets: "fontawesome-with-brands",
 
-  logo: "favicon.ico",
+  logo: "/favicon-green2/android-chrome-512x512.png",
 
   favicon: "favicon.ico",
 

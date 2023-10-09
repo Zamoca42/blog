@@ -39,13 +39,19 @@ export default sidebar({
       collapsible: true,
       children: "structure",
     },
+    "github-flow",
+    "git-flow",
+    {
+      text: "GitHub Actions로 배포 자동화 하기",
+      prefix: "github-actions/",
+      collapsible: true,
+      children: "structure",
+    },
     {
       text: "회고",
       prefix: "retrospect/",
       collapsible: true,
       children: "structure",
     },
-    "github-flow",
-    "git-flow",
   ],
 });
