@@ -3,7 +3,7 @@ title: GitHub Actions
 order: 2
 ---
 
-> [https://docs.github.com/ko/actions](GitHub Actions 공식 문서)
+> https://docs.github.com/ko/actions - GitHub Actions 공식 문서
 
 Github Actions에 대해 간단히 설명하면 테스트 및 배포 파이프라인을 자동화할 수 있는 CI/CD 플랫폼입니다. 레포지토리에서 push같은 이벤트가 일어날 때, workflow를 통해 작업이 실행되는 자동화 프로세스로 각 작업은 자체 가상머신을 사용하여 실행됩니다.
 
