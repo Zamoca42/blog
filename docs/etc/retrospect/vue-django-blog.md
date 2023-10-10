@@ -116,9 +116,6 @@ AWS를 사용해보고 [GitHub Actions로 배포 자동화](../github-actions/)�
 
 ## 4. AWS
 
-hosting.kr에서 넘겨준 zamoca.space
-도메인연결
-
 ![구글 검색 인덱싱](https://github.com/Zamoca42/blog/assets/96982072/e53600fc-5ee1-4923-a599-44bd05ad75c2)
 
 ![사이트맵](https://github.com/Zamoca42/blog/assets/96982072/bbe4c72f-05d3-4e60-ae53-759fe30075d2)
