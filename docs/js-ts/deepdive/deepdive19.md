@@ -153,7 +153,7 @@ console.log(circle2.getArea()); // 12.566370614359172
 ## 3. 프로토타입 객체
 
 프로토타입 객체란 객체지향 프로그래밍의 근간을 이루는 객체 간 상속을 구현하기 위해 사용된다.
-프로토타입은 어떤 객체의 상위(부모) 객체의 역할ㄹ을 하는 객체로서 다른 객체에 공유 프로퍼티를 제공한다.
+프로토타입은 어떤 객체의 상위(부모) 객체의 역할을 하는 객체로서 다른 객체에 공유 프로퍼티를 제공한다.
 
 모든 객체는 `[[Prototype]]`이라는 내부 슬롯을 가지며, 이 내부 슬롯의 값은 프로토타입의 참조다.
 `[[Prototype]]`에 저장되는 프로토타입은 객체 생성 방식에 의해 결정된다.
@@ -186,10 +186,10 @@ const person = { name: "Lee" };
 const obj = {};
 const parent = { x: 1 };
 
-// getter 함수인 get **proto**가 호출되어 obj 객체의 프로토타입을 취득
-obj.**proto**;
-// setter함수인 set **proto**가 호출되어 obj 객체의 프로토타입을 교체
-obj.**proto** = parent;
+// getter 함수인 get __proto__가 호출되어 obj 객체의 프로토타입을 취득
+obj.__proto__;
+// setter함수인 set __proto__가 호출되어 obj 객체의 프로토타입을 교체
+obj.__proto__ = parent;
 
 console.log(obj.x); // 1
 ```
@@ -581,7 +581,7 @@ const obj = { x: 1 };
 
 ![그림 19-14. 객체 리터럴에 의해 생성된 객체의 프로토타입](https://github.com/Zamoca42/blog/assets/96982072/6216cb74-f125-479e-a377-174a07ee4093)
 
-이처럼 객체 리터럴에 의해 생성된 obj 객체는 Object.prototype을 프로토타입으로 갖게되며, 이로써 O`bject.prototype`을 상속받는다. obj 객체는 constructor 프로퍼티와 `hasOwnProperty` 메서드 등을 소유하지 않지만
+이처럼 객체 리터럴에 의해 생성된 obj 객체는 Object.prototype을 프로토타입으로 갖게되며, 이로써 `Object.prototype`을 상속받는다. obj 객체는 constructor 프로퍼티와 `hasOwnProperty` 메서드 등을 소유하지 않지만
 자신의 프로토타입인 `Object.prototype`의 constructor 프로퍼티와 `hasOwnProperty` 메서드를 자신의 자산인 것처럼 자유롭게 사용할 수 있다.
 
 ```js
@@ -721,7 +721,8 @@ me.hasOwnProperty("name"); // -> true
 1. 먼저 `hasOwnProperty` 메서드를 호출한 `me` 객체에서 `hasOwnProperty` 메서드를 검색한다.
    `me` 객체에는 `hasOwnProperty` 메서드가 없으므로 프로토타입 체인을 따라, 다시 말해 `[[Prototype]]` 내부 슬롯에 바인딩되어 있는 프로토타입(위 예제의 경우 Person.prototype)으로 이동하여 `hasOwnProperty` 메서드를 검색한다.
 
-2. `Perosn.prototype`에도 `hasOwnProperty` 메서드가 없으므로 프로토타입 체인을 따라, 1번과 같이 `hasOwnProperty` 메서드를 검색한다.
+2. `Perosn.prototype`에도 `hasOwnProperty` 메서드가 없으므로 프로토타입 체인을 따라,
+   1번과 같이 `hasOwnProperty` 메서드를 검색한다.
 
 3. `Object.prototype`에 있는 `hasOwnProperty` 메서드가 존재한다.
    자바스크립트 엔진은 `Object.prototype.hasOwnProperty` 메서드를 호출하고 해당 메서드의 `this`에는 `me` 객체가 바인딩 된다.
@@ -739,7 +740,7 @@ call 메서드는 this로 사용할 객체를 전달하면서 함수를 호출�
 호출한다고 이해하자.
 :::
 
-프로토타입 체인으 최상위에 위치한 객체는 언제나 `Object.prototype`이다.
+프로토타입 체인으 최상위에 위치한 객체는 언제나 `Object.prototype`이다. 
 `Object.prototype`을 프로토타입 체인의 종점이라 한다.
 종점의 프로토타입 `[[Prototype]]`내부 슬롯의 값은 `null`이다.
 
@@ -805,7 +806,7 @@ me.sayHello(); // Hey! My name is Lee
 
 오버라이딩은 상위 클래스가 가지고 있는 메서드를 하위 클래스가 재정의하여 사용하는 방식이다.
 
-오버로딩은 함수 이름은 동일하지만 매개변수의 타입 또는 개수가 다른 메서드를 구현하고 매개변수에 의해 메서드를 구별하여 호출하는 방식이다. 
+오버로딩은 함수 이름은 동일하지만 매개변수의 타입 또는 개수가 다른 메서드를 구현하고 매개변수에 의해 메서드를 구별하여 호출하는 방식이다.
 자바스크립트는 오버로딩을 지원하지 않지만 arguments 객체를 사용하여 구현할 수는 있다.
 :::
 
@@ -827,7 +828,7 @@ delete me.sayHello;
 me.sayHello(); // Hi! My name is Lee
 ```
 
-이와 같이 **하위 객체를 통해 프로토타입의 프로퍼티를 변경 또는 삭제하는 것은 불가능**하다. 
+이와 같이 **하위 객체를 통해 프로토타입의 프로퍼티를 변경 또는 삭제하는 것은 불가능**하다.
 다시 말해 하위 객체를 통해 프로토타입에 `get` 액세스는 허용되나 `set` 액세스는 허용되지 않는다.
 
 프로토타입 프로퍼티를 변경 또는 삭제하려면 하위 객체를 통해 프로토타입 체인으로 접근하는 것이 아니라 프로토타입에 직접 접근해야한다.
@@ -846,7 +847,7 @@ me.sayHello(); // TypeError: me.sayHello is not a function
 
 ## 9. 프로토타입의 교체
 
-프로토타입은 임의의 다른 객체로 변경할 수 있다. 이것은 부모 객체인 프로토타입을 동적으로 변경할 수 있다는 것을 의미한다. 
+프로토타입은 임의의 다른 객체로 변경할 수 있다. 이것은 부모 객체인 프로토타입을 동적으로 변경할 수 있다는 것을 의미한다.
 이러한 특징을 활용하여 객체 간의 상속 관계를 동적으로 변경할 수 있다.
 프로토타입은 생성자 함수 또는 인스턴스에 의해 교체할 수 있다.
 
@@ -1013,7 +1014,7 @@ console.log(Person.prototype === Object.getPrototypeOf(me)); // true
 
 ## 10. instanceof 연산자
 
-`instanceof` 연산자는 이항 연산자로서 좌변에 객체를 가리키는 식별자, 
+`instanceof` 연산자는 이항 연산자로서 좌변에 객체를 가리키는 식별자,
 우변에 생성자 함수를 가리키는 식별자를 피연산자로 받는다.
 만약 우변의 피연산자가 함수가 아닌 경우 `TypeError`가 발생한다.
 
@@ -1066,12 +1067,12 @@ console.log(me instanceof Person); // false
 console.log(me instanceof Object); // true
 ```
 
-`me` 객체는 비록 프로토타입이 교체되어 프로토타입과 생성자 함수 간의 연결이 파괴되었지만 
+`me` 객체는 비록 프로토타입이 교체되어 프로토타입과 생성자 함수 간의 연결이 파괴되었지만
 `Person` 생성자 함수에 의해 생성된 인스턴스임에는 틀림없다.
 그러나 `me instanceof Person`은 `false`로 평가된다.
 
-이는 `Person.prototype`이 `me` 객체의 프로토타입 체인 상에 존재하지 않기 때문이다. 
-따라서 프로토타입으로 교체한 `parent` 객체를 `Person` 생성자 함수의 `prototype` 프로퍼티에 바인딩하면 
+이는 `Person.prototype`이 `me` 객체의 프로토타입 체인 상에 존재하지 않기 때문이다.
+따라서 프로토타입으로 교체한 `parent` 객체를 `Person` 생성자 함수의 `prototype` 프로퍼티에 바인딩하면
 `me instanceof Person`은 `true`로 평가될 것이다.
 
 ```js
@@ -1356,7 +1357,7 @@ const obj = Object.create({ name: "Lee" });
 obj.hasOwnProperty("name"); // -> false
 ```
 
-만약 인스턴스/프로토타입 메서드 내에서 this를 사용하지 않는다면 그 메서드는 정적 메서드로 변경 할 수 있다. 
+만약 인스턴스/프로토타입 메서드 내에서 this를 사용하지 않는다면 그 메서드는 정적 메서드로 변경 할 수 있다.
 인스턴스가 호출한 인스턴스/프로토타입 메서드 내에서 `this`는 인스턴스를 가리킨다.
 메서드 내에서 인스턴스를 참조할 필요가 없다면 정적 메서드로 변경하여도 동작한다.
 프로토타입 메서드를 호출하려면 인스턴스를 생성해야 하지만 정적 메서드는 인스턴스를 생성하지않아도 호출할 수 있다.
@@ -1383,7 +1384,7 @@ Foo.x = function () {
 Foo.x(); // x
 ```
 
-MDN과 같은 문서를 보면 다음과 같이 정적 프로퍼티/메서드와 프로토타입 프로퍼티/메서드를 구분하여 소개하고 있다. 
+MDN과 같은 문서를 보면 다음과 같이 정적 프로퍼티/메서드와 프로토타입 프로퍼티/메서드를 구분하여 소개하고 있다.
 따라서 표기법만으로도 정적 프로퍼티/메서드와 프로토타입 프로퍼티/메서드를 구별할 수 있어야 한다.
 
 ![그림 19-25. MDN(https://developer.mozilla.org)](https://github.com/Zamoca42/blog/assets/96982072/f7b69a07-1fc0-452a-b6f7-f5bd92ef0763)
@@ -1415,8 +1416,8 @@ console.log("address" in person); // true
 console.log("age" in person); // false
 ```
 
-`in` 연산자는 확인 대상 객체의 프로퍼티뿐만 아니라 확인 대상 객체가 상속받은 
-모든 프로토타입의 프로퍼티를 확인하므로 주의가 필요하다. `person` 객체에는 `toString`이라는 프로퍼티가 없지만 
+`in` 연산자는 확인 대상 객체의 프로퍼티뿐만 아니라 확인 대상 객체가 상속받은
+모든 프로토타입의 프로퍼티를 확인하므로 주의가 필요하다. `person` 객체에는 `toString`이라는 프로퍼티가 없지만
 다음 코드의 실행 결과는 `true`다.
 
 ```js
@@ -1425,7 +1426,7 @@ console.log("toString" in person); // true
 
 이는 `in` 연산자가 `person` 객체가 속한 프로토타입 체인 상에 존재하는 모든 프로토타입에서 `toString` 프로퍼티를 검색했기 때문이다.
 `toString`은 `Object.prototype`의 메서드다.
-`in` 연산자 대신 ES6에서 도입된 `Reflect.has` 메서드를 사용할 수도 있다. 
+`in` 연산자 대신 ES6에서 도입된 `Reflect.has` 메서드를 사용할 수도 있다.
 `Reflect.has` 메서드는 `in` 연산자와 동일하게 동작한다.
 
 ```js
@@ -1444,7 +1445,7 @@ console.log(person.hasOwnProperty("name")); // true
 console.log(person.hasOwnProperty("age")); // false
 ```
 
-`Object.prototype.hasOwnProperty` 메서드는 이름에서 알 수 있듯이 인수로 전달받은 프로퍼티 키가 
+`Object.prototype.hasOwnProperty` 메서드는 이름에서 알 수 있듯이 인수로 전달받은 프로퍼티 키가
 객체 고유의 프로퍼티 키인 경우에만 `true`를 반환하고 상속받은 프로토타입의 프로퍼티 키인 경우 `false`를 반환한다.
 
 ```js
@@ -1476,7 +1477,7 @@ for (const key in person) {
 ```
 
 for ... in 문은 객체의 프로퍼티 개수만큼 순회하면 for ... in 문의 변수 선언문에서 선언한 변수에 프로퍼티 키를 할당한다.
-위 예제의 경우 `person` 객체에는 2개의 프로퍼티가 있으므로 객체를 2번 순회하면서 
+위 예제의 경우 `person` 객체에는 2개의 프로퍼티가 있으므로 객체를 2번 순회하면서
 프로퍼티 키를 `key` 변수에 할당한 후 코드 블록을 실행한다.
 
 첫 번째 순회에서는 프로퍼티 키 'name'을 `key` 변수에 할당한 후 코드 블록을 실행하고
@@ -1505,7 +1506,7 @@ for (const key in person) {
 ```
 
 이는 `toString` 메서드가 열거할 수 없도록 정의되어 있는 프로퍼티이기 때문이다.
-다시 말해,` Object.prototype.toString` 프로퍼티의 프로퍼티 어트리뷰트 
+다시 말해, `Object.prototype.toString` 프로퍼티의 프로퍼티 어트리뷰트
 `[[Enumerable]]`의 값이 `false`이기 때문이다.
 프로퍼티 어트리뷰트 `[[Enumerable]]`은 프로퍼티의 열거 가능 여부를 나타내며 불리언 값을 갖는다.
 
@@ -1549,7 +1550,7 @@ for (const key in obj) {
 // a: 1
 ```
 
-상속받은 프로퍼티는 제외하고 객체 자신의 프로퍼티만 열거하려면 
+상속받은 프로퍼티는 제외하고 객체 자신의 프로퍼티만 열거하려면
 `Object.prototype.hasOwnProperty` 메서드를 사용하여 객체 자신의 프로퍼티인지 확인해야한다.
 
 ```js

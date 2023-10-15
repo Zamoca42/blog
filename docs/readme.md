@@ -21,6 +21,9 @@ actions:
   - text: Profile
     link: https://github.com/zamoca42
 
+  - text: Resume
+    link: https://zamoca.notion.site/CHU-YEON-KYU-cf8504c6c6c14f2481828d7177b85aa7?pvs=4
+
 highlights:
   - header: Blog Topics
     bgImage: https://theme-hope-assets.vuejs.press/bg/2-light.svg
