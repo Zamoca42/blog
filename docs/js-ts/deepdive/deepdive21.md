@@ -24,8 +24,8 @@ title: 21. 빌트인 객체
 
 Math, Reflect, JSON을 제외한 표준 빌트인 객체는 모두 인스턴스를 생성할 수 있는 생성자 함수 객체다.
 
-생성자 함수 객체인 표준 빌트인 객체는 프로토타입 메서드와 정적 메서드를 제공
-생성자 함수 객체가 아닌 표준 빌트인 객체는 정적 메서드만 제공
+표준 빌트인 생성자 함수 객체는 프로토타입 메서드와 정적 메서드를 제공
+표준 빌트인 객체는 정적 메서드만 제공
 
 ```js
 // String 생성자 함수에 의한 String 객체 생성
@@ -115,7 +115,7 @@ console.log(typeof str); // string
 
 이때 문자열 래퍼 객체인 String 생성자 함수의 인스턴스는 `String.prototype`의 메서드를 상속받아 사용할 수 있다.
 
-![그림 21-1. 문자열 래퍼 객체의 프로토타입 체인]()
+![그림 21-1. 문자열 래퍼 객체의 프로토타입 체인](https://github.com/Zamoca42/blog/assets/96982072/70a79933-b286-4cc0-90ba-8a91f89c22da)
 
 그 후 래퍼 객체의 처리가 종료되면 래퍼 객체의 `[[StringData]]` 내부 슬롯에 할당된 원시값으로 원래의 상태, 즉 식별자가 원시값을 갖도록 되돌리고 래퍼 객체는 가비지 컬렉션의 대상이 된다.
 
@@ -189,7 +189,7 @@ globalThis === global; // true
 전역 객체가 최상위 객체라는 것은 프로토타입 상속 관계상에서 최상위 객체라는 의미가 아니다.
 전역 객체 자신은 어떤 객체의 프로퍼티도 아니며 객체의 계층적 구조상 표준 빌트인 객체와 호스트 객체를 프로퍼티로 소유한다는 것을 말한다.
 
-전역 객체의 특징
+#### **전역 객체의 특징**
 
 - 개발자가 의도적으로 생성할 수 없다. 즉, 전역 객체를 생성할 수 있는 생성자 함수가 제공되지 않는다.
 
@@ -206,7 +206,7 @@ globalThis === global; // true
 
 - 전역 객체는 Object, Stirng, Number, Function, Promise 같은 모든 표준 빌트인 객체를 프로퍼티로 가지고 있다.
 
-- 자바스크립트 실행 환경에 따라 추가적으로 프로퍼티와 메서드를 갖는다.(맨위에서 설명)
+- 자바스크립트 실행 환경에 따라 추가적으로 프로퍼티와 메서드를 갖는다.(맨 위에서 설명)
 
 - var 키워드로 선언한 전역 변수와 선언하지 않은 변수에 값을 할당하는 암묵적 전역, 그리고 전역 함수는 전역 객체의 프로퍼티가 된다.
 
@@ -235,7 +235,7 @@ globalThis === global; // true
 
 ### 4.1. 빌트인 전역 프로퍼티
 
-- Infinity
+- **Infinity**
 
   ```js
   // 전역 프로퍼티는 window를 생략하고 참조할 수 있다.
@@ -249,7 +249,7 @@ globalThis === global; // true
   console.log(typeof Infinity); // number
   ```
 
-- NaN
+- **NaN**
 
   - NaN 프로퍼티는 숫자가 아님(Not-a-Number)을 나타내는 숫자값 NaN을 갖는다.
   - NaN 프로퍼티는 `Number.NaN`프로퍼티와 같다.
@@ -262,7 +262,7 @@ globalThis === global; // true
   console.log(typeof NaN); // number
   ```
 
-- undefined
+- **undefined**
 
   ```js
   console.log(window.undefined); // undefined
@@ -274,7 +274,7 @@ globalThis === global; // true
 
 ### 4.2. 빌트인 전역 함수
 
-- eval
+- **eval**
 
   - eval 함수는 자바스크립트 코드를 나타내는 문자열을 인수로 전달
   - 표현식이라면 런타임에 평가하여 값을 생성
@@ -355,7 +355,7 @@ globalThis === global; // true
   - eval 함수를 통해 입력받은 콘텐츠를 실행하는 것은 **보안에 매우 취약**
   - 최적화가 수행되지 않으므로 처리속도 느림
 
-- isFinite
+- **isFinite**
 
   - 전달받은 인수가 정상적인 유한수인지 검사하여 유한수이면 true를 반환하고 무한수이면 false를 반환한다.
 
@@ -376,7 +376,7 @@ globalThis === global; // true
   isFinite("2005/12/12"); // -> false
   ```
 
-- isNaN
+- **isNaN**
 
   - 전달 받은 인수가 NaN인지 검사하여 그 결과를 불리언 타입으로 반환한다.
 
@@ -407,7 +407,7 @@ globalThis === global; // true
   isNaN(new Date().toString()); // -> true:  String => NaN
   ```
 
-- parseFloat
+- **parseFloat**
 
   - 전달받은 문자열 인수를 부동 소수점 숫자(floating point number), 즉 실수로 해석(parsing)하여 반환
 
@@ -427,7 +427,7 @@ globalThis === global; // true
   parseFloat(" 60 "); // -> 60
   ```
 
-- parseInt
+- **parseInt**
 
   - 전달받은 문자열을 인수를 정수로 해석하여 반환
 
@@ -539,12 +539,12 @@ globalThis === global; // true
   parseInt(" 60 "); // -> 60
   ```
 
-- encodeURI / decodeURI
+- **encodeURI / decodeURI**
 
   - encodeURI 함수는 완전한 URI를 문자열로 전달받아 이스케이프 처리를 위해 인코딩
     - URI는 인터넷에 있는 자원을 나타내는 유일한 주소를 말한다. URI의 하위 개념으로 URL, URN이 존재
 
-  ![그림 21-2. URI]()
+  ![그림 21-2. URI](https://github.com/Zamoca42/blog/assets/96982072/719fe520-6404-4755-9e89-bfbfdd2e648d)
 
   - 이스케이프 처리는 네트워크를 통해 정보를 공유할 때 어떤 시스템도 읽을 수 있는 아스키 문자 셋으로 변환하는 것이다.
   - 이스케이프 처리가 필요한 이유는 URL내에서 의미를 갖고 있는 문자(%, ?, #)나 URL에 올 수 없는 문자(한글, 공백 등) 또는 시스템에 해석될 수 있는 문자(<, >)를 이스케이프 처리하여 야기될 수 있는 문제를 예방
@@ -575,7 +575,7 @@ globalThis === global; // true
   // http://example.com?name=이웅모&job=programmer&teacher
   ```
 
-- encodeURIComponent / decodeURIComponent
+- **encodeURIComponent / decodeURIComponent**
 
   ```js
   // URI의 쿼리 스트링
