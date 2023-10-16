@@ -53,5 +53,11 @@ export default sidebar({
       collapsible: true,
       children: "structure",
     },
+    {
+      text: "vuepress 블로그 만들기",
+      prefix: "vue-press-hope/",
+      collapsible: true,
+      children: "structure",
+    },
   ],
 });
