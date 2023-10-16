@@ -57,7 +57,7 @@ const date = new Date(); // Fri May 08 2020 10:43:25 GMT+0900 (대한민국 표�
 console.log(typeof date); // object
 ```
 
-생성자 함수인 표준 빌트인 객체가 생성한 인스턴스의 포로토타입은 표준 빌트인 객체의 prototype 프로퍼티에 바인딩된 객체다.
+생성자 함수인 표준 빌트인 객체가 생성한 인스턴스의 프로토타입은 표준 빌트인 객체의 prototype 프로퍼티에 바인딩된 객체다.
 
 ```js
 // String 생성자 함수에 의한 String 객체 생성
