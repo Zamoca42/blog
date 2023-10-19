@@ -38,7 +38,7 @@ ECMAScript 사양은 실행 컨텍스트를 생성하는 소스코드를 4가지
 #### 4. 모듈 코드
 
 - 모듈 내부에 존재하는 소스코드
-- 모듈별로 독립적인 모듈 스코프를 생성.
+- 모듈별로 독립적인 모듈 스코프를 생성
 - 모듈 내부의 함수, 클래스 등의 내부 코드는 포함되지 않음
 
 ![그림 23-1. 소스코드를 평가하여 실행 컨텍스트를 생성](https://github.com/Zamoca42/blog/assets/96982072/4c259d36-2264-460b-af8f-fb17113b49df)
@@ -225,12 +225,224 @@ foo(); // 6
 
 1. 환경 레코드(Environment Record)
 
-  - 스코프에 포함된 식별자를 등록하고 등록된 식별자에 바인딩된 값을 저장하는 저장소
-  - 환경 레코드는 소스코드의 타입에 따라 관리하는 내용에 차이 존재
+- 스코프에 포함된 식별자를 등록하고 등록된 식별자에 바인딩된 값을 저장하는 저장소
+- 환경 레코드는 소스코드의 타입에 따라 관리하는 내용에 차이 존재
 
 2. 외부 렉시컬 환경에 대한 참조(Outer Lexical Environment Reference)
 
-  - 외부 렉시컬 환경에 대한 참조는 상위 스코프를 가리킨다.
-    - 상위 스코프란 해당 실행 컨텍스트를 생성한 소스코드를 포함하는 상위 코드의 렉시컬 환경을 말한다.
-  - 외부 렉시컬 환경에 대한 참조를 통해 단방향 링크드 리스트인 스코프 체인을 구현한다.
+- 외부 렉시컬 환경에 대한 참조는 상위 스코프를 가리킨다.
+  - 상위 스코프란 해당 실행 컨텍스트를 생성한 소스코드를 포함하는 상위 코드의 렉시컬 환경을 말한다.
+- 외부 렉시컬 환경에 대한 참조를 통해 단방향 링크드 리스트인 스코프 체인을 구현한다.
 
+## 6. 실행 컨텍스트의 생성과 식별자 검색 과정
+
+```js
+var x = 1;
+const y = 2;
+
+function foo(a) {
+  var x = 3;
+  const y = 4;
+
+  function bar(b) {
+    const z = 5;
+    console.log(a + b + x + y + z);
+  }
+  bar(10);
+}
+
+foo(20); // 42
+```
+
+### 6.1. 전역 객체 생성
+
+- 코드 평가 이전에 생성
+- 표준 빌트인 객체가 추가되며 동작환경에 따라 Web API 또는 특정 환경을 위한 호스트 객체 포함
+- 전역 객체도 프로토타입 체인의 일원이므로 `Object.prototype` 상속을 받음
+
+```js
+// Object.prototype.toString
+window.toString(); // -> "[object Window]"
+
+window.__proto__.__proto__.__proto__.__proto__ === Object.prototype; // -> true
+```
+
+### 6.2. 전역 코드 평가
+
+1. 전역 실행 컨텍스트 생성
+2. 전역 렉시컬 환경 생성
+   2.1. 전역 환경 레코드 생성
+   - 객체 환경 레코드 생성
+   - 선언적 환경 레코드 생성
+     2.2. this 바인딩
+     2.3. 외부 렉시컬 환경에 대한 참조 결정
+
+위 과정을 그림으로 나타내면 다음과 같다.
+
+![그림 23-9. 전역 실행 컨텍스트와 렉시컬 환경](https://github.com/Zamoca42/blog/assets/96982072/e319082c-df91-424a-9d0c-98fba98d3db0)
+
+세부적인 생성 과정을 살펴보자.
+
+#### 1. 전역 실행 컨텍스트 생성
+
+비어있는 전역 실행 컨텍스트을 생성하여 스택에 푸시한다.
+
+![그림 23-10. 전역 실행 컨텍스트 생성](https://github.com/Zamoca42/blog/assets/96982072/dafaee77-a7a5-44c9-a038-1e8a8196f173)
+
+#### 2. 전역 렉시컬 환경 생성
+
+전역 렉시컬 환경을 생성하고 전역 실행 컨텍스트에 바인딩
+
+![그림 23-11. 전역 렉시컬 환경 생성](https://github.com/Zamoca42/blog/assets/96982072/b9295509-83d0-4871-ba13-8de117c195ec)
+
+환경 레코드(Environment Record)와 외부 렉시컬 환경에 대한 참조로 구성
+
+- 전역 환경 레코드 생성
+
+  - 전역 변수를 관리하는 전역 스코프, 전역 객체의 빌트인 전역 프로퍼티, 전역 함수, 표준 빌드인 객체 제공
+
+  - 객체 환경 레코드
+
+    - var 키워드로 선언한 변수 및 함수 선언문으로 정의된 전역 함수는 전역 환경 레코드의 객체 환경 레코드에 연결된 BindingObject(전역 객체)를 통해 전역 객체의 프로퍼티와 메서드가 된다.
+    - 변수 호이스팅이 발생하는 원인
+
+    ```js
+    var x = 1;
+    const y = 2;
+
+    function foo (a) {
+    ...
+    }
+    ```
+
+    ![그림 23-12. 전역 환경 레코드의 객체 환경 레코드](https://github.com/Zamoca42/blog/assets/96982072/f15c97ae-27c7-48bb-bc47-98873083f04a)
+
+  - 선언적 환경 레코드
+
+    - let, const 키워드로 선언한 전역 변수는 선언적 환경 레코드에 등록되고 관리
+    - 일시적 사각지대의 원인
+
+    ```js
+    let foo = 1; // 전역 변수
+    {
+      // let, const 키워드로 선언한 변수가 호이스팅되지 않는다면 전역 변수를 참조해야 한다.
+      // 하지만 let 키워드로 선언한 변수도 여전히 호이스팅이 발생하기 때문에 참조 에러(ReferenceError)가 발생한다.
+      console.log(foo); // ReferenceError: Cannot access 'foo' before initialization
+      let foo = 2; // 지역 변수
+    }
+    ```
+
+    ![그림 23-13. 전역 환경 레코드의 선언적 환경 레코드](https://github.com/Zamoca42/blog/assets/96982072/79e333cf-4c30-4fbe-b388-eb8ead44fef6)
+
+- this 바인딩
+
+  - 전역 코드에서 this를 참조하면 전역 환경 레코드의 `[[GlobalThisValue]]` 내부 슬롯에 바인딩 되어있는 객체가 반환
+
+![그림 23-14. this 바인딩](https://github.com/Zamoca42/blog/assets/96982072/65ed9240-b0fe-462d-acc4-93871654a76e)
+
+- 외부 렉시컬 환경에 대한 참조 결정
+
+  - 평가 중인 소스코드를 포함하는 외부 소스코드의 렉시컬 환경(상위 스코프)를 가리킨다.
+  - 전역 코드를 포함하는 소스코드는 없으므로 null이 할당
+  - 스코프 체인의 종점에 존재함을 의미
+
+![그림 23-15. 외부 렉시컬 환경에 대한 참조 결정](https://github.com/Zamoca42/blog/assets/96982072/e2ff0e5d-0fe8-46df-9ba3-bdc59b5a3b9a)
+
+### 6.3. 전역 코드 실행
+
+변수 할당문이 실행되어 전역 변수 x, y에 값이 할당, foo 함수 호출
+
+![그림 23-16. 전역 코드의 실행](https://github.com/Zamoca42/blog/assets/96982072/d3bdc47c-ce0f-420f-ac73-b030e05e0313)
+
+식별자를 결정하기 위해 식별자를 검색할 때는 실행중인 실행 컨텍스트에서 식별자를 검색하기 시작
+
+### 6.4. foo 함수 코드 평가
+
+```js
+var x = 1;
+const y = 2;
+
+function foo(a) {
+  var x = 3;
+  const y = 4;
+
+  function bar(b) {
+    const z = 5;
+    console.log(a + b + x + y + z);
+  }
+  bar(10);
+}
+
+foo(20); // ← 호출 직전
+```
+
+1. 함수 실행 컨텍스트 생성
+2. 함수 렉시컬 환경 생성
+   2.1. 함수 환경 레코드 생성
+   2.2. this 바인딩
+   2.3. 외부 렉시컬 환경에 대한 참조 결정
+
+![그림 23-17. foo 함수 실행 컨텍스트와 렉시컬 환경](https://github.com/Zamoca42/blog/assets/96982072/bdd53a0f-29ff-4adf-a535-f997a5ba4569)
+
+### 6.5. foo 함수 코드 실행
+
+- 식별자 결정을 위해 실행 중인 실행 컨텍스트의 렉시컬 환경에서 식별자를 검색하기 시작
+
+![그림 23-22. foo 함수 코드의 실행](https://github.com/Zamoca42/blog/assets/96982072/0ba73a20-9cf7-44fe-9945-dc5b5acc22bd)
+
+### 6.6. bar 함수 코드 평가
+
+- foo 함수 코드 평가와 동일
+
+```js
+var x = 1;
+const y = 2;
+
+function foo(a) {
+  var x = 3;
+  const y = 4;
+
+  function bar(b) {
+    const z = 5;
+    console.log(a + b + x + y + z);
+  }
+  bar(10); // ← 호출 직전
+}
+
+foo(20);
+```
+
+![그림 23-23. bar 함수 실행 컨텍스트와 렉시컬 환경](https://github.com/Zamoca42/blog/assets/96982072/56a3f8c4-cef1-4ddf-88ed-ff38d48f5436)
+
+### 6.7. bar 함수 코드 실행
+
+![그림 23-24. bar 함수 코드의 실행](https://github.com/Zamoca42/blog/assets/96982072/8e01ccce-15e2-4359-b1a3-ba3a4c423ea6)
+
+### 6.8 ~ 9. 함수 코드 실행 종료
+
+![그림 23-26. bar 함수 코드 실행 종료](https://github.com/Zamoca42/blog/assets/96982072/9dd3ed36-bbd8-40db-8af4-d1fc5f372bed)
+
+![그림 23-27. foo 함수 코드 실행 종료](https://github.com/Zamoca42/blog/assets/96982072/a6434fe3-4a3a-4b70-b448-5e976761ed26)
+
+### 6.10. 전역 코드 실행 종료
+
+- 전역 코드의 실행이 종료되고 실행 컨텍스트 스택에는 아무것도 남아있지 않게됨
+
+## 7. 실행 컨텍스트와 블록 레벨 스코프
+
+let, const 키워드로 선언한 변수는 블록 레벨 스코프를 따른다.
+
+```js
+let x = 1;
+
+if (true) {
+  let x = 10;
+  console.log(x); // 10
+}
+
+console.log(x); // 1
+```
+
+![그림 23-28. if 문의 코드 블록이 실행되면 새로운 렉시컬 환경을 생성하여 기존의 렉시컬 환경을 교체](https://github.com/Zamoca42/blog/assets/96982072/1b5def64-2db5-4dfa-9236-e9d217c684f9)
+
+![그림 23-29. if 문의 코드 블록을 위한 렉시컬 환경에서 이전 렉시컬 환경으로 복귀](https://github.com/Zamoca42/blog/assets/96982072/a41e03ec-7d5b-46b4-a68c-23f35af550db)
