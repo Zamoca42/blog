@@ -1,5 +1,6 @@
 ---
 title: 페이지, navbar, sidebar 설정하기
+order: 3
 ---
 
 ### 마크다운
