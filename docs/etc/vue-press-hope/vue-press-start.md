@@ -1,12 +1,33 @@
 ---
 title: vuepress 블로그 만들기(+ 테마)
+order: 1
 ---
 
 > vuepress 2.x버전을 기준으로 설명합니다.
 
 vuepress로 블로그를 만드는 방법에 대해 알아보겠습니다.
 vuepress도 자체도 편리했지만 설정에서 설정이나 다른 부분이 더 필요했습니다.
-편리한 기능을 제공하는 테마를 발견해서 사용법도 함께 알아보도록 하겠습니다.
+편리한 기능을 제공하는 테마와 플러그인를 발견해서 사용법도 함께 알아보도록 하겠습니다.
+
+## hope 테마 소개
+
+[vuepress-theme-hope 페이지](https://vuepress-theme-hope.github.io/v2/guide/get-started/intro.html) 
+hope 테마에서 다음과 같은 [편리한 플러그인들](https://vuepress-theme-hope.github.io/v2/config/plugins/intro.html)을 지원해서 vuepress와 같이 설치해서 사용해보겠습니다.
+
+- vuepress-plugin-auto-catalog: Catalog automatically generation for VuePress2
+- vuepress-plugin-blog2: Blog plugin for VuePress2
+- vuepress-plugin-comment2: Provides comment and pageview function
+- vuepress-plugin-components: Provides some plugins out of the box
+- vuepress-plugin-copy-code2: Provides one-click copy code block function.
+- vuepress-plugin-copyright2: Append copyright information when copying or disable copy and selection.
+- vuepress-plugin-feed2: Feed support
+- vuepress-plugin-md-enhance: Provides more Markdown syntax
+- vuepress-plugin-photo-swipe: Image preview plugin based on photo-swipe
+- vuepress-plugin-pwa2: Enhanced PWA support
+- vuepress-plugin-reading-time2: Reading time and word count
+- vuepress-plugin-sass-palette: Sass style plugin for all plugins and themes
+- vuepress-plugin-seo2: SEO enhancement plugin
+- vuepress-plugin-sitemap2: Sitemap plugin
 
 ## 프로젝트 시작하기
 
