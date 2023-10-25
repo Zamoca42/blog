@@ -166,7 +166,7 @@ outer 함수를 호출하면 outer 함수의 렉시컬 환경이 생성되고 �
 
 outer 함수의 실행 컨텍스트는 실행 컨텍스트 스택에서 제거되지만 outer 함수의 렉시컬 환경까지 소멸하는 것은 아니다.
 
-inner 함수는 전역 변수 innerFunc에 의해 참조되고 있으므로 가비지 컬렉션의 대산ㅇ이 되지 않기 때문이다.
+inner 함수는 전역 변수 innerFunc에 의해 참조되고 있으므로 가비지 컬렉션의 대상이 되지 않기 때문이다.
 가비지 컬렉터는 누군가가 참조하고 있는 메모리 공간을 함부로 해제하지 않는다.
 
 ![그림 24-4. outer 함수의 실행 컨텍스트가 제거되어도 outer 함수의 렉시컬 환경은 유지](https://github.com/Zamoca42/blog/assets/96982072/694f1b88-e806-4b85-9442-da8d28fe42ba)
@@ -382,7 +382,7 @@ console.log(counter.decrease()); // 1
 console.log(counter.decrease()); // 0
 ```
 
-위 예제의 increase, decrease 메서드의 사우이 스코프는 increase, decrease 메서드가 평가되는 시점에 실행 중인 실행 컨텍스트인 즉시 실행 함수 실행 컨텍스트의 렉시컬 환경이다.
+위 예제의 increase, decrease 메서드의 상위 스코프는 increase, decrease 메서드가 평가되는 시점에 실행 중인 실행 컨텍스트인 즉시 실행 함수 실행 컨텍스트의 렉시컬 환경이다.
 
 ```js
 const Counter = (function () {
