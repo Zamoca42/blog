@@ -53,6 +53,7 @@ export default sidebar({
       collapsible: true,
       children: "structure",
     },
+    "grafana-prometheus-in-django"
     // {
     //   text: "vuepress 블로그 만들기",
     //   prefix: "vue-press-hope/",

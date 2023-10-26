@@ -1,5 +1,5 @@
 ---
-title: 프로메테우스 + 그라파나 모니터링 설정 in Django
+title: 프로메테우스 - 그라파나 in Django
 ---
 
 ## 왜 그라파나와 프로메테우스 인가?
@@ -8,8 +8,7 @@ Datadog, Sentry와 같이 여러 데이터를 시각화해서 보여주는 앱�
 
 ## 설정 플로우
 
-![prometheus-on-docker](https://github.com/pre-onboarding-backend-G/team-g-project-skeleton/assets/96982072/43bd474a-7143-4a9b-ab6d-2fa8fdee037d)
-- [출처](https://stefanprodan.com/2016/a-monitoring-solution-for-docker-hosts-containers-and-containerized-services/)
+![prometheus-on-docker [[출처]](https://stefanprodan.com/2016/a-monitoring-solution-for-docker-hosts-containers-and-containerized-services/)](https://github.com/pre-onboarding-backend-G/team-g-project-skeleton/assets/96982072/43bd474a-7143-4a9b-ab6d-2fa8fdee037d)
 
 1. docker-compose 설정
 2. django-prometheus를 Django 설정의 앱과 미들웨어 설정
@@ -122,22 +121,22 @@ scrape_configs:
 
 그 다음 docker-compose를 빌드 후 `localhost:8000/metrics`으로 들어가면 다음과 같이 보입니다.
 
-<img width="1255" alt="스크린샷 2023-10-24 오전 11 46 42" src="https://github.com/develop-pix/dump-in-Application-BE/assets/96982072/59f2173b-d8e9-4eda-b28f-f6c88a3962ab">
-
+![localhost:8000/metrics](https://github.com/Zamoca42/blog/assets/96982072/51db3ba4-a7bd-4620-8277-9bbe2e4e1891)
 
 모니터링 상태를 확인하려면 `localhost:9090/targets`로 들어가보면 상태를 확인할 수 있습니다.
-prometheus.yml에서 `static_configs`에서 모니터링 타겟을 `localhost`로 설정했을 때 
+prometheus.yml에서 `static_configs`에서 모니터링 타겟을 `localhost`로 설정했을 때
 `connect refused` 에러가 발생했습니다.
 
-<img width="1435" alt="스크린샷 2023-10-24 오후 1 55 34" src="https://github.com/develop-pix/dump-in-Application-BE/assets/96982072/4bb4c1d0-1710-4e20-8d1c-f5b79677e599">
-
+![connected refused error](https://github.com/Zamoca42/blog/assets/96982072/c0c89e38-74b4-466a-a964-cea06dfe7c14)
 
 - 해당 이슈: https://stackoverflow.com/questions/54397463/getting-error-get-http-localhost9443-metrics-dial-tcp-127-0-0-19443-conne
 
 해당 이슈는 docker 컨테이너 내부의 네트워크 호스트를 인지하지 못해서 생기는 이슈인거 같습니다.
-모니터링 타겟을 컨테이너 이미지 이름이나 `docker.host.internal` 설정되면 해결됩니다
+모니터링 타겟을 컨테이너 이미지 이름이나 `docker.host.internal`로 설정하면 해결됩니다.
 
-<img width="1435" alt="스크린샷 2023-10-24 오후 1 55 58" src="https://github.com/develop-pix/dump-in-Application-BE/assets/96982072/ae27801f-3f28-4f08-84f4-540b099adb25">
+![docker.host.internal로 변경](https://github.com/Zamoca42/blog/assets/96982072/19be385e-0e1e-4c3b-88fe-a2bfc5c937ec)
+
+state가 UP으로 바뀐 것을 확인할 수 있습니다.
 
 ## Step 3: 그라파나(Grafana) 설정
 
@@ -146,29 +145,30 @@ admin 레포에서 설정하고 어드민용 인스턴스에 배포한다면 어
 
 먼저 프로메테우스의 데이터 소스를 가져오도록 설정 합니다.
 
-1. 왼쪽 사이드바에서 **Connections**를 클릭하고 **Add new connection**으로 이동합니다.   
-    <img width="1649" alt="스크린샷 2023-10-25 오전 1 09 33" src="https://github.com/develop-pix/dump-in-Application-BE/assets/96982072/63741d92-4cbb-4940-9a80-03a70f905cba">
+1. 왼쪽 사이드바에서 **Connections**를 클릭하고 **Add new connection**으로 이동합니다.  
+   ![그라파나 새로운 커넥션 연결](https://github.com/Zamoca42/blog/assets/96982072/1bb0f209-b69b-47e9-a607-86a8b7cc5fd3)
 
 2. 상단 검색바에서 prometheus를 찾습니다.
 3. Prometheus를 클릭해서 Add new data source를 클릭합니다.
-    <img width="1262" alt="스크린샷 2023-10-25 오전 1 04 19" src="https://github.com/develop-pix/dump-in-Application-BE/assets/96982072/7ccbb10f-3612-44c8-83d5-ac3e6bccce38">
+   ![그라파나에서 프로메테우스 아이콘은 이렇게 생겼습니다.](https://github.com/Zamoca42/blog/assets/96982072/596c8f1d-eed3-45f8-b75c-b3e103c9f808)
 
 4. `docker.host.internal:9090`또는 `localhost:9090`으로 연결합니다
-    <img width="1262" alt="스크린샷 2023-10-25 오전 1 04 36" src="https://github.com/develop-pix/dump-in-Application-BE/assets/96982072/42ad5dec-876e-4235-84dd-2cd41c461955">
-
-6. 대시보드에서 프로메테우스를 선택하고 원하는 Metric을 선택하고 Runqueries를 누르면 데이터를 볼 수 있습니다.
-    <img width="1266" alt="스크린샷 2023-10-25 오전 1 08 07" src="https://github.com/develop-pix/dump-in-Application-BE/assets/96982072/1f9aa5cc-1341-467c-8110-05d1deaf4655">
-     <br/>
-    <img width="1266" alt="스크린샷 2023-10-25 오전 1 08 21" src="https://github.com/develop-pix/dump-in-Application-BE/assets/96982072/c43db0c4-1519-49e7-b0f9-ef4951c69327">
+   ![프로메테우스의 호스트:포트와 연결](https://github.com/Zamoca42/blog/assets/96982072/66b8670b-4e8e-47e0-baf6-d5ead738115c)
+   ![save & test 성공 시](https://github.com/Zamoca42/blog/assets/96982072/a4af30ee-433d-4348-96d1-881d8d796176)
+5. 대시보드에서 프로메테우스를 선택하고 원하는 Metric을 선택하고 Runqueries를 누르면 데이터를 볼 수 있습니다.
+   ![대시보드에서 보고 싶은 metrics 선택](https://github.com/Zamoca42/blog/assets/96982072/72f21655-ce1a-4969-9c00-6d0a0a1ee43e)
+   ![Run queries로 대시보드 활성](https://github.com/Zamoca42/blog/assets/96982072/c9c5968f-81af-44aa-967f-0b659a2c44c5)
 
 ## 참고 링크
 
 - 프로메테우스
-	- https://prometheus.io/docs/guides/cadvisor/
+
+  - https://prometheus.io/docs/guides/cadvisor/
 
 - 그라파나
-	- https://grafana.com/docs/grafana/latest/datasources/prometheus/?pg=oss-prom&plcmt=deploy-box-1
 
-- 전체 설정 플로우 
-	- https://karanchuri.medium.com/prometheus-grafana-in-django-92da4d782f8a
-	- https://www.devkuma.com/docs/prometheus/docker-compose-install/
+  - https://grafana.com/docs/grafana/latest/datasources/prometheus/?pg=oss-prom&plcmt=deploy-box-1
+
+- 전체 설정 플로우
+  - https://karanchuri.medium.com/prometheus-grafana-in-django-92da4d782f8a
+  - https://www.devkuma.com/docs/prometheus/docker-compose-install/
