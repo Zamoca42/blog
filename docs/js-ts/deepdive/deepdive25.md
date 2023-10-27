@@ -579,14 +579,14 @@ private 필드는 클래스 내부에서만 참조할 수 있다.
 
 | 접근 가능성                 | public | private |
 | --------------------------- | :----: | :-----: |
-| 클래스 내부                 |  :O:   |   :O:   |
-| 자식 클래스 내부            |  :O:   |   :X:   |
-| 클래스 인스턴스를 통한 접근 |  :O:   |   :X:   |
+| 클래스 내부                 |  :o:   |   :o:   |
+| 자식 클래스 내부            |  :o:   |   :x:   |
+| 클래스 인스턴스를 통한 접근 |  :o:   |   :x:   |
 
 ```js
 class Person {
   // private 필드 정의
-  #name = '';
+  #name = "";
 
   constructor(name) {
     this.#name = name;
@@ -599,7 +599,7 @@ class Person {
   }
 }
 
-const me = new Person(' Lee ');
+const me = new Person(" Lee ");
 console.log(me.name); // Lee
 ```
 
@@ -635,14 +635,20 @@ class Animal {
     this.weight = weight;
   }
 
-  eat() { return 'eat'; }
+  eat() {
+    return "eat";
+  }
 
-  move() { return 'move'; }
+  move() {
+    return "move";
+  }
 }
 
 // 상속을 통해 Animal 클래스를 확장한 Bird 클래스
 class Bird extends Animal {
-  fly() { return 'fly'; }
+  fly() {
+    return "fly";
+  }
 }
 
 const bird = new Bird(1, 5);
@@ -651,9 +657,9 @@ console.log(bird); // Bird {age: 1, weight: 5}
 console.log(bird instanceof Bird); // true
 console.log(bird instanceof Animal); // true
 
-console.log(bird.eat());  // eat
+console.log(bird.eat()); // eat
 console.log(bird.move()); // move
-console.log(bird.fly());  // fly
+console.log(bird.fly()); // fly
 ```
 
 상속에 의해 확장된 클래스 Bird를 통해 생성된 인스턴스의 프로토타입 체인은 다음과 같다.
@@ -699,7 +705,7 @@ class ColorRectangle extends Rectangle {
   }
 }
 
-const colorRectangle = new ColorRectangle(2, 4, 'red');
+const colorRectangle = new ColorRectangle(2, 4, "red");
 console.log(colorRectangle); // ColorRectangle {width: 2, height: 4, color: "red"}
 
 // 상속을 통해 getArea 메서드를 호출
