@@ -31,23 +31,118 @@ DTO(Data Transfer Object)는 **계층간 데이터 교환**을 하기 위해 사
 
 Nest의 공식문서의 내용과 계층화 아키텍쳐와 연관지어 정리해보면 표현 계층은 Controller, 서비스 계층은 Service, 데이터 접근 계층은 Datebase의 모델과 스키마로 정리해볼 수 있습니다
 
-## Nest에서 데이터 이동, 검증, 변환 사용해보기
+## Nest에서 일반 객체를 -> 클래스 인스턴스로 변환
 
-Nest에서는 `class-validator`, `class-transformer` 패키지로 데이터가 이동할 때 검증(validation), 변환(transform)할 수 있습니다.
+Nest에서 클라이언트에 데이터를 전달할 때 일반 객체를 클래스로 바꿔서 내보내기 위해 
+`class-transformer`를 사용했습니다.
 
-- [Nest-class-validator](https://docs.nestjs.com/pipes#class-validator)
 - [class-transformer](https://github.com/typestack/class-transformer)
 
-이전 [로그인 구현하기](./login_module.md)에서 클라이언트 부분에서 Controller로 넘어오는 데이터를 검증하기 위해 DTO를 작성해보겠습니다.
+```ts
+import { Exclude, Expose, Type } from 'class-transformer';
+import { License } from './plan-licenses.dto';
 
-먼저 패키지를 설치합니다
+@Exclude()
+class ExcludePlanModelDto {
+  expirationTime: number;
+
+  activationTime: number;
+
+  currencyCode: string;
+
+  amount: number;
+
+  objective: string;
+
+  countrycode: string;
+
+  @Type(() => License)
+  licenses: License[];
+}
+
+export class PlanDto extends ExcludePlanModelDto {
+  @Expose()
+  title: string;
+
+  @Expose()
+  period: number;
+
+  @Expose({ groups: ['queryParam'] })
+  id: string;
+}
 
 ```
-$ npm i --save class-validator class-transformer
+
+요금제 id를 조회했을 때 요금제 이름과 요금제의 구독 개월 수를 보여주게 DTO를 만들었습니다.
+class-transformer를 사용하지 않으면 서비스 로직에서 일일이 매핑을 해줘야겠지만
+
+DTO에서 보여줄 필드는 `@Expose()`를 사용하고 제외할 필드는 `@Exclude()`를 사용해서 
+서비스로직에서 `plainToClass` 메서드를 사용하는 것으로 일반 객체를 클래스 인스턴스로 바꿔서 내보낼 수 있습니다.
+
+```ts
+import { PlainLiteralObject } from '@nestjs/common';
+import {
+  ClassConstructor,
+  ClassTransformOptions,
+  plainToClass,
+} from 'class-transformer';
+
+export const toClassInstance = <T>(
+  cls: ClassConstructor<T>,
+  plain: PlainLiteralObject,
+  options?: ClassTransformOptions,
+): T => {
+  return plainToClass(cls, plain, {
+    excludeExtraneousValues: true,
+    ...options,
+  });
+};
 ```
+
+저는 `excludeExtraneousValues`옵션을 true로 사용하기 위해 `plainToClass`를 커스텀해서 사용했습니다.
+
+```ts
+@Injectable()
+export class CustomerPlanService {
+  private readonly planModel: Model<Plan>;
+
+  constructor(
+    private readonly customerService: CustomerService,
+  ) {
+      this.planModel = createPlanModel(tablePrefix);
+  }
+
+  async findPlanTitle(planId: string): Promise<PlanDto> {
+    const planTitle = await this.planModel.get(planId);
+    if (!planTitle) {
+      throw new NotFoundException('요금제명을 찾지 못했습니다');
+    }
+    return toClassInstance(PlanDto, planTitle);// 여기서 객체를 클래스 인스턴스로 변환
+  }
+
+}
+```
+
+## 왜 일반 객체를 클래스 인스턴스로 바꿔야 할까?
+
+자바스크립트에서 일반 객체(plain object)를 클래스 인스턴스로 변환하여 외부에 전달하는 이유는 뭘까?
+
+그냥 일반 객체를 매핑해서 보내면 안되는 것인지 고민하던 중에 모던 딥다이브에 클로저와 클래스에 관한 챕터에서 그 이유를 알 수 있을 것 같았다.
+
+여러가지 이유가 있겠지만 클래스 인스턴스를 사용하면 객체 내부의 상태나 메서드를 캡슐화해서 외부로부터 상태를 조작하는 것을 방지하는 측면에서 일반 객체를 클래스 인스턴스로 변환하는 것 같다.
+
+그리고 클래스 인스턴스로 객체를 구분하고 상태를 관리, 추적하는 것에도 용이한 것도 하나의 이유가 될거 같다.
+
+## 데이터 검증하기
+
+클라이언트에서 넘어오는 데이터는 어떻게 검증(validation)할 수 있을까요?
+
+class-validator와 global scoped pipes로 원하지 않는 데이터를 제외하고 받아올 수 있습니다.
+
+이전 [로그인 구현하기](./login_module.md)에서 클라이언트 부분에서 Controller로 넘어오는 데이터를 검증해보겠습니다.
 
 `auth`폴더 아래에 `dto`폴더를 만들고 `auth.dto.ts` 파일을 만듭니다.
-그리고 다음과 같이 작성했습니다.
+예제는 NestJS 문서를 참고했습니다.
 
 **auth/dto/auth.dto.ts**
 
@@ -73,9 +168,9 @@ export class LoginResponseDto {
 
 `LoginRequestDto`에서 클라이언트에서 넘어온 데이터가 문자인지 그리고 최소길이, 최대길이를 만족하는지 decorator를 통해 검증합니다.
 
-하지만 데이터 검증이 완전히 작동하려면 main.ts에서 설정이 필요합니다.
+데이터 검증이 완전히 작동하려면 `src/main.ts`에서 설정이 필요합니다.
 
-**main.ts**
+**src/main.ts**
 
 ```typescript
 import { NestFactory } from "@nestjs/core";
