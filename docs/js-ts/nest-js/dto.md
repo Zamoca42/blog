@@ -91,6 +91,7 @@ DTO에서 getter 함수를 사용 페이지에 대한 offset을 보여주는 계
 서비스 로직에 작성했던 skip을 dto로 옮기고, `PageRequestDto`에서 @Transform()으로 사용했던 
 page에 대한 쿼리 스트링이 없을 때 기본으로 숫자 1로 반환하던 함수도 getter로 이동해보겠습니다.
 
+### 변경 후
 ```js
 const skip = (page - 1) * perPage; // -> getter로 이동
 ```
