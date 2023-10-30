@@ -1,5 +1,5 @@
 ---
-title: docker compose로 CI 설정하기(with NestJS)
+title: docker compose로 환경변수 전달
 ---
 
 ## 도커 컴포즈 설정
