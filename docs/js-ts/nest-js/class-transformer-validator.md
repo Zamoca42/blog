@@ -1,5 +1,6 @@
 ---
 title: nest에서 class-transformer, validator 사용하기
+order: 5
 ---
 
 ## Nest에서 일반 객체를 -> 클래스 인스턴스로 변환
