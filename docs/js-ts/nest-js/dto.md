@@ -5,235 +5,246 @@ order: 3
 
 ## DTO란?
 
-DTO(Data Transfer Object)는 **계층간 데이터 교환**을 하기 위해 사용하는 객체로 비즈니스 로직을 가지지 않고 저장, 검색, 직렬화, 역직렬화 로직만을 가져야한다고 합니다.
+DTO(Data Transfer Object)는 **계층간 데이터 교환**을 하기 위해 사용하는 객체로 로직을 가지지 않은 순수한 데이터 객체이고 getter, setter 메서드만 가진 클래스를 의미합니다.
 
-계층간 데이터 교환은 계층화 아키텍쳐(Layered Architecture)와 관련있습니다.
+![Layered 아키텍쳐](https://github.com/Zamoca42/blog/assets/96982072/9460d59f-2b48-445c-85ca-23f9b7021520)
 
-![Layered](https://github.com/Zamoca42/blog/assets/96982072/9460d59f-2b48-445c-85ca-23f9b7021520)
+계층간 데이터 교환은 아키텍쳐에서 레이어 사이에 데이터 교환을 위한 객체를 생성해주는 것으로 이해할 수 있습니다.
 
-- [Nest.js — Architectural Pattern, Controllers, Providers, and Modules.](https://medium.com/geekculture/nest-js-architectural-pattern-controllers-providers-and-modules-406d9b192a3a)
+- [NestJS — Architectural Pattern, Controllers, Providers, and Modules.](https://medium.com/geekculture/nest-js-architectural-pattern-controllers-providers-and-modules-406d9b192a3a)
 
-계층화 아키텍쳐는 다음과 같은 계층으로 나뉩니다
+![계층 사이에 데이터를 전달할때 객체를 DTO라고 할 수 있겠습니다](https://github.com/Zamoca42/blog/assets/96982072/6830b3db-07b6-4aca-b6e4-806842b171c8)
 
-- 표현 계층(Presentation Layer)
+## 그렇다면 왜 DTO를 사용해야할까?
 
-  - 클라이언트를 통해 요청을 받아 처리하고 응답 결과를 출력
-  - 사용자가 요청한 내용을 서비스 계층으로 전달, 처리한 결과를 사용자에게 반환
+DTO를 사용해야 하는 이유는 Entity를 Controller와 같은 클라이언트단과 마주하는 계층에 직접 전달하기 보다는 Wrapper Class를 만들어서 도메인 모델의 정보를 외부로 노출시키지 않고 캡슐화로 보안을 강화할 수 있습니다.
 
-- 서비스 or 어플리케이션 계층(Service or Application Layer)
+Entity에서 getter만을 사용해 원하는 데이터를 표시하기 어렵기 때문에 Entity와 DTO를 분리하고 DTO에 Presentation을 위한 필드나 로직을 추가하고 Entity는 변경하지 않아서 모델링의 변경을 막습니다.
 
-  - 비즈니스 로직이 구현되는 계층
-  - 요청받은 데이터를 검증, 처리
-  - 데이터 접근 계층에 요청을 보내고, 받은 데이터를 가공하여 반환
+## DTO 사용하기
 
-- 데이터 접근 계층 (Data Access Layer)
-  - 데이터 베이스와 상호작용을 담당하는 계층
+전에는 DTO의 예시만 보고 getter는 사용한적 없고 validator와 transformer로만 사용했었는데요. 
+프로젝트를 하면서 dto에서 contructor와 getter, setter를 사용하는 방법을 알게되어 
+getter함수를 사용해서 페이지네이션을 해보도록 하겠습니다.
 
-Nest의 공식문서의 내용과 계층화 아키텍쳐와 연관지어 정리해보면 표현 계층은 Controller, 서비스 계층은 Service, 데이터 접근 계층은 Datebase의 모델과 스키마로 정리해볼 수 있습니다
+### getter를 사용하기 전
 
-## Nest에서 일반 객체를 -> 클래스 인스턴스로 변환
+**page-request.dto.ts**
+```js
+import { Transform } from 'class-transformer';
+import { IsOptional, IsInt } from 'class-validator';
+import { Type } from 'class-transformer';
+import { IsOptional, IsInt, IsNumber } from 'class-validator';
 
-Nest에서 클라이언트에 데이터를 전달할 때 일반 객체를 클래스로 바꿔서 내보내기 위해 
-`class-transformer`를 사용했습니다.
+export class PageRequestDto {
+  @IsInt()
+  @Type(() => Number)
+  @IsOptional()
+  @Transform(({ value }) => {
+    const parsedValue = parseInt(value)
+    if (isNaN(parsedValue) || parsedValue < 1) {
+      return 1;
+    }
+    return parsedValue
+  })
+  @IsNumber()
+  page?: number;
 
-- [class-transformer](https://github.com/typestack/class-transformer)
-
-```ts
-import { Exclude, Expose, Type } from 'class-transformer';
-import { License } from './plan-licenses.dto';
-
-@Exclude()
-class ExcludePlanModelDto {
-  expirationTime: number;
-
-  activationTime: number;
-
-  currencyCode: string;
-
-  amount: number;
-
-  objective: string;
-
-  countrycode: string;
-
-  @Type(() => License)
-  licenses: License[];
+  @IsInt()
+  @IsOptional()
+  @Transform(({ value }) => {
+    const parsedValue = parseInt(value)
+    if (isNaN(parsedValue) || parsedValue < 10) {
+      return 10;
+    }
+    return parsedValue
+  })
+  @Type(() => Number)
+   perPage?: number;
 }
+```
+처음에 이렇게 작성을 하고 pagination을 하고 서비스 로직에서 페이지와 offset을 컨트롤 했습니다.
 
-export class PlanDto extends ExcludePlanModelDto {
-  @Expose()
-  title: string;
-
-  @Expose()
-  period: number;
-
-  @Expose({ groups: ['queryParam'] })
-  id: string;
-}
-
+**project.service.ts**
+```js
+//...
+  const skip = (page - 1) * perPage; // -> page offset
+  const [totalArticleCount, articles] = await Promise.all([
+    this.articleModel.countDocuments({}),
+    this.articleModel
+      .find(mongoQuery)
+      .sort({ [sort]: order })
+      .skip(skip)
+      .limit(perPage)
+      .exec()
+  ]);
+  const totalPage = Math.ceil(totalArticleCount / perPage); // 전체 페이지 수
+  const articleDtos = articles.map((article) =>
+    plainToClass(GetArticleResDto, article, { excludeExtraneousValues: true })
+  );
+//...
 ```
 
-요금제 id를 조회했을 때 요금제 이름과 요금제의 구독 개월 수를 보여주게 DTO를 만들었습니다.
-class-transformer를 사용하지 않으면 서비스 로직에서 일일이 매핑을 해줘야겠지만
+이 후에 DTO에서 constructor와 getter 사용 방법을 알게 되었습니다.
+DTO에서 getter 함수를 사용 페이지에 대한 offset을 보여주는 계산을 DTO로 이동할 수 있습니다.
 
-DTO에서 보여줄 필드는 `@Expose()`를 사용하고 제외할 필드는 `@Exclude()`를 사용해서 
-서비스로직에서 `plainToClass` 메서드를 사용하는 것으로 일반 객체를 클래스 인스턴스로 바꿔서 내보낼 수 있습니다.
+서비스 로직에 작성했던 skip을 dto로 옮기고, `PageRequestDto`에서 @Transform()으로 사용했던 
+page에 대한 쿼리 스트링이 없을 때 기본으로 숫자 1로 반환하던 함수도 getter로 이동해보겠습니다.
 
-```ts
-import { PlainLiteralObject } from '@nestjs/common';
-import {
-  ClassConstructor,
-  ClassTransformOptions,
-  plainToClass,
-} from 'class-transformer';
-
-export const toClassInstance = <T>(
-  cls: ClassConstructor<T>,
-  plain: PlainLiteralObject,
-  options?: ClassTransformOptions,
-): T => {
-  return plainToClass(cls, plain, {
-    excludeExtraneousValues: true,
-    ...options,
-  });
-};
+```js
+const skip = (page - 1) * perPage; // -> getter로 이동
 ```
 
-저는 `excludeExtraneousValues`옵션을 true로 사용하기 위해 `plainToClass`를 커스텀해서 사용했습니다.
+```js
+//...
+  @IsInt()
+  @Type(() => Number)
+  @IsOptional()
+  @Transform(({ value }) => { //-> 이 부분을 getter로 이동
+    const parsedValue = parseInt(value)
+    if (isNaN(parsedValue) || parsedValue < 1) {
+      return 1;
+    }
+    return parsedValue
+  })
+  @IsNumber()
+  page?: number;
+//..
+```
 
-```ts
-@Injectable()
-export class CustomerPlanService {
-  private readonly planModel: Model<Plan>;
+```js
+import { Type } from 'class-transformer';
+import { IsOptional, IsInt, IsString } from 'class-validator';
+
+export class RequestPaginatedQueryDto {
+  @IsInt()
+  @Type(() => Number)
+  @IsOptional()
+  page?: number;
+
+  @IsInt()
+  @IsOptional()
+  @Type(() => Number)
+  perPage?: number;
 
   constructor(
-    private readonly customerService: CustomerService,
+    page?: number,
+    perPage?: number,
   ) {
-      this.planModel = createPlanModel(tablePrefix);
+    this.page = page;
+    this.perPage = perPage;
   }
 
-  async findPlanTitle(planId: string): Promise<PlanDto> {
-    const planTitle = await this.planModel.get(planId);
-    if (!planTitle) {
-      throw new NotFoundException('요금제명을 찾지 못했습니다');
-    }
-    return toClassInstance(PlanDto, planTitle);// 여기서 객체를 클래스 인스턴스로 변환
+  get skip(): number {
+    return this.page <= 0 ? (this.page = 0) : (this.page - 1) * this.perPage;
+  } //-> const skip = (page - 1) * perPage; // page offset
+
+  validatePaginateQuery() {
+    this.validatePage();
+    this.validateTake();
+
+    return this;
   }
 
+  private validateTake(): void {
+    this.perPage = this.perPage && this.perPage >= 1 ? this.perPage : 10;
+  } // -> @transform()을 사용했던 기본 페이지 항목 반환
+
+  private validatePage(): void {
+    this.page = this.page && this.page >= 1 ? this.page : 1;
+  } // -> @transform()을 사용했던 기본 페이지 수 반환
 }
 ```
 
-## 왜 일반 객체를 클래스 인스턴스로 바꿔야 할까?
+이제 서비스 로직에서 DTO에서 getter함수로 사용한 skip을 전달 해보겠습니다.
 
-자바스크립트에서 일반 객체(plain object)를 클래스 인스턴스로 변환하여 외부에 전달하는 이유는 뭘까?
+**project.service.ts**
 
-그냥 일반 객체를 매핑해서 보내면 안되는 것인지 고민하던 중에 모던 딥다이브에 클로저와 클래스에 관한 챕터에서 그 이유를 알 수 있을 것 같았다.
+```js
+@Injectable()
+export class ArticleService {
+  constructor(
+    @InjectModel(Article.name)
+    private articleModel: Model<Article>,
+  ) { }
 
-여러가지 이유가 있겠지만 클래스 인스턴스를 사용하면 객체 내부의 상태나 메서드를 캡슐화해서 외부로부터 상태를 조작하는 것을 방지하는 측면에서 일반 객체를 클래스 인스턴스로 변환하는 것 같다.
+  async getPaginatedArticleList(request: RequestPaginatedQueryDto): Promise<Page<GetArticleResDto>> {
+    const { page, perPage, skip } = request // -> getter skip 전달
 
-그리고 클래스 인스턴스로 객체를 구분하고 상태를 관리, 추적하는 것에도 용이한 것도 하나의 이유가 될거 같다.
+    const articles = await this.articleModel.find({})
+        .skip(skip) //-> 여기서 page offset 전달
+        .limit(perPage)
+        .lean();
 
-## 데이터 검증하기
+    const articleDtos = articles.map((article) =>
+      plainToClass(GetArticleResDto, article, { excludeExtraneousValues: true })
+    );
 
-클라이언트에서 넘어오는 데이터는 어떻게 검증(validation)할 수 있을까요?
+    const totalPage = Math.ceil(totalArticleCount / perPage);
 
-class-validator와 global scoped pipes로 원하지 않는 데이터를 제외하고 받아올 수 있습니다.
+    return new Page<GetArticleResDto>(page, totalPage, articleDtos)
+  }
+}
+```
 
-이전 [로그인 구현하기](./login_module.md)에서 클라이언트 부분에서 Controller로 넘어오는 데이터를 검증해보겠습니다.
+이렇게 서비스 로직에 getter함수로 선언했던 pageoffset인 skip을 쿼리에 전달할 수 있습니다.
+같은 방법으로 총 페이지수를 반환하는 totalPage도 dto로 옮겨볼 수 있을 것 같습니다.
 
-`auth`폴더 아래에 `dto`폴더를 만들고 `auth.dto.ts` 파일을 만듭니다.
-예제는 NestJS 문서를 참고했습니다.
+```js
+@Controller('articles')
+export class ArticleController {
+  constructor(private readonly articleService: ArticleService) { }
 
-**auth/dto/auth.dto.ts**
+@Get()
+  async getPaginatedList(
+    @Query()
+    request: RequestPaginatedQueryDto,
+  ): Promise<Page<GetArticleResDto>> {
+    return await this.articleService.getPaginatedArticleList(
+      request.validatePaginateQuery() // 페이지 쿼리 전달
+    );
+  }
+}
+```
 
-```typescript
-import { IsString, MinLength, MaxLength } from "class-validator";
+컨트롤러에서도 쿼리 매개변수로 request에 앞서 작성한 DTO를 사용하고 postman으로 요청을 보낸다면 이렇게 나옵니다.
 
-export class LoginRequestDto {
+![DTO에 type을 해서 서비스에 쿼리를 전달하면 이렇게 사용할 수도 있습니다.](https://github.com/Zamoca42/blog/assets/96982072/7c798fc3-a855-4a0b-8242-ccae790ae195)
+
+로컬 데이터베이스에 임시로 만든 데이터에 facebook타입을 가진 5페이지의 항목은 1개가 존재하는 것을 확인할 수 있습니다. 이렇게 pagination으로 쿼리를 할 수 있지만 데이터 베이스에 쿼리하고 싶은 다른 내용을 dto에 추가할 수 있습니다.
+
+```js
+import { Type } from 'class-transformer';
+import { IsOptional, IsInt, IsString } from 'class-validator';
+
+export class RequestPaginatedQueryDto {
+  @IsInt()
+  @Type(() => Number)
+  @IsOptional()
+  page?: number;
+
+  @IsInt()
+  @IsOptional()
+  @Type(() => Number)
+  perPage?: number;
+
   @IsString()
-  @MinLength(3)
-  @MaxLength(10)
-  username: string;
+  @IsOptional()
+  @Type(() => String)
+  type?: string; //-> SNS 타입을 추가
 
-  @IsString()
-  @MinLength(8)
-  @MaxLength(15)
-  password: string;
-}
-
-export class LoginResponseDto {
-  username: string;
-}
-```
-
-`LoginRequestDto`에서 클라이언트에서 넘어온 데이터가 문자인지 그리고 최소길이, 최대길이를 만족하는지 decorator를 통해 검증합니다.
-
-데이터 검증이 완전히 작동하려면 `src/main.ts`에서 설정이 필요합니다.
-
-**src/main.ts**
-
-```typescript
-import { NestFactory } from "@nestjs/core";
-import { AppModule } from "./app.module";
-import { ValidationPipe } from "@nestjs/common";
-
-async function bootstrap(): Promise<void> {
-  const app = await NestFactory.create(AppModule);
-
-  app.useGlobalPipes(
-    new ValidationPipe({
-      whitelist: true,
-      transform: true,
-      forbidNonWhitelisted: true,
-    })
-  );
-
-  await app.listen(3000);
-}
-bootstrap();
-```
-
-전체 프로젝트에서 DTO의 validation이 작동할 수 있게 `useGlobalPipes`를 통해서 설정했습니다.
-다른 모듈이 생성되더라도 따로 설정해줄 필요없이 validation이 가능합니다.
-
-- [Global-scoped-pipes](https://docs.nestjs.com/pipes#global-scoped-pipes)
-
-`ValidationPipe`는 validator가 작동할 때 어떻게 동작할지 설정할 수 있습니다.
-
-ValidationPipe의 옵션은 [공식문서](https://docs.nestjs.com/techniques/validation#using-the-built-in-validationpipe)에 자세히 설명되어 있습니다
-
-**auth/auth.controller.ts**
-
-```typescript
-import {
-  Controller,
-  Post,
-  HttpCode,
-  HttpStatus,
-  Body,
-  UseGuards,
-} from "@nestjs/common";
-import { AuthService } from "./auth.service";
-import { AuthGuard } from "@nestjs/passport";
-import { LoginRequestDto, LoginResponseDto } from "./dto/auth.dto";
-
-@Controller("auth")
-export class AuthController {
-  constructor(private authService: AuthService) {}
-
-  // @UseGuards(AuthGuard('local'))
-  @HttpCode(HttpStatus.OK)
-  @Post("login")
-  async login(@Body() reqUser: LoginRequestDto): Promise<LoginResponseDto> {
-    return this.authService.validateUser(reqUser.username, reqUser.password);
+  constructor(
+    type?: string,
+    page?: number,
+    perPage?: number,
+  ) {
+    this.type = type;
+    this.page = page;
+    this.perPage = perPage;
   }
+
+  // 생략...
 }
 ```
 
-`AuthController`에서 local 전략 대신 `LoginRequestDto`를 넣고 클라이언트에서 넘어오는 username과 password를 보겠습니다
-
-username에서 문자열이 아닌 타입이 넘어오면 어떻게 될까요?
-
-![](https://github.com/Zamoca42/blog/assets/96982072/fae68fb2-b407-4fc9-9925-f3550455488c)
-
-username에 "zamoca"대신 숫자 11을 넣으면 `LoginRequestDto`의 username에서 validator에 통과하지 못했기 때문에 `Bad Request Error`가 발생하는 것을 볼 수 있습니다
+이렇게하고 서비스 로직에서 type을 추가해서 데이터베이스에 쿼리를 하면 되겠습니다.
