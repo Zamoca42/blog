@@ -73,9 +73,9 @@ console.log(new obj.f()); // f {}
 
 | ES6 함수의 구분 | constructor | prototype | super | arguments |
 | --------------- | ----------- | --------- | ----- | --------- |
-| 일반 함수       | :O:         | :O:       | :X:   | :O:       |
-| 메서드          | :X:         | :X:       | :O:   | :O:       |
-| 화살표 함수     | :X:         | :X:       | :X:   | :X:       |
+| 일반 함수       | :o:         | :o:       | :x:   | :o:       |
+| 메서드          | :x:         | :x:       | :o:   | :o:       |
+| 화살표 함수     | :x:         | :x:       | :x:   | :x:       |
 
 constructor이지만 ES6의 메서드와 화살표 함수는 non-constructor다.
 
