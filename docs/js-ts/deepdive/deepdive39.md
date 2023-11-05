@@ -10,11 +10,11 @@ DOM(Document Object Model)은 HTML 문서의 계층적 구조와 정보를 표�
 
 HTML 요소는 HTML 문서를 구성하는 개별적인 요소를 의미
 
-![그림 39-1. HTML 요소의 구조]()
+![그림 39-1. HTML 요소의 구조](https://github.com/Zamoca42/blog/assets/96982072/2e1f1d03-32b3-4c2f-a4fa-4a7d6348ca86)
 
 HTML요소의 어트리뷰트는 어트리뷰트 노드로, HTML 요소의 텍스트 콘텐츠는 텍스트 노드로 변환
 
-![그림 39-2. HTML 요소와 노드 객체]()
+![그림 39-2. HTML 요소와 노드 객체](https://github.com/Zamoca42/blog/assets/96982072/46ed82cd-2602-432b-929a-8d8ca09849f4)
 
 HTML 문서는 HTML 요소들의 집합으로 이뤄지며 중첩관계를 갖는다
 이 때 요소 간에는 중첩 관계에 의해 계층적 부자(parent-child) 관계가 형성된다.
@@ -26,7 +26,7 @@ HTML 문서는 HTML 요소들의 집합으로 이뤄지며 중첩관계를 갖�
 하나의 최상위 노드에서 시작한다. 최상위 노드를 루트노드라 한다.
 자식 노드가 없는 노드를 리프 노드라 한다.
 
-![그림 39-3. 트리 자료구조]()
+![그림 39-3. 트리 자료구조](https://github.com/Zamoca42/blog/assets/96982072/9081a622-1691-47e1-b86d-17b1f574b942)
 
 노드 객체들로 구성된 트리 자료구조를 DOM 트리라고 부르기도 한다.
 
@@ -52,7 +52,7 @@ HTML 문서는 HTML 요소들의 집합으로 이뤄지며 중첩관계를 갖�
 
 렌더링 엔진은 위 HTML 문서를 파싱하여 다음과 같이 DOM을 생성
 
-![그림 39-4. DOM]()
+![그림 39-4. DOM](https://github.com/Zamoca42/blog/assets/96982072/42994a9b-0ceb-4ef0-9f3f-3d07c17324ea)
 
 이처럼 DOM은 노드 객체의 계층적 구조로 구성된다. 이 중 중요한 노드 타입은 다음과 같이 4가지다
 
@@ -81,11 +81,11 @@ HTML 문서는 HTML 요소들의 집합으로 이뤄지며 중첩관계를 갖�
 
 DOM을 구성하는 노드 객체의 상속 구조는 다음과 같다.
 
-![그림 39-5. 노드 객체의 상속 구조]()
+![그림 39-5. 노드 객체의 상속 구조](https://github.com/Zamoca42/blog/assets/96982072/00f5e14e-3d38-4716-b78b-97c562db0063)
 
 input 요소 노드의 객체는 프로토타입 체인에 있는 모든 프로토타입의 프로퍼티나 메스드를 상속받아 사용할 수 있다.
 
-![그림 39-6. input 요소 노드의 객체는 프로토타입 체인]()
+![그림 39-6. input 요소 노드의 객체는 프로토타입 체인](https://github.com/Zamoca42/blog/assets/96982072/e73cc1b5-b351-47f4-be64-63644b65f8f6)
 
 ```html
 <!DOCTYPE html>
@@ -124,7 +124,7 @@ input 요소 노드의 객체는 프로토타입 체인에 있는 모든 프로�
 
 노드 객체의 상속 구조는 개발자 도구의 Elements 패널 우측의 Properties 패널에서 확인할 수 있다.
 
-![그림 39-7. 노드 객체의 상속 구조]()
+![그림 39-7. 노드 객체의 상속 구조](https://github.com/Zamoca42/blog/assets/96982072/947cfe85-2ba6-4cbc-a5a8-c5dd2c4b8b8e)
 
 DOM은 HTML 문서의 계층적 구조와 정보를 표현하는 것은 물론 노드 객체의 종류, 즉 노드 타입에 따라 필요한 기능을 프로퍼티와 메서드의 집합인 DOM API로 제공한다.
 
@@ -235,7 +235,7 @@ Document.prototype/Element.prototype.getElementsByTagName 메서드는 인수로
 
 getElementsByTagName 메서드가 반환하는 DOM 컬렉션 객체인 HTMLCollection 객체는 유사 배열 객체이면서 이터러블이다.
 
-![그림 39-8. HTMLCollection]()
+![그림 39-8. HTMLCollection](https://github.com/Zamoca42/blog/assets/96982072/3429f874-45c2-4144-b6c7-19eab186fdbb)
 
 ### 2.3. class를 이용한 요소 노드 취득
 
@@ -339,7 +339,7 @@ HTMLCollection과 NodeList의 중요한 특징은 노드 객체의 상태 변화
 
 위 예제는 HTMLCollection 객체를 for 문으로 순회하며 className 프로퍼티를 사용하여 모든 요소의 class 값을 'red'에서 'blue'로 변경한다.
 
-![그림 39-9. 예상대로 동작하지 않는다]()
+![그림 39-9. 예상대로 동작하지 않는다](https://github.com/Zamoca42/blog/assets/96982072/6f05cc4a-ba13-46fd-8bee-71983c8b26e1)
 
 `$elems.length`는 3이므로 for 문의 코드 블록은 3번 반복된다.
 
