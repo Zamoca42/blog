@@ -437,6 +437,7 @@ HTML 요소 사이의 스페이스, 탭, 줄바꿈 등의 공백 문자는 텍�
 ### 3.2. 자식 노드 탐색
 
 - Node.prototype.childNodes
+
   - 자식 노드를 모두 탐색하여 NodeList에 담아 반환
   - 텍스트 노드도 포함
 
@@ -456,7 +457,7 @@ HTML 요소 사이의 스페이스, 탭, 줄바꿈 등의 공백 문자는 텍�
   </body>
   <script>
     // 노드 탐색의 기점이 되는 #fruits 요소 노드를 취득한다.
-    const $fruits = document.getElementById('fruits');
+    const $fruits = document.getElementById("fruits");
 
     // #fruits 요소의 모든 자식 노드를 탐색한다.
     // childNodes 프로퍼티가 반환한 NodeList에는 요소 노드뿐만 아니라 텍스트 노드도 포함되어 있다.
@@ -493,12 +494,11 @@ HTML 요소 사이의 스페이스, 탭, 줄바꿈 등의 공백 문자는 텍�
 <!DOCTYPE html>
 <html>
   <body>
-    <ul id="fruits">
-    </ul>
+    <ul id="fruits"></ul>
   </body>
   <script>
     // 노드 탐색의 기점이 되는 #fruits 요소 노드를 취득한다.
-    const $fruits = document.getElementById('fruits');
+    const $fruits = document.getElementById("fruits");
 
     // hasChildNodes 메서드는 텍스트 노드를 포함하여 자식 노드의 존재를 확인한다.
     console.log($fruits.hasChildNodes()); // true
@@ -509,7 +509,6 @@ HTML 요소 사이의 스페이스, 탭, 줄바꿈 등의 공백 문자는 텍�
     console.log(!!$fruits.childElementCount); // 0 -> false
   </script>
 </html>
-
 ```
 
 ## 4. 노드 정보 취득
@@ -517,6 +516,7 @@ HTML 요소 사이의 스페이스, 탭, 줄바꿈 등의 공백 문자는 텍�
 노드 객체에 대한 정보를 취득하려면 다음과 같은 노드 정보 프로퍼티를 사용
 
 - Node.prototype.nodeType
+
   - 노드 객체의 종류로 노드 타입을 나타내는 상수를 반환
   - Node.ELEMENT_NODE: 요소 노드 타입을 나타내는 상수 1을 반환
   - Node.TEXT_NODE: 텍스트 노드 타입을 나타내는 상수 3을 반환
@@ -547,7 +547,7 @@ HTML 요소 사이의 스페이스, 탭, 줄바꿈 등의 공백 문자는 텍�
     console.log(document.nodeValue); // null
 
     // 요소 노드의 nodeValue 프로퍼티를 참조한다.
-    const $foo = document.getElementById('foo');
+    const $foo = document.getElementById("foo");
     console.log($foo.nodeValue); // null
 
     // 텍스트 노드의 nodeValue 프로퍼티를 참조한다.
@@ -570,11 +570,11 @@ Node.prototype.textContent 프로퍼티는 setter와 getter 모두 존재하는 
   </body>
   <script>
     // #foo 요소 노드는 텍스트 노드가 아니다.
-    console.log(document.getElementById('foo').nodeValue); // null
+    console.log(document.getElementById("foo").nodeValue); // null
     // #foo 요소 노드의 자식 노드인 텍스트 노드의 값을 취득한다.
-    console.log(document.getElementById('foo').firstChild.nodeValue); // Hello
+    console.log(document.getElementById("foo").firstChild.nodeValue); // Hello
     // span 요소 노드의 자식 노드인 텍스트 노드의 값을 취득한다.
-    console.log(document.getElementById('foo').lastChild.firstChild.nodeValue); // world!
+    console.log(document.getElementById("foo").lastChild.firstChild.nodeValue); // world!
   </script>
 </html>
 ```
@@ -598,7 +598,7 @@ DOM 조작에 의해 DOM에 새로운 노드가 추가되거나 삭제되면 리
   </body>
   <script>
     // #foo 요소의 콘텐츠 영역 내의 HTML 마크업을 문자열로 취득한다.
-    console.log(document.getElementById('foo').innerHTML);
+    console.log(document.getElementById("foo").innerHTML);
     // "Hello <span>world!</span>"
   </script>
 </html>
@@ -617,7 +617,7 @@ HTML 마크업이 파싱되어 요소 노드의 자식 노드로 DOM에 반영
   </body>
   <script>
     // HTML 마크업이 파싱되어 요소 노드의 자식 노드로 DOM에 반영된다.
-    document.getElementById('foo').innerHTML = 'Hi <span>there!</span>';
+    document.getElementById("foo").innerHTML = "Hi <span>there!</span>";
   </script>
 </html>
 ```
@@ -649,8 +649,9 @@ DOMPurify 라이브러리를 사용하는 것을 권장한다.
 잠재적 위험을 내포한 HTML 마크업을 새니티제이션하여 잠재적 위험을 제거한다.
 
 ```js
-DOMPurify.sanitize('<img src="x" onerror="alert(document.cookie)">')
+DOMPurify.sanitize('<img src="x" onerror="alert(document.cookie)">');
 ```
+
 :::
 
 ### 6.2. insertAdjacentHTML 메서드
@@ -673,12 +674,12 @@ insertAdjacentHTML 메서드는 두 번째 인수로 전달한 HTML 마크업 �
     <!-- afterend -->
   </body>
   <script>
-    const $foo = document.getElementById('foo');
+    const $foo = document.getElementById("foo");
 
-    $foo.insertAdjacentHTML('beforebegin', '<p>beforebegin</p>');
-    $foo.insertAdjacentHTML('afterbegin', '<p>afterbegin</p>');
-    $foo.insertAdjacentHTML('beforeend', '<p>beforeend</p>');
-    $foo.insertAdjacentHTML('afterend', '<p>afterend</p>');
+    $foo.insertAdjacentHTML("beforebegin", "<p>beforebegin</p>");
+    $foo.insertAdjacentHTML("afterbegin", "<p>afterbegin</p>");
+    $foo.insertAdjacentHTML("beforeend", "<p>beforeend</p>");
+    $foo.insertAdjacentHTML("afterend", "<p>afterend</p>");
   </script>
 </html>
 ```
@@ -698,13 +699,13 @@ DOM은 노드를 직접 생성/삽입/삭제/치환하는 메서드도 제공한
     </ul>
   </body>
   <script>
-    const $fruits = document.getElementById('fruits');
+    const $fruits = document.getElementById("fruits");
 
     // 1. 요소 노드 생성
-    const $li = document.createElement('li');
+    const $li = document.createElement("li");
 
     // 2. 텍스트 노드 생성
-    const textNode = document.createTextNode('Banana');
+    const textNode = document.createTextNode("Banana");
 
     // 3. 텍스트 노드를 $li 요소 노드의 자식 노드로 추가
     $li.appendChild(textNode);
@@ -719,35 +720,35 @@ DOM은 노드를 직접 생성/삽입/삭제/치환하는 메서드도 제공한
 
 ### 7.1. 어트리뷰트 노드와 attributes 프로퍼티
 
-HTML 요소의 동작을 제어하기 위한 추가적인 정보를 제공하는 HTML 어트리뷰트는 HTML 요소의 시작 태그에 
+HTML 요소의 동작을 제어하기 위한 추가적인 정보를 제공하는 HTML 어트리뷰트는 HTML 요소의 시작 태그에
 어트리뷰트 이름 = "어트리뷰트 값" 형식으로 정의한다.
 
 ```html
-<input id="user" type="text" value="ungmo2">
+<input id="user" type="text" value="ungmo2" />
 ```
 
 ![그림 39-31. 요소 노드의 attributes 프로퍼티](https://github.com/Zamoca42/blog/assets/96982072/f0d2ec65-aa57-4cfe-8173-1078e19bbfc5)
 
-attributes 프로퍼티는 getter만 존재하는 읽기 전용 접근자 프로퍼티이며, 
+attributes 프로퍼티는 getter만 존재하는 읽기 전용 접근자 프로퍼티이며,
 요소 노드의 모든 어트리뷰트 노드의 참조가 담긴 NamedNodeMap 객체를 반환한다.
 
 ```html
 <!DOCTYPE html>
 <html>
-<body>
-  <input id="user" type="text" value="ungmo2">
-  <script>
-    // 요소 노드의 attribute 프로퍼티는 요소 노드의 모든 어트리뷰트 노드의 참조가 담긴 NamedNodeMap 객체를 반환한다.
-    const { attributes } = document.getElementById('user');
-    console.log(attributes);
-    // NamedNodeMap {0: id, 1: type, 2: value, id: id, type: type, value: value, length: 3}
+  <body>
+    <input id="user" type="text" value="ungmo2" />
+    <script>
+      // 요소 노드의 attribute 프로퍼티는 요소 노드의 모든 어트리뷰트 노드의 참조가 담긴 NamedNodeMap 객체를 반환한다.
+      const { attributes } = document.getElementById("user");
+      console.log(attributes);
+      // NamedNodeMap {0: id, 1: type, 2: value, id: id, type: type, value: value, length: 3}
 
-    // 어트리뷰트 값 취득
-    console.log(attributes.id.value); // user
-    console.log(attributes.type.value); // text
-    console.log(attributes.value.value); // ungmo2
-  </script>
-</body>
+      // 어트리뷰트 값 취득
+      console.log(attributes.id.value); // user
+      console.log(attributes.type.value); // text
+      console.log(attributes.value.value); // ungmo2
+    </script>
+  </body>
 </html>
 ```
 
@@ -758,23 +759,123 @@ attributes 프로퍼티는 getter만 존재하는 읽기 전용 접근자 프로
 ```html
 <!DOCTYPE html>
 <html>
-<body>
-  <input id="user" type="text" value="ungmo2">
-  <script>
-    const $input = document.getElementById('user');
+  <body>
+    <input id="user" type="text" value="ungmo2" />
+    <script>
+      const $input = document.getElementById("user");
 
-    // value 어트리뷰트 값을 취득
-    const inputValue = $input.getAttribute('value');
-    console.log(inputValue); // ungmo2
+      // value 어트리뷰트 값을 취득
+      const inputValue = $input.getAttribute("value");
+      console.log(inputValue); // ungmo2
 
-    // value 어트리뷰트 값을 변경
-    $input.setAttribute('value', 'foo');
-    console.log($input.getAttribute('value')); // foo
-  </script>
-</body>
+      // value 어트리뷰트 값을 변경
+      $input.setAttribute("value", "foo");
+      console.log($input.getAttribute("value")); // foo
+    </script>
+  </body>
 </html>
 ```
 
 ## 8. 스타일
 
+### 8.1. 인라인 스타일 조작
+
+HTMLElement.prototype.style 프로퍼티는 setter와 getter 모두 존재하는 접근자 프로퍼티로서
+요소 노드의 인라인 스타일을 취득하거나 추가 또는 변경한다.
+
+![그림 39-34. style 프로퍼티에 의한 인라인 스타일 조작](https://github.com/Zamoca42/blog/assets/96982072/7dd82402-5f43-4ee6-84dc-49f884004a28)
+
+style 프로퍼티를 참조하면 CSSStyleDeclaration 객체는 다양한 CSS 프로퍼티에 대응하는 프로퍼티를 가지고 있으며, 이 프로퍼티에 값을 할당하면 해당 CSS 프로퍼티가 인라인 스타일로 HTML 요소에 추가되거나 변경된다.
+
+```js
+$div.style.backgroundColor = "yellow";
+```
+
+### 8.2. 클래스 조작
+
+HTML 요소의 class 어트리뷰트 값을 변경하여 HTML 요소의 스타일을 변경할 수도 있다.
+이때 HTML 요소의 class 어트리뷰트를 조작하려면 class 어트리뷰트에 대응하는 요소 노드의 DOM 프로퍼티를 사용한다.
+
+#### className
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .box {
+        width: 100px;
+        height: 100px;
+        background-color: antiquewhite;
+      }
+      .red {
+        color: red;
+      }
+      .blue {
+        color: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box red">Hello World</div>
+    <script>
+      const $box = document.querySelector(".box");
+
+      // .box 요소의 class 어트리뷰트 값을 취득
+      console.log($box.className); // 'box red'
+
+      // .box 요소의 class 어트리뷰트 값 중에서 'red'만 'blue'로 변경
+      $box.className = $box.className.replace("red", "blue");
+    </script>
+  </body>
+</html>
+```
+
+#### classList
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .box {
+        width: 100px;
+        height: 100px;
+        background-color: antiquewhite;
+      }
+      .red {
+        color: red;
+      }
+      .blue {
+        color: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box red">Hello World</div>
+    <script>
+      const $box = document.querySelector(".box");
+
+      // .box 요소의 class 어트리뷰트 정보를 담은 DOMTokenList 객체를 취득
+      // classList가 반환하는 DOMTokenList 객체는 HTMLCollection과 NodeList와 같이
+      // 노드 객체의 상태 변화를 실시간으로 반영하는 살아 있는(live) 객체다.
+      console.log($box.classList);
+      // DOMTokenList(2) [length: 2, value: "box blue", 0: "box", 1: "blue"]
+
+      // .box 요소의 class 어트리뷰트 값 중에서 'red'만 'blue'로 변경
+      $box.classList.replace("red", "blue");
+    </script>
+  </body>
+</html>
+```
+
 ## 9. DOM 표준
+
+DOM은 현재 다음과 같이 4개의 버전이 있다.
+
+| 레벨        | 표준 문서 URL                          |
+| :---------- | :------------------------------------- |
+| DOM Level 1 | https://www.w3.org/TR/REC-DOM-Level-1  |
+| DOM Level 2 | https://www.w3.org/TR/DOM-Level-2-Core |
+| DOM Level 3 | https://www.w3.org/TR/DOM-Level-3-Core |
+| DOM Level 4 | https://dom.spec.whatwg.org            |
