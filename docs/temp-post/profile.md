@@ -5,7 +5,9 @@ title: GitHub Profile
 ![header](https://capsule-render.vercel.app/api?type=waving&color=7fbcd2&section=header&text=Chu%20Yeon%20Kyu&fontColor=e1ffee&height=200)
 
 **"JavaScript의 프로토타입기반 객체지향 언어를 좋아합니다."**
+
 **"TypeScript을 활용해서 효율적이고 생산적인 개발 방법에 대해 고민하고 있습니다."**
+<br/>
 
 | :pencil: **Tech Blog**  | [![Blog][Blog]][Blog-url]                                                  |
 | :---------------------- | :------------------------------------------------------------------------- |
@@ -14,15 +16,18 @@ title: GitHub Profile
 <details>
 <summary><b>🛠️ Technologies & Tools</b></summary>
 
-|                                                                                     Main                                                                                      |
-| :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-| ![NestJS][NestJS] ![NodeJS][NodeJS] ![TypeScript][TypeScript] ![JavaScript][JavaScript] ![Postgres][Postgres] ![Git][Git] ![Docker][Docker] ![Docker Compose][Docker-Compose] |
-|                                                                                **Experienced**                                                                                |
-|                                               ![Python][Python] ![Django][Django] ![Vue.js][Vue.js] ![React][React] ![AWS][AWS]                                               |
-|                                                                               **Explore & Use**                                                                               |
-|                                                       ![C][C] ![DynamoDB][DynamoDB] ![MongoDB][MongoDB] ![Redis][Redis]                                                       |
-|                                                                                   **Tools**                                                                                   |
-|                                      ![VS Code][VS-Code] ![Markdown][Markdown] ![Obsidian][Obsidian] ![Colab][Colab] ![ChatGPT][ChatGPT]                                      |
+<br/>
+
+
+|                                                                                          Main                                                                                          |
+| :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+|                                     ![NestJS][NestJS] ![NodeJS][NodeJS] ![TypeScript][TypeScript] ![JavaScript][JavaScript] ![Postgres][Postgres] ![GitHub-Actions][GitHub-Actions]                                      |
+|                                                                                    **Experienced**                                                                                     |
+|                                                   ![Python][Python] ![Django][Django] ![Vue.js][Vue.js] ![React][React] ![AWS][AWS]                                                    |
+|                                                                                   **Explore & Use**                                                                                    |
+|                                                           ![C][C] ![DynamoDB][DynamoDB] ![MongoDB][MongoDB] ![Redis][Redis]                                                            |
+|                                                                                       **Tools**                                                                                        |
+| ![VS Code][VS-Code] ![Markdown][Markdown] ![Obsidian][Obsidian] ![Colab][Colab] ![ChatGPT][ChatGPT] ![Git][Git] ![Docker][Docker] ![Docker Compose][Docker-Compose] ![Swagger][Swagger] |
 
 </details>
 
@@ -30,17 +35,11 @@ title: GitHub Profile
 
 <summary><b>:bar_chart: GitHub Stats</b></summary>
 
-<p align="center">
+<br/>
 
 [![Zamoca's GitHub Stats][GitHub-Stats]][GitHub-url]
 
-</p>
-
-<p align="center">
-
 [![Hits][Hits]][Hits-url]
-
-</p>
 
 </details>
 
@@ -79,6 +78,8 @@ title: GitHub Profile
 [Obsidian]: https://img.shields.io/badge/Obsidian-%23483699?style=for-the-badge&logo=obsidian&logoColor=white
 [Colab]: https://img.shields.io/badge/Colab-%23F46800?style=for-the-badge&logo=googlecolab&logoColor=white
 [ChatGPT]: https://img.shields.io/badge/ChatGPT-%23000000?style=for-the-badge&logo=openai&logoColor=white
+[Swagger]: https://img.shields.io/badge/Swagger-%85EA2D?style=for-the-badge&logo=swagger&logoColor=white
+[GitHub-Actions]: https://img.shields.io/badge/GitHub%20Actions-%23000000?style=for-the-badge&logo=githubactions&logoColor=white
 
 <!--URL-LINK-->
 
