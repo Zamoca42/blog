@@ -9,7 +9,8 @@
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
     "docs:update-package": "npx vp-update",
-    "prepare": "husky install",
+    "dev:vite": "vuepress-vite dev src",
+    "dev:vite-clean": "vuepress-vite dev src --clean-cache",
     "commit": "cz"
   },
   "keywords": [],
@@ -18,19 +19,24 @@
   "devDependencies": {
     "@commitlint/cli": "^17.7.1",
     "@commitlint/config-conventional": "^17.7.0",
-    "@vuepress/client": "2.0.0-beta.67",
-    "@vuepress/plugin-google-analytics": "^2.0.0-beta.67",
-    "@vuepress/plugin-search": "^2.0.0-beta.67",
+    "@vuepress/bundler-vite": "^2.0.0-beta.68",
+    "@vuepress/client": "2.0.0-beta.68",
+    "@vuepress/plugin-google-analytics": "2.0.0-beta.68",
+    "@vuepress/plugin-search": "2.0.0-beta.68",
+    "@waline/client": "^3.0.0-alpha.1",
     "commitizen": "^4.3.0",
     "cz-conventional-changelog": "^3.3.0",
-    "husky": "^8.0.3",
-    "vue": "^3.3.4",
-    "vuepress": "2.0.0-beta.67",
-    "vuepress-theme-hope": "2.0.0-beta.237"
+    "vue": "^3.3.8",
+    "vuepress": "2.0.0-beta.68",
+    "vuepress-theme-hope": "2.0.0-beta.250"
   },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "dependencies": {
+    "@waline/api": "^1.0.0-alpha.1",
+    "recaptcha-v3": "^1.10.0"
   }
 }
