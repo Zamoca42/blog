@@ -50,7 +50,6 @@ export default hopeTheme({
     blog: {
       excerptLength: 0
     },
-
     // You should generate and use your own comment service
     comment: {
       provider: "Waline",
@@ -156,4 +155,5 @@ export default hopeTheme({
     //   },
     // },
   },
-});
+},
+  { custom: true });
