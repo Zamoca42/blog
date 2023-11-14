@@ -20,7 +20,7 @@ export default hopeTheme({
 
   docsDir: "docs",
 
-  // hotReload: true,
+  hotReload: true,
 
   // navbar
   navbar,
@@ -50,7 +50,9 @@ export default hopeTheme({
   },
 
   plugins: {
-    blog: true,
+    blog: {
+      excerptLength: 0
+    },
 
     // You should generate and use your own comment service
     comment: {
@@ -75,7 +77,7 @@ export default hopeTheme({
       katex: false,
       mark: true,
       mermaid: false,
-      mathjax:false,
+      mathjax: false,
       playground: {
         presets: ["ts", "vue"],
       },
