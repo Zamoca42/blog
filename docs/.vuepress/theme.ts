@@ -18,7 +18,7 @@ export default hopeTheme({
 
   repo: "zamoca42/blog",
 
-  docsDir: "docs",
+  docsDir: "src",
 
   hotReload: true,
 
@@ -27,7 +27,6 @@ export default hopeTheme({
 
   // sidebar
   sidebar,
-  headerDepth: 3,
 
   navbarLayout: {
     start: ["Brand"],
@@ -35,9 +34,7 @@ export default hopeTheme({
     end: ["Search", "Outlook"],
   },
 
-  footer: "Default footer",
-
-  displayFooter: false,
+  breadcrumb: false,
 
   encrypt: {
     config: {
@@ -78,9 +75,9 @@ export default hopeTheme({
       mark: true,
       mermaid: false,
       mathjax: false,
-      playground: {
-        presets: ["ts", "vue"],
-      },
+      // playground: {
+      //   presets: ["ts", "vue"],
+      // },
       // presentation: ["highlight", "math", "search", "notes", "zoom"],
       stylize: [
         {
