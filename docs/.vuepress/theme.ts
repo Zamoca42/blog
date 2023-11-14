@@ -18,7 +18,9 @@ export default hopeTheme({
 
   repo: "zamoca42/blog",
 
-  docsDir: "src",
+  docsDir: "docs",
+
+  hotReload: true,
 
   // navbar
   navbar,
@@ -30,7 +32,7 @@ export default hopeTheme({
   navbarLayout: {
     start: ["Brand"],
     center: ["Links"],
-    end: ["Search", "Repo", "Outlook"],
+    end: ["Search", "Outlook"],
   },
 
   footer: "Default footer",
@@ -48,38 +50,38 @@ export default hopeTheme({
   },
 
   plugins: {
+    blog: {
+      excerptLength: 0
+    },
 
     // You should generate and use your own comment service
     comment: {
-      provider: "Giscus",
-      repo: "zamoca42/blog",
-      repoId: "R_kgDOKUTHQw",
-      category: "Announcements",
-      categoryId: "DIC_kwDOKUTHQ84CZ0Ei",
-      mapping: "og:title"
+      provider: "Waline",
+      serverURL: "https://waline-comment-zamoca42s-projects.vercel.app/"
     },
 
     // All features are enabled for demo, only preserve features you need here
     mdEnhance: {
       align: true,
       attrs: true,
-      chart: true,
+      chart: false,
       codetabs: true,
       demo: true,
-      echarts: true,
+      echarts: false,
       figure: true,
-      flowchart: true,
+      flowchart: false,
       gfm: true,
       imgLazyload: true,
       imgSize: true,
       include: true,
-      katex: true,
+      katex: false,
       mark: true,
-      mermaid: true,
+      mermaid: false,
+      mathjax: false,
       playground: {
         presets: ["ts", "vue"],
       },
-      presentation: ["highlight", "math", "search", "notes", "zoom"],
+      // presentation: ["highlight", "math", "search", "notes", "zoom"],
       stylize: [
         {
           matcher: "Recommended",
@@ -97,7 +99,7 @@ export default hopeTheme({
       sup: true,
       tabs: true,
       vPre: true,
-      vuePlayground: true,
+      vuePlayground: false,
     },
 
     // uncomment these if you want a pwa

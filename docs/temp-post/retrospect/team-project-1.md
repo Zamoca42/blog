@@ -1,5 +1,7 @@
 ---
 title: 포토부스 팀 프로젝트 첫번째 후기
+timeline: false
+article: false
 ---
 
 > 2023. 10. 17(화) ~ 10. 23(월) 후기입니다

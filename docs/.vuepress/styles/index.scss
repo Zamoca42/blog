@@ -1,1 +1,16 @@
 // place your custom styles here
+.blog-page-wrapper {
+  direction: rtl;
+
+  > * > * {
+    direction: ltr;
+  }
+}
+
+// .vp-blog-hero-title {
+//   background-color: rgb(169, 169, 169, 0.3);
+// }
+
+// .vp-blog-hero-description {
+//   background-color: rgb(169, 169, 169, 0.3);
+// }

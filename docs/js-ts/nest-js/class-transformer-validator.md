@@ -105,7 +105,7 @@ export class CustomerPlanService {
 
 class-validator와 global scoped pipes로 원하지 않는 데이터를 제외하고 받아올 수 있습니다.
 
-이전 [로그인 구현하기](./login_module.md)에서 클라이언트 부분에서 Controller로 넘어오는 데이터를 검증해보겠습니다.
+이전 로그인 구현하기에서 클라이언트 부분에서 Controller로 넘어오는 데이터를 검증해보겠습니다.
 
 `auth`폴더 아래에 `dto`폴더를 만들고 `auth.dto.ts` 파일을 만듭니다.
 예제는 NestJS 문서를 참고했습니다.

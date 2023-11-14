@@ -1,3 +1,8 @@
+---
+article: false
+timeline: false
+---
+
 # Reference
 
 ![poetry 로 파이썬 패키지 관리하기](https://www.wool-dev.com/backend-engineering/python/poetry-python-environment)

@@ -1,6 +1,8 @@
 ---
 title: etc.
 comment: false
+timeline: false
+article: false
 ---
 
 <br/>
