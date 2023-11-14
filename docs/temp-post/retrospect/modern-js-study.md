@@ -1,5 +1,7 @@
 ---
 title: 모던 자바스크립트 딥다이브 스터디 후기
+timeline: false
+article: false
 ---
 
 ## 스터디를 하게된 동기

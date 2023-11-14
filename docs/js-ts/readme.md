@@ -1,6 +1,8 @@
 ---
 title: JS & TS
 comment: false
+timeline: false
+article: false
 ---
 
 <br/>

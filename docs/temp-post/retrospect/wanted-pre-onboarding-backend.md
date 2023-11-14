@@ -1,5 +1,7 @@
 ---
 title: 원티드 백엔드 프리온보딩 인턴쉽 1주차 후기 (작성중)
+timeline: false
+article: false
 ---
 
 ## 신청하게된 동기

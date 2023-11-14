@@ -1,5 +1,7 @@
 ---
 title: ERD (Entity Relationship Diagram)
+article: false
+timeline: false
 ---
 
 테이블 도식화

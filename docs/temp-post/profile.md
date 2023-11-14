@@ -1,5 +1,7 @@
 ---
 title: GitHub Profile
+timeline: false
+article: false
 ---
 
 ![header](https://capsule-render.vercel.app/api?type=waving&color=7fbcd2&section=header&text=Chu%20Yeon%20Kyu&fontColor=e1ffee&height=200)
