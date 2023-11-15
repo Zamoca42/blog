@@ -1,5 +1,9 @@
 ---
 title: 9. 타입 변환과 단축 평가
+category:
+  - JS & TS
+tag:
+  - JavaScript
 ---
 
 ## 1. 타입 변환이란?
@@ -288,7 +292,8 @@ function getStringLength(str = "") {
 
 ### 4.2. 옵셔널 체이닝 연산자
 
-ES11(ECMAScript2020)에서 도입된 옵셔널 체이닝 연산자 ?.는 좌항의 피연산자가 null 또는 undefined인 경우 undefined를 반환하고, 그렇지 않으면 우항의 프로퍼티 참조를 이어간다
+ES11(ECMAScript2020)에서 도입된 옵셔널 체이닝 연산자 ?.는
+좌항의 피연산자가 null 또는 undefined인 경우 undefined를 반환하고, 그렇지 않으면 우항의 프로퍼티 참조를 이어간다
 
 ```js
 var elem = null;
@@ -301,7 +306,8 @@ console.log(value); // undefined
 
 ### 4.3. null 병합 연산자
 
-ES11(ECMAScript2020)에서 도입된 null 병합 연산자 ??는 좌항의 피연산자가 null 또는 undefined인 경우 우항의 피연사자를 반환하고, 그렇지 않으면 좌항의 피연산자를 반환한다.
+ES11(ECMAScript2020)에서 도입된 null 병합 연산자 ??는
+좌항의 피연산자가 null 또는 undefined인 경우 우항의 피연사자를 반환하고, 그렇지 않으면 좌항의 피연산자를 반환한다.
 
 ```js
 var foo = null ?? "default string";

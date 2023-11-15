@@ -1,5 +1,9 @@
 ---
 title: 5. 표현식과 문
+category:
+  - JS & TS
+tag:
+  - JavaScript
 ---
 
 ## 1. 값

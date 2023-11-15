@@ -1,6 +1,8 @@
 {
   "MD001": false,
   "MD013": {
-    "line_length": 50
-  }
+    "line_length": 80,
+    "tables": false
+  },
+  "MD033": false
 }

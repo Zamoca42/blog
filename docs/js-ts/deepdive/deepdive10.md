@@ -1,5 +1,9 @@
 ---
 title: 10. 객체 리터럴
+category:
+  - JS & TS
+tag:
+  - JavaScript
 ---
 
 ## 1. 객체란?
@@ -9,20 +13,21 @@ title: 10. 객체 리터럴
 
 객체는 0개 이상의 프로퍼티로 구성된 집합이며, 프로퍼티는 키와 값으로 구성된다.
 
-![](https://github.com/Zamoca42/blog/assets/96982072/30727ee8-b9c9-4c6a-b5e7-a974189d3cca)
+![10-1](https://github.com/Zamoca42/blog/assets/96982072/30727ee8-b9c9-4c6a-b5e7-a974189d3cca)
 
 프로퍼티 값이 함수일 경우, 일반 함수와 구분하기 위해 메서드라 부른다.
 
-![](https://github.com/Zamoca42/blog/assets/96982072/e9dd00c6-7cec-481e-aa6e-3a8bf9d935da)
+![10-2](https://github.com/Zamoca42/blog/assets/96982072/e9dd00c6-7cec-481e-aa6e-3a8bf9d935da)
 
 프로퍼티와 메서드의 역할은 다음과 같다
 
 - 프로퍼티: 객체의 상태를 나타내는 값(data)
 - 메서드: 프로퍼티(상태 데이터)를 참조하고 조작할 수 있는 동작(behavior)
 
-이처럼 객체는 객체의 상태를 나타내는 값과 프로퍼티를 참조하고 조작할 수 있는 메서드를 모두 포함할 수 있기 때문에 상태와 동작을 하나의 단위로 구조화할 수 있어 유용하다.
+이처럼 객체는 객체의 상태를 나타내는 값과 프로퍼티를 참조하고 조작할 수 있는 메서드를
+모두 포함할 수 있기 때문에 상태와 동작을 하나의 단위로 구조화할 수 있어 유용하다.
 
-![](https://github.com/Zamoca42/blog/assets/96982072/59e3746c-4e49-44b9-9eb5-3a45167f4e8b)
+![10-3](https://github.com/Zamoca42/blog/assets/96982072/59e3746c-4e49-44b9-9eb5-3a45167f4e8b)
 
 객체의 집합으로 프로그램을 표현하려는 프로그래밍 패러다임을 객체지향 프로그래밍이라 한다.
 
