@@ -1,13 +1,13 @@
-// place your custom styles here
-@keyframes blink {
-  0%, 100% {
-    background-color: rgba(100, 140, 200, 0.3);
-  }
+// // place your custom styles here
+// @keyframes blink {
+//   0%, 100% {
+//     background-color: rgba(100, 140, 200, 0.3);
+//   }
 
-  50% {
-    background-color: transparent;
-  }
-}
+//   50% {
+//     background-color: transparent;
+//   }
+// }
 
 .blog-page-wrapper {
   direction: rtl;
@@ -19,8 +19,9 @@
 
 .vp-blog-hero-title,
 .vp-blog-hero-description {
-  // background-color: rgb(169, 169, 169, 0.3);
+  // background-color: rgb(169, 169, 169, 0.2);
   // background-color: rgba(144, 204, 170, 0.2);
-  animation: blink 2s infinite;
+  background-color: rgba(100, 140, 200, 0.3);
+  // animation: blink 2s infinite;
 }
 

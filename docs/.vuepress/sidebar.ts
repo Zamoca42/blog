@@ -39,8 +39,6 @@ export default sidebar({
       collapsible: true,
       children: "structure",
     },
-    "github-flow",
-    "git-flow",
     {
       text: "GitHub Actions로 배포 자동화",
       prefix: "github-actions/",
@@ -60,5 +58,7 @@ export default sidebar({
       children: "structure",
     },
     "grafana-prometheus-in-django",
+    "github-flow",
+    "git-flow",
   ],
 });
