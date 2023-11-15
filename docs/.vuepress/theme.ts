@@ -10,6 +10,18 @@ export default hopeTheme({
     url: "https://github.com/zamoca42",
   },
 
+  blog: {
+    name: '추연규(Zamoca)',
+    medias: {
+      GitHub: "https://github.com/zamoca42",
+      Email: "mailto:suntail2002@naver.com",
+      Gmail: "mailto:suntail93@gmail.com",
+      Linkedin: "https://www.linkedin.com/in/연규-추-951017276",
+      Instagram: "https://instagram.com/suntail2012",
+      Steam: "https://steamcommunity.com/id/starlake21/",
+    }
+  },
+
   iconAssets: "fontawesome-with-brands",
 
   logo: "/favicon-green2/android-chrome-512x512.png",
