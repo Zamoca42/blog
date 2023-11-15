@@ -4,6 +4,10 @@ comment: false
 next: false
 timeline: false
 article: false
+category:
+  - Database
+tag:
+  - SQL
 ---
 
 <br/>

@@ -1,11 +1,16 @@
 ---
 title: 6. 데이터 타입
+category:
+  - JS & TS
+tag:
+  - JavaScript
 ---
 
-자바스크립트의 모든 값은 데이터 타입을 갖는다. 데이터 타입(Data type)은 값의 종류를 말한다.
+자바스크립트의 모든 값은 데이터 타입을 갖는다.
+데이터 타입(Data type)은 값의 종류를 말한다.
 
 자바스크립트(ES6)은 7개의 데이터 타입을 제공하고
-원시 타입(Primitive type)과 객체 타입(Object/Reference type)으로 분류할 수 있다.
+원시 타입(Primitive type)과 객체 타입(Object type)으로 분류할 수 있다.
 
 <table>
   <tr>
@@ -28,7 +33,7 @@ title: 6. 데이터 타입
   </tr>
   <tr>
     <td>undefined</td>
-    <td>var 키워드로 선언된 변수에 암묵적으로 할당되는 값</td>    
+    <td>var 키워드로 선언된 변수에 암묵적으로 할당되는 값</td>
   </tr>
   <tr>
     <td>null</td>
@@ -44,7 +49,8 @@ title: 6. 데이터 타입
   </tr>
 </table>
 
-데이터 타입에 따라 확보해야 할 메모리 공간의 크기도 다르고 메모리에 저장되는 2진수도 다르며 읽어 들여 해석하는 방식도 다르다.
+데이터 타입에 따라 확보해야 할 메모리 공간의 크기도 다르고 메모리에 저장되는 2진수도 다르며
+읽어 들여 해석하는 방식도 다르다.
 
 ## 1. 숫자 타입
 
@@ -52,7 +58,8 @@ C나 자바의 경우, 정수와 실수를 구분해서 int, log, float, double 
 
 하지만 자바스크립트는 하나의 숫자타입만 존재한다.
 
-ECMAScript사양에 따르면 숫자 타입의 값은 [배정밀도 64비트 부동소수점 형식](https://en.wikipedia.org/wiki/Double-precision_floating-point_format)을 따른다
+ECMAScript사양에 따르면 숫자 타입의 값은
+[배정밀도 64비트 부동소수점 형식][Double-precision]을 따른다
 
 ![IEEE 754 Double Floating Point Format](https://github.com/Zamoca42/blog/assets/96982072/ff9bc416-9cc2-4796-8328-12a5f4345b6d)
 
@@ -122,9 +129,9 @@ console.log(template);
 
 출력 결과
 
-```
+```html
 <ul>
-    <li><a href="#">Home</a></li>
+  <li><a href="#">Home</a></li>
 </ul>
 ```
 
@@ -139,7 +146,7 @@ console.log(`My name is ${first} ${last}`);
 
 출력 결과
 
-```
+```text
 My name is Ung-mo Lee
 ```
 
@@ -151,7 +158,7 @@ console.log(`1 + 2 = ${1 + 2}`);
 
 출력
 
-```
+```text
 1 + 2 = 3
 ```
 
@@ -257,7 +264,8 @@ int num;
 ```
 
 정적 타입 언어는 변수의 타입을 변경할 수 없으며, 변수에 선언한 타입에 맞는 값만 할당할 수 있다.
-그리고 컴파일 시점에 타입 체크를 수행해서 타입 체크를 통과하지 못했다면 에러를 발생시키고 프로그램의 실행 자체를 막는다. 이를 통해 타입의 일관성을 강제함으로써 런타임에 발생하는 에러를 줄인다.
+컴파일 시점에 타입 체크를 수행해서 타입 체크를 통과하지 못했다면 에러를 발생시키고 프로그램의 실행 자체를 막는다.
+이를 통해 타입의 일관성을 강제함으로써 런타임에 발생하는 에러를 줄인다.
 
 자바 스크립트는 정적 타입언어와 다르게 타입을 선언하지 않는다.
 
@@ -310,3 +318,5 @@ console.log(typeof foo); // function
 ## 추가 자료
 
 - [자바스크립트의 숫자(Number)형 - aeunhi99님의 티스토리](https://aeunhi99.tistory.com/323)
+
+[Double-precision]: https://en.wikipedia.org/wiki/Double-precision_floating-point_format

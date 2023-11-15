@@ -34,7 +34,6 @@ export default hopeTheme({
     end: ["Search", "Outlook"],
   },
 
-  breadcrumb: false,
 
   encrypt: {
     config: {
@@ -48,9 +47,8 @@ export default hopeTheme({
 
   plugins: {
     blog: {
-      excerptLength: 0
+      // excerptLength: 0
     },
-
     // You should generate and use your own comment service
     comment: {
       provider: "Waline",
@@ -156,4 +154,5 @@ export default hopeTheme({
     //   },
     // },
   },
-});
+},
+  { custom: true });

@@ -1,5 +1,14 @@
 ---
 title: etc.
+category:
+  - etc.
+tag:
+  - Git
+  - Retrospect
+  - Test
+  - Docker
+  - GitHub-Actions
+  - Monitoring
 comment: false
 timeline: false
 article: false
