@@ -1,6 +1,8 @@
 ---
 title: vuepress 블로그 만들기(+ 테마)
 order: 1
+article: false
+timeline: false
 ---
 
 > vuepress 2.x버전을 기준으로 설명합니다.

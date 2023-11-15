@@ -1,6 +1,8 @@
 ---
 title: 블로그 구글 검색에 등록하기(SEO)
 order: 2
+article: false
+timeline: false
 ---
 
 구글 검색에 크롤링 노출
