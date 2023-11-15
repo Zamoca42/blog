@@ -24,6 +24,13 @@ export default defineUserConfig({
         crosorigin: "",
       },
     ],
+    [
+      "link",
+      {
+        href: "https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;700&display=swap",
+        rel: "stylesheet",
+      },
+    ],
   ],
   // Enable it with pwa
   // shouldPrefetch: false,
