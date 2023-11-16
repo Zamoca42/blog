@@ -1,6 +1,11 @@
 ---
 title: 로그인 구현하기
 order: 2
+category:
+  - JS & TS
+tag:
+  - NestJS
+  - TypeScript
 ---
 
 React Admin에서 로그인 페이지를 만들고 Nest의 인증 모듈과 연결했을 때의 화면입니다.
@@ -18,54 +23,55 @@ React Admin에서 로그인 페이지를 만들고 Nest의 인증 모듈과 연�
 
 ## `passport-local` 설치
 
-```
-$ npm install --save @nestjs/passport passport passport-local
-$ npm install --save-dev @types/passport-local
+```bash
+npm install --save @nestjs/passport passport passport-local
+npm install --save-dev @types/passport-local
 ```
 
 ## 관리자 모듈 만들기
 
 회원을 관리할 관리자를 등록하는 모듈을 만들어줍니다
 
-```
-$ nest g module manager
-$ nest g service manager
+```bash
+nest g module manager
+nest g service manager
 ```
 
 그러면 이런 구조가 만들어집니다
 
-|manager/|
-|:--|
-|\|- manager.controller.ts |
-|\|- manager.module.ts |
-|\|- manager.service.ts |
+| manager/                  |
+| :------------------------ |
+| \|- manager.controller.ts |
+| \|- manager.module.ts     |
+| \|- manager.service.ts    |
 
 그 다음 `ManagerService`에서 임시로 로그인 유저를 만듭니다. 이 부분은 Database를 연결해서 옮겨줄 수있습니다.
 
 **manager/manager.service.ts**
+
 ```typescript
-import { Injectable } from '@nestjs/common';
-import { Manager } from './entities/manager.entity';
-import * as bcrypt from 'bcrypt';
+import { Injectable } from "@nestjs/common";
+import { Manager } from "./entities/manager.entity";
+import * as bcrypt from "bcrypt";
 
 @Injectable()
 export class ManagerService {
   private readonly managers = [
     {
       userId: 1,
-      username: 'zamoca',
-      password: 'zamoca1234',
+      username: "zamoca",
+      password: "zamoca1234",
     },
     {
       userId: 2,
-      username: 'admin',
-      password: 'admin1234',
+      username: "admin",
+      password: "admin1234",
     },
   ];
 
   async findOne(managername: string): Promise<Manager | undefined> {
     const manager = this.managers.find(
-      (manager) => manager.username === managername,
+      (manager) => manager.username === managername
     );
     if (manager) {
       const hashedPassword = await bcrypt.hash(manager.password, 10);
@@ -76,13 +82,14 @@ export class ManagerService {
 }
 ```
 
-`ManagerModule`에서 `exports`에 `ManagerService`를 추가하면 다른 모듈에서 `ManagerService`를 사용할 수 있습니다. 여기서는 `AuthService` 사용합니다.
+`ManagerModule`에서 `exports`에 `ManagerService`를 추가하면 다른 모듈에서
+`ManagerService`를 사용할 수 있습니다. 여기서는 `AuthService` 사용합니다.
 
 **manager/manager.module.ts**
 
 ```typescript
-import { Module } from '@nestjs/common';
-import { ManagerService } from './manager.service';
+import { Module } from "@nestjs/common";
+import { ManagerService } from "./manager.service";
 
 @Module({
   providers: [ManagerService],
@@ -95,32 +102,33 @@ export class ManagerModule {}
 
 다음은 생성된 관리자가 맞는지 인증하는 모듈을 만듭니다
 
-```
-$ nest g module auth
-$ nest g controller auth
-$ nest g service auth
+```bash
+nest g module auth
+nest g controller auth
+nest g service auth
 ```
 
 이런 폴더 구조가 생성됩니다
 
-|auth/|
-|:--|
-|\|- auth.controller.ts |
-|\|- auth.module.ts |
-|\|- auth.service.ts |
+| auth/                  |
+| :--------------------- |
+| \|- auth.controller.ts |
+| \|- auth.module.ts     |
+| \|- auth.service.ts    |
 
 ### 유저 검증 추가하기
 
-`AuthService`에서는 사용자를 검색하고 비밀번호를 확인하는 작업을 `validateUser()`에 작성합니다. 
+`AuthService`에서는 사용자를 검색하고 비밀번호를 확인하는 작업을 `validateUser()`에 작성합니다.
 
 마지막에 로그인을 확인하기 위해 유저 이름을 반환하겠습니다.
 
 **auth/auth.service.ts**
+
 ```typescript
-import { Injectable } from '@nestjs/common';
-import { ManagerService } from '../manager/manager.service';
-import { LoginResponseDto } from './dto/auth.dto';
-import * as bcrypt from 'bcrypt';
+import { Injectable } from "@nestjs/common";
+import { ManagerService } from "../manager/manager.service";
+import { LoginResponseDto } from "./dto/auth.dto";
+import * as bcrypt from "bcrypt";
 
 @Injectable()
 export class AuthService {
@@ -128,7 +136,7 @@ export class AuthService {
 
   async validateUser(
     username: string,
-    pass: string,
+    pass: string
   ): Promise<LoginResponseDto | null> {
     const user = await this.managerService.findOne(username);
     if (user && (await bcrypt.compare(pass, user.password))) {
@@ -138,17 +146,19 @@ export class AuthService {
   }
 }
 ```
+
 ### 로컬 인증 전략 불러오기
 
 다음은 `auth` 폴더에 `passport`의 인증 전략을 따로 `local.strategy.ts`를 만들어 추가합니다.
 
 **auth/local.strategy.ts**
+
 ```typescript
-import { Strategy } from 'passport-local';
-import { PassportStrategy } from '@nestjs/passport';
-import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { AuthService } from './auth.service';
-import { LoginResponseDto } from './dto/auth.dto';
+import { Strategy } from "passport-local";
+import { PassportStrategy } from "@nestjs/passport";
+import { Injectable, UnauthorizedException } from "@nestjs/common";
+import { AuthService } from "./auth.service";
+import { LoginResponseDto } from "./dto/auth.dto";
 
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy) {
@@ -158,7 +168,7 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
 
   async validate(
     username: string,
-    password: string,
+    password: string
   ): Promise<LoginResponseDto> {
     const user = await this.authService.validateUser(username, password);
     if (!user) {
@@ -176,13 +186,14 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
 이러면 인증 모듈에서 passport와 관리자 아이디, 비밀번호를 사용할 수 있습니다
 
 **auth/auth.module.ts**
+
 ```typescript
-import { Module } from '@nestjs/common';
-import { AuthService } from './auth.service';
-import { ManagerModule } from '../manager/manager.module';
-import { PassportModule } from '@nestjs/passport';
-import { LocalStrategy } from './local.strategy';
-import { AuthController } from './auth.controller';
+import { Module } from "@nestjs/common";
+import { AuthService } from "./auth.service";
+import { ManagerModule } from "../manager/manager.module";
+import { PassportModule } from "@nestjs/passport";
+import { LocalStrategy } from "./local.strategy";
+import { AuthController } from "./auth.controller";
 
 @Module({
   imports: [ManagerModule, PassportModule],
@@ -194,11 +205,11 @@ export class AuthModule {}
 
 ### 로그인 경로 구현
 
-마지막에 `AuthController`에서 `/auth/lgoin` 경로를 구현하고 `@UseGuards(AuthGuard('local'))`를 추가해서
-
-로컬 인증 전략을 불러옵니다
+마지막에 `AuthController`에서 `/auth/lgoin` 경로를 구현하고
+`@UseGuards(AuthGuard('local'))`를 추가해서 로컬 인증 전략을 불러옵니다.
 
 **auth/auth.controller.ts**
+
 ```typescript
 import {
   Controller,
@@ -207,18 +218,18 @@ import {
   HttpStatus,
   Body,
   UseGuards,
-} from '@nestjs/common';
-import { AuthService } from './auth.service';
-import { AuthGuard } from '@nestjs/passport';
-import { LoginRequestDto, LoginResponseDto } from './dto/auth.dto';
+} from "@nestjs/common";
+import { AuthService } from "./auth.service";
+import { AuthGuard } from "@nestjs/passport";
+import { LoginRequestDto, LoginResponseDto } from "./dto/auth.dto";
 
-@Controller('auth')
+@Controller("auth")
 export class AuthController {
   constructor(private authService: AuthService) {}
 
-  @UseGuards(AuthGuard('local'))
+  @UseGuards(AuthGuard("local"))
   @HttpCode(HttpStatus.OK)
-  @Post('login')
+  @Post("login")
   async login(@Request() req) {
     return req.user;
   }
@@ -233,12 +244,4 @@ export class AuthController {
 
 ![요청 실패](https://github.com/Zamoca42/blog/assets/96982072/a6050763-38ee-45a8-af1f-5c12b5bc0790)
 
-인증에 실패하면 401(Unauthorized)에러를 반환하고 성공하면 유저이름을 반환하고 다음페이지로 넘어갑니다
-
-## 정리
-
-![](https://github.com/Zamoca42/blog/assets/96982072/4d5bc910-71f6-464c-8a86-275688421138)
-
-로그인을 구현하면서 구성을 플로우차트로 정리했습니다.
-
-:pushpin: React Admin에 대해서는 기회가 되면 블로그에서 다루도록 하겠습니다
+인증에 실패하면 401(Unauthorized)에러를 반환하고 성공하면 유저이름을 반환하고 다음페이지로 넘어갑니다.

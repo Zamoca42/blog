@@ -1,9 +1,15 @@
 ---
 title: 예외 처리하기(Exception Filter)
 order: 5
+category:
+  - JS & TS
+tag:
+  - NestJS
+  - TypeScript
 ---
 
-Nest에는 애플리케이션 전체에서 처리되지 않은 모든 예외를 처리하는 예외 계층(Exceptions Layer)이 내장되어 있습니다. 애플리케이션 코드에서 예외가 처리되지 않으면 이 계층에서 이를 포착한 다음 사용자에게 응답을 내보냅니다.
+Nest에는 애플리케이션 전체에서 처리되지 않은 모든 예외를 처리하는 예외 계층(Exceptions Layer)이 내장되어 있습니다.
+애플리케이션 코드에서 예외가 처리되지 않으면 이 계층에서 이를 포착한 다음 사용자에게 응답을 내보냅니다.
 
 ## 커스텀하기
 
@@ -84,4 +90,4 @@ bootstrap();
 
 예외가 발생했을 때 URL, 상태코드, 예외메세지를 확인할 수 있습니다.
 
-![](https://github.com/Zamoca42/blog/assets/96982072/d610b655-9b5e-4840-acdc-920d0017e534)
+![exception](https://github.com/Zamoca42/blog/assets/96982072/d610b655-9b5e-4840-acdc-920d0017e534)

@@ -1,6 +1,12 @@
 ---
 title: 고객정보 API 만들기
 order: 6
+category:
+  - JS & TS
+tag:
+  - NestJS
+  - TypeScript
+  - Project
 ---
 
 ![회원 정보 검색](https://github.com/Zamoca42/blog/assets/96982072/3cb4e5b5-b460-470e-8c80-f65a1502ed44)
@@ -13,7 +19,7 @@ order: 6
   "phoneNumber": "+821099990001",
   "email": "이메일@.com",
   "businessName": "회사이름",
-  "businessItem": "사업",
+  "businessItem": "사업"
 }
 ```
 
@@ -22,39 +28,35 @@ order: 6
 [데이터베이스 연결하기](./database.md)에서 고객정보 스키마는 이렇게 작성했습니다.
 
 ```typescript
-export const customerMetaSchema = new Schema(
-  {
-    id: {
-      type: String,
-      hashKey: true,
-    },
-    businessName: String,
-    businessItem: String,
+export const customerMetaSchema = new Schema({
+  id: {
+    type: String,
+    hashKey: true,
   },
-);
+  businessName: String,
+  businessItem: String,
+});
 
-export const customerSchema = new Schema(
-  {
-    user_id: {
-      type: String,
-      hashKey: true,
+export const customerSchema = new Schema({
+  user_id: {
+    type: String,
+    hashKey: true,
+  },
+  email: {
+    type: String,
+    index: {
+      name: "EmailIndex",
+      type: "global",
     },
-    email: {
-      type: String,
-      index: {
-        name: "EmailIndex",
-        type: "global",
-      },
+  },
+  phone_number: {
+    type: String,
+    index: {
+      name: "PhoneNumberIndex",
+      type: "global",
     },
-    phone_number: {
-      type: String,
-      index: {
-        name: "PhoneNumberIndex",
-        type: "global",
-      },
-    },
-  }
-);
+  },
+});
 ```
 
 1. `customer`와 `customerMeta`의 컨벤션(convention)을 일치시켜야합니다.
@@ -69,6 +71,7 @@ customer모듈을 만드는부분은 생략하고 Service, Controller를 작성�
 customer모듈을 만들고 유저아이디를 입력하면 데이터베이스에 쿼리하는 부분을 서비스 로직에 작성했습니다.
 
 **customer/customer.service.ts**
+
 ```typescript
 @Injectable()
 export class CustomerService {
@@ -110,7 +113,7 @@ export class CustomerService {
 
 Dynamoose의 [쿼리](https://dynamoosejs.com/guide/Query)기능을 이용해서 유저아이디를 쿼리합니다.
 
-일치하는 결과가 있으면 [`plainToClass`](https://github.com/typestack/class-transformer#plaintoclass)로 DTO와 데이터베이스 쿼리 결과(자바스크립트 객체)와 매핑합니다.
+일치하는 결과가 있으면 [`plainToClass`][PlainToClass]로 DTO와 데이터베이스 쿼리 결과(자바스크립트 객체)와 매핑합니다.
 
 ## Controller 작성
 
@@ -119,10 +122,10 @@ Dynamoose의 [쿼리](https://dynamoosejs.com/guide/Query)기능을 이용해서
 export class CustomerController {
   constructor(private readonly customerService: CustomerService) {}
 
-  @Get('customers/:userId')
+  @Get("customers/:userId")
   async getCustomer(
-    @Param('userId', new ParseIDPipe())
-    userId: string,
+    @Param("userId", new ParseIDPipe())
+    userId: string
   ): Promise<GetCustomerResponseDto> {
     const customerDto: CustomerDto =
       await this.customerService.findCustomerByUserId(userId);
@@ -138,17 +141,18 @@ export class CustomerController {
 ## Response Body 만들기
 
 **customer/dto/get-customer-response.dto.ts**
+
 ```typescript
-import { Exclude, Expose } from 'class-transformer';
+import { Exclude, Expose } from "class-transformer";
 
 export class CustomerDto {
-  @Expose({ name: 'user_id' })
+  @Expose({ name: "user_id" })
   id: string;
 
   @Expose()
   email: string;
 
-  @Expose({ name: 'phone_number' })
+  @Expose({ name: "phone_number" })
   phoneNumber: string;
 }
 
@@ -161,9 +165,7 @@ export class CustomerMetaDto {
 
   @Expose()
   businessItem: string;
-
 }
-
 
 export class GetCustomerResponseDto extends CustomerDto {
   @Exclude()
@@ -174,10 +176,14 @@ export class GetCustomerResponseDto extends CustomerDto {
 
   @Expose()
   businessItem: string;
-
 }
 ```
 
-앞서 서비스 로직에서 `plainToClass`를 사용했기 때문에 DTO에서 내보낼 객체는 `@Expose()`로 또는 `@Exclude()`로 제외시킬 수도 있습니다.
+앞서 서비스 로직에서 `plainToClass`를 사용했기 때문에 DTO에서 내보낼 객체는
+`@Expose()`로 또는 `@Exclude()`로 제외시킬 수도 있습니다.
 
-또 [`@Expose()`](https://github.com/typestack/class-transformer#exposing-properties-with-different-names)의 옵션으로 컨벤션이 다르다면 컨벤션을 일치시킬 수 있습니다.
+또 [`@Expose()`][Expose]의 옵션으로
+컨벤션이 다르다면 컨벤션을 일치시킬 수 있습니다.
+
+[Expose]: https://github.com/typestack/class-transformer#exposing-properties-with-different-names
+[PlainToClass]: https://github.com/typestack/class-transformer#plaintoclass
