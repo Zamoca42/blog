@@ -1,6 +1,11 @@
 ---
 title: nest에서 class-transformer, validator 사용하기
 order: 5
+category:
+  - JS & TS
+tag:
+  - NestJS
+  - TypeScript
 ---
 
 ## Nest에서 일반 객체를 -> 클래스 인스턴스로 변환
@@ -95,9 +100,11 @@ export class CustomerPlanService {
 
 자바스크립트에서 일반 객체(plain object)를 클래스 인스턴스로 변환하여 외부에 전달하는 이유는 뭘까요?
 
-그냥 일반 객체를 매핑해서 보내면 안되는 것인지 고민하던 중에 모던 딥다이브에 [클로저](../deepdive/deepdive24.md)와 [클래스](../deepdive/deepdive25.md)에 관한 챕터에서 그 이유를 알 수 있었습니다.
+그냥 일반 객체를 매핑해서 보내면 안되는 것인지 고민하던 중에 모던 딥다이브에 [클로저](../deepdive/deepdive24.md)와
+[클래스](../deepdive/deepdive25.md)에 관한 챕터에서 그 이유를 알 수 있었습니다.
 
-여러가지 이유가 있겠지만 클래스 인스턴스를 사용하면 객체 내부의 상태나 메서드를 캡슐화해서 외부로부터 상태를 조작하는 것을 방지하는 측면에서 일반 객체를 클래스 인스턴스로 변환한다고 이해했습니다.
+여러가지 이유가 있겠지만 클래스 인스턴스를 사용하면 객체 내부의 상태나 메서드를 캡슐화해서
+외부로부터 상태를 조작하는 것을 방지하는 측면에서 일반 객체를 클래스 인스턴스로 변환한다고 이해했습니다.
 
 ## 데이터 검증하기
 
@@ -166,7 +173,7 @@ bootstrap();
 
 `ValidationPipe`는 validator가 작동할 때 어떻게 동작할지 설정할 수 있습니다.
 
-ValidationPipe의 옵션은 [공식문서](https://docs.nestjs.com/techniques/validation#using-the-built-in-validationpipe)에 자세히 설명되어 있습니다
+ValidationPipe의 옵션은 [공식문서][document]에 자세히 설명되어 있습니다
 
 **auth/auth.controller.ts**
 
@@ -196,10 +203,14 @@ export class AuthController {
 }
 ```
 
-`AuthController`에서 local 전략 대신 `LoginRequestDto`를 넣고 클라이언트에서 넘어오는 username과 password를 보겠습니다
+`AuthController`에서 local 전략 대신 `LoginRequestDto`를 넣고
+클라이언트에서 넘어오는 username과 password를 보겠습니다
 
 username에서 문자열이 아닌 타입이 넘어오면 어떻게 될까요?
 
-![](https://github.com/Zamoca42/blog/assets/96982072/fae68fb2-b407-4fc9-9925-f3550455488c)
+![validator](https://github.com/Zamoca42/blog/assets/96982072/fae68fb2-b407-4fc9-9925-f3550455488c)
 
-username에 "zamoca"대신 숫자 11을 넣으면 `LoginRequestDto`의 username에서 validator에 통과하지 못했기 때문에 `Bad Request Exception`이 발생하는 것을 볼 수 있습니다
+username에 "zamoca"대신 숫자 11을 넣으면 `LoginRequestDto`의 username에서 validator에
+통과하지 못했기 때문에 `Bad Request Exception`이 발생하는 것을 볼 수 있습니다
+
+[document]: https://docs.nestjs.com/techniques/validation#using-the-built-in-validationpipe

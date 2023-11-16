@@ -1,10 +1,16 @@
 ---
 title: 맛집 목록 가져와서 지도에 표시하기
+category:
+  - JS & TS
+tag:
+  - NestJS
+  - TypeScript
+  - Project
 ---
 
 공공데이터로 맛집 목록을 받아와서 지도에 내 위치 주변 맛집을 보여주는 API를 만들었습니다.
 
-> 해당 프로젝트 링크: https://github.com/pre-onboarding-backend-G/feed-me-baby
+> 해당 프로젝트 링크: <https://github.com/pre-onboarding-backend-G/feed-me-baby>
 
 제가 맡은 부분은 전처리된 데이터를 가져와서 맛집 목록을 지도에 표시할 수 있게 반환하는 부분입니다.
 
@@ -27,6 +33,7 @@ title: 맛집 목록 가져와서 지도에 표시하기
 그 다음 목록들을 배열 메서드 filter로 거리에 벗어난 부분을 제외했습니다.
 
 **restaurant-guide.service.ts (getRestaurantList) 메서드**
+
 ```ts
 // 쿼리 메서드..
  return restaurants.filter((restaurant) => {
@@ -44,8 +51,7 @@ title: 맛집 목록 가져와서 지도에 표시하기
 
 ![범위를 늘렸을 때](https://github.com/pre-onboarding-backend-G/feed-me-baby/assets/96982072/3dcf95de-6640-4f9b-9c3e-27b7652f9832)
 
-
-거리상 1도는 약 100km로 계산해서 0.01을 1km로 계산해 위도, 경도에서 범위만큼 더하거나 빼서 
+거리상 1도는 약 100km로 계산해서 0.01을 1km로 계산해 위도, 경도에서 범위만큼 더하거나 빼서
 범위를 설정했습니다.
 
 ```ts
@@ -78,7 +84,7 @@ export class CoordinateBoundDto {
 }
 ```
 
-위도, 경도에 둘 다 적용 가능하지만 위도의 1도의 거리와 경도의 1도의 거리는 차이가 있습니다. 
+위도, 경도에 둘 다 적용 가능하지만 위도의 1도의 거리와 경도의 1도의 거리는 차이가 있습니다.
 
 그래서 최종 geojson에서 확인하면 타원이나 직사각형으로 보이는 현상이 있었습니다.
 

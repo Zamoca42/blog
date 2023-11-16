@@ -1,19 +1,26 @@
 ---
 title: 데이터베이스 연결하기
 order: 4
+category:
+  - JS & TS
+tag:
+  - NestJS
+  - TypeScript
 ---
 
-Nest에서는 TypeORM, Prisma, Mongoose 등 Node.js의 database 관련 라이브러리와 ORM을 지원하기 때문에 SQL이나 NoSQL 데이터베이스 모두 쉽게 연결할 수 있습니다.
+Nest에서는 TypeORM, Prisma, Mongoose 등 다양한 ORM을 사용할 수 있기 때문에
+SQL이나 NoSQL 데이터베이스 모두 쉽게 연결할 수 있습니다.
 
 이번 주제에서는 AWS의 대표적인 NoSQL 기반 데이터베이스인 DynamoDB를 Dynamoose를 이용해서 연결해보겠습니다.
 
 ## Dynamoose 설치하기
 
-Dynamoose는 MongoDB를 연결하는 Mongoose와 같이 [ODM(Object Document Mapping)](https://www.dctacademy.com/blog/what-is-object-document-mapper-odm)에 속하는 DynamoDB 모델링 도구 입니다.
+Dynamoose는 MongoDB를 연결하는 Mongoose와 같이
+[ODM(Object Document Mapping)][ODM]에 속하는 DynamoDB 모델링 도구 입니다.
 
 Dynamoose를 설치하기위해서 터미널에서 명령어를 입력합니다
 
-```
+```bash
 npm install --save dynamoose
 ```
 
@@ -21,7 +28,7 @@ npm install --save dynamoose
 
 DynamoDB 서비스를 이미 사용하고 있다면, 터미널에서 환경변수를 입력하면 연결됩니다.
 
-```
+```bash
 export AWS_ACCESS_KEY_ID = "Your AWS Access Key ID"
 export AWS_SECRET_ACCESS_KEY = "Your AWS Secret Access Key"
 export AWS_REGION = "us-east-1"
@@ -68,33 +75,31 @@ Dynamoose에서 DynamoDB의 스키마를 설정할 수 있습니다. 각 필드�
 ```typescript
 import { Schema } from "dynamoose";
 
-export const customerSchema = new Schema(
-  {
-    user_id: {
-      type: String,
-      hashKey: true,
+export const customerSchema = new Schema({
+  user_id: {
+    type: String,
+    hashKey: true,
+  },
+  email: {
+    type: String,
+    index: {
+      name: "EmailIndex",
+      type: "global",
     },
-    email: {
-      type: String,
-      index: {
-        name: "EmailIndex",
-        type: "global",
-      },
+  },
+  phone_number: {
+    type: String,
+    index: {
+      name: "PhoneNumberIndex",
+      type: "global",
     },
-    phone_number: {
-      type: String,
-      index: {
-        name: "PhoneNumberIndex",
-        type: "global",
-      },
-    },
-  }
-);
+  },
+});
 ```
 
 우선 고객정보 스키마입니다. 유저아이디, 이메일, 전화번호, 마케팅 동의 일자 등이 정의 되어 있습니다. type에서 어떤 속성을 가지는지 보여줍니다.
 
-- [Dynamoose - Attribute Type](https://dynamoosejs.com/guide/Schema#attribute-types)
+- [Dynamoose - Attribute Type][Attribute]
 
 ### 기본키(Primary Key)
 
@@ -106,7 +111,7 @@ PK는 테이블을 생성할 때 반드시 지정해야하는 기본키입니다
 
 rangeKey를 사용하면 rangeKey에서 범위를 지정해서 쿼리할 수 있습니다.
 
-- [Amazon DynamoDB의 핵심 구성 요소](https://docs.aws.amazon.com/ko_kr/amazondynamodb/latest/developerguide/HowItWorks.CoreComponents.html)
+- [Amazon DynamoDB의 핵심 구성 요소][AMAZON]
 
 ### 글로벌 보조 인덱스 (GSI)
 
@@ -121,16 +126,14 @@ rangeKey를 사용하면 rangeKey에서 범위를 지정해서 쿼리할 수 있
 ```typescript
 import { Schema } from "dynamoose";
 
-export const customerMetaSchema = new Schema(
-  {
-    id: {
-      type: String,
-      hashKey: true,
-    },
-    businessName: String,
-    businessItem: String,
-  }
-);
+export const customerMetaSchema = new Schema({
+  id: {
+    type: String,
+    hashKey: true,
+  },
+  businessName: String,
+  businessItem: String,
+});
 ```
 
 고객메타정보 스키마를 설정했습니다. 고객메타정보 스키마는 유저아이디(id), 사업 이름, 업종을 저장합니다.
@@ -185,3 +188,7 @@ export const createCustomerMetaModel = (
 ```
 
 tablePrefix는 환경에 따라서 개발 환경일 때는 개발용 테이블을 사용하고 실제 프로덕션 환경에서는 서비스용 테이블을 사용할 수 있게 적용했습니다
+
+[ODM]: https://www.dctacademy.com/blog/what-is-object-document-mapper-odm
+[AMAZON]: https://docs.aws.amazon.com/ko_kr/amazondynamodb/latest/developerguide/HowItWorks.CoreComponents.html
+[Attribute]: https://dynamoosejs.com/guide/Schema#attribute-types

@@ -1,8 +1,13 @@
 ---
 title: 39. DOM
+category: 
+  - JS & TS
+tag:
+  - JavaScript
 ---
 
-DOM(Document Object Model)은 HTML 문서의 계층적 구조와 정보를 표현하며 이를 제어할 수 있는 API, 즉 프로퍼티와 메서드를 제공하는 트리 자료구조다.
+DOM(Document Object Model)은 HTML 문서의 계층적 구조와 정보를 표현하며
+이를 제어할 수 있는 API, 즉 프로퍼티와 메서드를 제공하는 트리 자료구조다.
 
 ## 1. 노드
 
@@ -111,7 +116,8 @@ input 요소 노드의 객체는 프로토타입 체인에 있는 모든 프로�
 </html>
 ```
 
-배열이 객체인 동시에 배열인 것처럼 input 요소 노드 객체도 다음과 같이 다양한 특성을 갖는 객체이며, 이러한 특성을 나타내는 기능들을 상속을 통해 제공받는다.
+배열이 객체인 동시에 배열인 것처럼 input 요소 노드 객체도 다음과 같이 다양한 특성을 갖는 객체이며,
+이러한 특성을 나타내는 기능들을 상속을 통해 제공받는다.
 
 | input 요소 노드 객체의 특성                                | 프로토타입을 제공하는 객체 |
 | ---------------------------------------------------------- | -------------------------- |
@@ -126,7 +132,8 @@ input 요소 노드의 객체는 프로토타입 체인에 있는 모든 프로�
 
 ![그림 39-7. 노드 객체의 상속 구조](https://github.com/Zamoca42/blog/assets/96982072/947cfe85-2ba6-4cbc-a5a8-c5dd2c4b8b8e)
 
-DOM은 HTML 문서의 계층적 구조와 정보를 표현하는 것은 물론 노드 객체의 종류, 즉 노드 타입에 따라 필요한 기능을 프로퍼티와 메서드의 집합인 DOM API로 제공한다.
+DOM은 HTML 문서의 계층적 구조와 정보를 표현하는 것은 물론 노드 객체의 종류,
+즉 노드 타입에 따라 필요한 기능을 프로퍼티와 메서드의 집합인 DOM API로 제공한다.
 
 이 DOM API를 통해 HTML의 구조나 내용 또는 스타일 등을 동적으로 조작할 수 있다.
 
@@ -208,7 +215,8 @@ HTML 문서 내에는 중복된 id값을 갖는 요소가 여러 개 존재할 �
 
 ### 2.2. 태그 이름을 이용한 요소 노드를 취득
 
-Document.prototype/Element.prototype.getElementsByTagName 메서드는 인수로 전달한 태그 이름을 갖는 모든 요소 노드들을 탐색하여 반환한다.
+Document.prototype/Element.prototype.getElementsByTagName 메서드는
+인수로 전달한 태그 이름을 갖는 모든 요소 노드들을 탐색하여 반환한다.
 
 ```html
 <!DOCTYPE html>
@@ -241,7 +249,8 @@ getElementsByTagName 메서드가 반환하는 DOM 컬렉션 객체인 HTMLColle
 
 ### 2.3. class를 이용한 요소 노드 취득
 
-Document.prototype/Element.prototype.getElementsByClassName 메서드는 인수로 전달한 class 어트리뷰트 값을 갖는 모든 요소 노드들을 탐색하여 반환한다.
+Document.prototype/Element.prototype.getElementsByClassName 메서드는
+인수로 전달한 class 어트리뷰트 값을 갖는 모든 요소 노드들을 탐색하여 반환한다.
 
 ```html
 <!DOCTYPE html>
@@ -346,7 +355,8 @@ HTMLCollection과 NodeList의 중요한 특징은 노드 객체의 상태 변화
 </html>
 ```
 
-위 예제는 HTMLCollection 객체를 for 문으로 순회하며 className 프로퍼티를 사용하여 모든 요소의 class 값을 'red'에서 'blue'로 변경한다.
+위 예제는 HTMLCollection 객체를 for 문으로 순회하며 className 프로퍼티를 사용하여
+모든 요소의 class 값을 'red'에서 'blue'로 변경한다.
 
 ![그림 39-9. 예상대로 동작하지 않는다](https://github.com/Zamoca42/blog/assets/96982072/6f05cc4a-ba13-46fd-8bee-71983c8b26e1)
 
@@ -373,7 +383,8 @@ while ($elems.length > i) {
 }
 ```
 
-유사 배열 객체이면서 이터러블인 HTMLCollection 객체를 배열로 변환하면 부작용을 발생시키는 HTMLCollection 객체를 사용할 필요가 없고 유용한 배열의 고차함수를 사용할 수 있다.
+유사 배열 객체이면서 이터러블인 HTMLCollection 객체를 배열로 변환하면 부작용을 발생시키는
+HTMLCollection 객체를 사용할 필요가 없고 유용한 배열의 고차함수를 사용할 수 있다.
 
 ```js
 // 유사 배열 객체이면서 이터러블인 HTMLCollection을 배열로 변환하여 순회
@@ -382,7 +393,8 @@ while ($elems.length > i) {
 
 #### NodeList
 
-`getElementsByTagName`, `getElementsByClassName` 메서드 대신 querySelectorAll 메서드를 사용하는 방법도 있다.
+`getElementsByTagName`, `getElementsByClassName` 메서드 대신
+querySelectorAll 메서드를 사용하는 방법도 있다.
 
 `querySelectorAll` 메서드는 DOM 컬렉션 객체인 NodeList 객체를 반환한다.
 
@@ -411,7 +423,9 @@ ul#fruits 요소는 3개의 자식 요소를 갖는다.
 
 ![그림 39-10. 트리 노드 탐색 프로퍼티](https://github.com/Zamoca42/blog/assets/96982072/34aa4a9f-2e61-4c3e-8c9d-a573dd71189f)
 
-parentNode, previousSibling, firstChild, childNodes 프로퍼티 Node.prototype이 제공하고, 프로퍼티 키에 Element가 포함된 previousElementSibling, nextElementSibling과 children 프로퍼티는 Element.prototype이 제공된다.
+parentNode, previousSibling, firstChild, childNodes 프로퍼티 Node.prototype이 제공하고,
+프로퍼티 키에 Element가 포함된 previousElementSibling, nextElementSibling과
+children 프로퍼티는 Element.prototype이 제공된다.
 
 ![그림 39-11. 읽기 전용 접근자 프로퍼티](https://github.com/Zamoca42/blog/assets/96982072/df622570-f573-405a-b76b-83921ae7ae94)
 
@@ -559,8 +573,8 @@ HTML 요소 사이의 스페이스, 탭, 줄바꿈 등의 공백 문자는 텍�
 
 ### 5.2. textContent
 
-Node.prototype.textContent 프로퍼티는 setter와 getter 모두 존재하는 접근자 프로퍼티로서 요소 노드의 텍스트와 모든 자손 노드의 텍스트를
-모두 취득하거나 변경한다.
+Node.prototype.textContent 프로퍼티는 setter와 getter 모두 존재하는 접근자 프로퍼티로서
+요소 노드의 텍스트와 모든 자손 노드의 텍스트를 모두 취득하거나 변경한다.
 
 ```html
 <!DOCTYPE html>
@@ -574,7 +588,8 @@ Node.prototype.textContent 프로퍼티는 setter와 getter 모두 존재하는 
     // #foo 요소 노드의 자식 노드인 텍스트 노드의 값을 취득한다.
     console.log(document.getElementById("foo").firstChild.nodeValue); // Hello
     // span 요소 노드의 자식 노드인 텍스트 노드의 값을 취득한다.
-    console.log(document.getElementById("foo").lastChild.firstChild.nodeValue); // world!
+    console.log(document.getElementById("foo").lastChild.firstChild.nodeValue); 
+    // world!
   </script>
 </html>
 ```
@@ -741,7 +756,8 @@ attributes 프로퍼티는 getter만 존재하는 읽기 전용 접근자 프로
       // 요소 노드의 attribute 프로퍼티는 요소 노드의 모든 어트리뷰트 노드의 참조가 담긴 NamedNodeMap 객체를 반환한다.
       const { attributes } = document.getElementById("user");
       console.log(attributes);
-      // NamedNodeMap {0: id, 1: type, 2: value, id: id, type: type, value: value, length: 3}
+      // NamedNodeMap 
+      //{0: id, 1: type, 2: value, id: id, type: type, value: value, length: 3}
 
       // 어트리뷰트 값 취득
       console.log(attributes.id.value); // user
@@ -785,7 +801,8 @@ HTMLElement.prototype.style 프로퍼티는 setter와 getter 모두 존재하는
 
 ![그림 39-34. style 프로퍼티에 의한 인라인 스타일 조작](https://github.com/Zamoca42/blog/assets/96982072/7dd82402-5f43-4ee6-84dc-49f884004a28)
 
-style 프로퍼티를 참조하면 CSSStyleDeclaration 객체는 다양한 CSS 프로퍼티에 대응하는 프로퍼티를 가지고 있으며, 이 프로퍼티에 값을 할당하면 해당 CSS 프로퍼티가 인라인 스타일로 HTML 요소에 추가되거나 변경된다.
+style 프로퍼티를 참조하면 CSSStyleDeclaration 객체는 다양한 CSS 프로퍼티에 대응하는 프로퍼티를 가지고 있으며,
+이 프로퍼티에 값을 할당하면 해당 CSS 프로퍼티가 인라인 스타일로 HTML 요소에 추가되거나 변경된다.
 
 ```js
 $div.style.backgroundColor = "yellow";
@@ -873,9 +890,9 @@ HTML 요소의 class 어트리뷰트 값을 변경하여 HTML 요소의 스타�
 
 DOM은 현재 다음과 같이 4개의 버전이 있다.
 
-| 레벨        | 표준 문서 URL                          |
-| :---------- | :------------------------------------- |
-| DOM Level 1 | https://www.w3.org/TR/REC-DOM-Level-1  |
-| DOM Level 2 | https://www.w3.org/TR/DOM-Level-2-Core |
-| DOM Level 3 | https://www.w3.org/TR/DOM-Level-3-Core |
-| DOM Level 4 | https://dom.spec.whatwg.org            |
+| 레벨        | 표준 문서 URL                            |
+| :---------- | :--------------------------------------- |
+| DOM Level 1 | <https://www.w3.org/TR/REC-DOM-Level-1>  |
+| DOM Level 2 | <https://www.w3.org/TR/DOM-Level-2-Core> |
+| DOM Level 3 | <https://www.w3.org/TR/DOM-Level-3-Core> |
+| DOM Level 4 | <https://dom.spec.whatwg.org>            |
