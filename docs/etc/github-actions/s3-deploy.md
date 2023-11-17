@@ -1,6 +1,10 @@
 ---
 title: S3에 정적 웹페이지 배포하기
 order: 3
+category:
+  - etc.
+tag:
+  - CD
 ---
 
 AWS S3 버킷에 vue로 빌드한 페이지를 정적 웹 사이트로 호스팅할 수 있습니다.
@@ -17,7 +21,7 @@ S3 버킷을 정적 웹사이트로 호스팅하기 위해서는 다음과 같�
 
 ## 버킷 만들고 정적 웹 호스팅 활성화
 
-AWS S3로 이동해서 버킷만들기를 눌러서 버킷이름을 설정하고 버킷을 생성합니다. 
+AWS S3로 이동해서 버킷만들기를 눌러서 버킷이름을 설정하고 버킷을 생성합니다.
 버킷 이름만 설정하고 만들어도 나중에 설정들은 모두 변경할 수 있습니다.
 
 ![버킷을 만든 후 모습](https://github.com/Zamoca42/blog/assets/96982072/cb8e241b-53e4-42fc-b5a9-bb1240671e5e)
@@ -41,24 +45,22 @@ AWS S3로 이동해서 버킷만들기를 눌러서 버킷이름을 설정하고
 ![ACL 설정도 변경해줍니다](https://github.com/Zamoca42/blog/assets/96982072/a7d3e3ca-46cf-498d-80e3-c64830a05271)
 
 ### 버킷 정책
+
 ```json
 {
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Sid": "1",
-            "Effect": "Allow",
-            "Principal": "*",
-            "Action": [
-                "s3:GetObject",
-                "s3:DeleteObject"
-            ],
-            "Resource": [
-                "arn:aws:s3:::vue-blog-frontend/*",
-                "arn:aws:s3:::vue-blog-frontend"
-            ]
-        },
-    ]
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "1",
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": ["s3:GetObject", "s3:DeleteObject"],
+      "Resource": [
+        "arn:aws:s3:::vue-blog-frontend/*",
+        "arn:aws:s3:::vue-blog-frontend"
+      ]
+    }
+  ]
 }
 ```
 
@@ -66,26 +68,16 @@ AWS S3로 이동해서 버킷만들기를 눌러서 버킷이름을 설정하고
 
 ```json
 [
-    {
-        "AllowedHeaders": [
-            "*"
-        ],
-        "AllowedMethods": [
-            "HEAD",
-            "GET",
-            "PUT",
-            "POST",
-            "DELETE"
-        ],
-        "AllowedOrigins": [
-            "https://server.zamoca.space",
-            "https://www.zamoca.space"
-        ],
-        "ExposeHeaders": [
-            "Access-Control-Allow-Origin"
-        ],
-        "MaxAgeSeconds": 3000
-    }
+  {
+    "AllowedHeaders": ["*"],
+    "AllowedMethods": ["HEAD", "GET", "PUT", "POST", "DELETE"],
+    "AllowedOrigins": [
+      "https://server.zamoca.space",
+      "https://www.zamoca.space"
+    ],
+    "ExposeHeaders": ["Access-Control-Allow-Origin"],
+    "MaxAgeSeconds": 3000
+  }
 ]
 ```
 
@@ -97,53 +89,53 @@ AWS S3로 이동해서 버킷만들기를 눌러서 버킷이름을 설정하고
 name: Frontend Deploy # action 명
 
 on: # 이벤트 트리거
-	push: # push event에 반응
-		paths:
-			- "frontend/**" # frontend의 변경이 있을 때
-		branches: # github repository의 branch가
-			- main # main 일 경우만
+ push: # push event에 반응
+  paths:
+   - "frontend/**" # frontend의 변경이 있을 때
+  branches: # github repository의 branch가
+   - main # main 일 경우만
 
 jobs:
-	deploy: # GitHub-hosted runners env
-		runs-on: macos-latest # using MacOS
+ deploy: # GitHub-hosted runners env
+  runs-on: macos-latest # using MacOS
 
-	defaults:
-		run:
-			working-directory: "frontend" # frontend 폴더에서 실행
-	
-	steps:
-		- uses: actions/checkout@v3
+ defaults:
+  run:
+   working-directory: "frontend" # frontend 폴더에서 실행
 
-		- name: Set Node.js 18.x
-		  uses: actions/setup-node@v3
-		  with:
-			node-version: 18.x
+ steps:
+  - uses: actions/checkout@v3
 
-		- name: Install dependencies
-		  run: npm install
+  - name: Set Node.js 18.x
+    uses: actions/setup-node@v3
+    with:
+   node-version: 18.x
 
-		- name: Build page
-		  run: npm run build
+  - name: Install dependencies
+    run: npm install
 
-		- name: Authenticate AWS CLI
-		  env:
-			AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-			AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-			AWS_REGION: ${{ secrets.AWS_REGION }}
+  - name: Build page
+    run: npm run build
 
-		  run: |
-			aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
-			aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
-			aws configure set default.region $AWS_REGION
+  - name: Authenticate AWS CLI
+    env:
+   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+   AWS_REGION: ${{ secrets.AWS_REGION }}
 
-		- name: remove # 삭제
-		  run: |
-			aws s3 rm s3://my-site/assets/ --recursive
-			aws s3 rm s3://my-site/blog/ --recursive
-		
-		- name: deploy # 배포
-		  run: |
-			aws s3 cp --recursive dist s3://my-site
+    run: |
+   aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+   aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+   aws configure set default.region $AWS_REGION
+
+  - name: remove # 삭제
+    run: |
+   aws s3 rm s3://my-site/assets/ --recursive
+   aws s3 rm s3://my-site/blog/ --recursive
+
+  - name: deploy # 배포
+    run: |
+   aws s3 cp --recursive dist s3://my-site
 ```
 
 ## 배포 확인
@@ -152,7 +144,7 @@ jobs:
 
 S3에서 변경사항이 업데이트 되고있는지 마지막 수정 시간에서 확인할 수 있습니다.
 
-![](https://github.com/Zamoca42/blog/assets/96982072/34371e10-988a-4c73-b73c-97d93d39c037)
+![블로그 페이지](https://github.com/Zamoca42/blog/assets/96982072/34371e10-988a-4c73-b73c-97d93d39c037)
 
 Route53과 CloudFront까지 사용해서 원하는 도메인으로 라우팅한다면 이런 페이지로 보여집니다.
 

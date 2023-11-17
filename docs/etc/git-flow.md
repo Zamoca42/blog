@@ -1,6 +1,13 @@
-# Git-flow
+---
+title: Git-flow
+category:
+  - etc.
+tag:
+  - Git
+  - Strategy
+---
 
-![](https://user-images.githubusercontent.com/96982072/227922966-e7f04bb8-7943-434b-8a8a-cbb4097a0339.png)
+![git flow](https://user-images.githubusercontent.com/96982072/227922966-e7f04bb8-7943-434b-8a8a-cbb4097a0339.png)
 
 git-flow는 브랜치를 5가지 종류로 구분하여 개발하는 전략이다.
 
@@ -14,7 +21,7 @@ git-flow는 브랜치를 5가지 종류로 구분하여 개발하는 전략이�
 
 ## git-flow의 흐름
 
-![](https://user-images.githubusercontent.com/96982072/227924759-0e4dc474-667a-477e-8aca-33b936a2dc77.png)
+![git flow flow](https://user-images.githubusercontent.com/96982072/227924759-0e4dc474-667a-477e-8aca-33b936a2dc77.png)
 
 **main**
 
@@ -45,5 +52,5 @@ git-flow는 브랜치를 5가지 종류로 구분하여 개발하는 전략이�
 
 ## 참고 링크
 
-- https://blog.programster.org/git-workflows
-- https://github.com/nvie/gitflow
+- <https://blog.programster.org/git-workflows>
+- <https://github.com/nvie/gitflow>

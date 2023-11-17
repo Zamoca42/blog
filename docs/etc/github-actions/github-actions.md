@@ -1,11 +1,17 @@
 ---
 title: GitHub Actions
 order: 2
+category:
+  - etc.
+tag:
+  - CI
+  - CD
 ---
 
-> https://docs.github.com/ko/actions - GitHub Actions 공식 문서
+> <https://docs.github.com/ko/actions> - GitHub Actions 공식 문서
 
-Github Actions에 대해 간단히 설명하면 테스트 및 배포 파이프라인을 자동화할 수 있는 CI/CD 플랫폼입니다. 레포지토리에서 push같은 이벤트가 일어날 때, workflow를 통해 작업이 실행되는 자동화 프로세스로 각 작업은 자체 가상머신을 사용하여 실행됩니다.
+Github Actions에 대해 간단히 설명하면 테스트 및 배포 파이프라인을 자동화할 수 있는 CI/CD 플랫폼입니다.
+레포지토리에서 push같은 이벤트가 일어날 때, workflow를 통해 작업이 실행되는 자동화 프로세스로 각 작업은 자체 가상머신을 사용하여 실행됩니다.
 
 이번에는 GitHub Actions를 사용해서 AWS EC2에는 서버를 배포하고 S3에는 정적 웹페이지에 배포를 자동화 해보겠습니다.
 
@@ -16,7 +22,7 @@ YAML 파일에 의해 정의합니다.
 
 워크플로우를 설정할 때 다음과 같은 기본 구성 요소가 포함되어야 합니다.
 
-### 1. 트리거 
+### 1. 트리거
 
 트리거는 워크플로가 실행되도록 하는 이벤트입니다. 이러한 이벤트는 다음과 같습니다.
 
@@ -43,8 +49,7 @@ jobs:
 jobs 하위에 `example-job`로 작업 이름를 설정했습니다.
 `runs-on`으로 가상머신의 OS를 설정하고, 그 다음 리포지토리에서 설정한 secrets를 가져온 예제입니다.
 
-가상머신은 
-[GitHub Actions에서 지원하는 가상머신](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#choosing-github-hosted-runners)을 사용할 수 있습니다.
+가상머신은 [GitHub Actions에서 지원하는 가상머신][vm]을 사용할 수 있습니다.
 
 리눅스 ubuntu, MacOS, Window를 설정할 수 있고 대쉬(-)뒤에 버전을 설정할 수 있습니다. 또는 자체 호스팅을 해줄 수도 있습니다.
 
@@ -55,7 +60,7 @@ jobs 하위에 `example-job`로 작업 이름를 설정했습니다.
 아래는 앞으로 알아볼 AWS S3 배포 설정 중 일부를 가져와봤습니다.
 
 ```yaml
-jobs: 
+jobs:
   deploy: # GitHub-hosted runners env
     runs-on: macos-latest # using MacOS
 
@@ -65,7 +70,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Set Node.js 18.x
         uses: actions/setup-node@v3
         with:
@@ -77,6 +82,7 @@ jobs:
       - name: Build page
         run: npm run build
 ```
+
 위의 작업 과정을 요약하면 다음과 같습니다.
 
 1. Node.js 불러오기
@@ -98,13 +104,14 @@ jobs:
 
 ## Secret 등록
 
-워크플로우를 실행하는 과정에서 AWS의 EC2나 S3에 접근해서 배포하려면 AWS의 계정에서 발급한 액세스 키와 비밀 키가 필요합니다. 액세스 키는 AWS에 접근할 수 있는 권한이기 때문에 직접 키를 노출하면 보안 이슈가 발생할 수 있습니다.
-리포지토리의 설정에 Secret을 이용해 액세스 키를 저장하면 키와 비밀키를 노출하지 않고 
+워크플로우를 실행하는 과정에서 AWS의 EC2나 S3에 접근해서 배포하려면 AWS의 계정에서 발급한 액세스 키와 비밀 키가 필요합니다.
+액세스 키는 AWS에 접근할 수 있는 권한이기 때문에 직접 키를 노출하면 보안 이슈가 발생할 수 있습니다.
+리포지토리의 설정에 Secret을 이용해 액세스 키를 저장하면 키와 비밀키를 노출하지 않고
 워크플로우에서 사용할 수 있습니다.
 
 ![Actions를 사용할 리포지토리에서 Secrets 환경변수 등록](https://github.com/Zamoca42/vue-django-blog/assets/96982072/52f8a752-7904-465f-8961-0626e14f99e8)
 
-키를 발급받는 방법은 [AWS 문서](https://docs.aws.amazon.com/ko_kr/singlesignon/latest/userguide/what-is.html)에 자세히 나와있습니다. 
+키를 발급받는 방법은 [AWS 문서][aws-docs]에 자세히 나와있습니다.
 
 AWS에서 키 발급하고 screts에 등록하기까지 다음과 같은 과정이 필요합니다.
 
@@ -137,6 +144,9 @@ AWS 배포에 필요한 보안 권한을 지정합니다. 우선 S3만 지정해
 
 ### 키와 액세스 키를 Github 레포지토리 리포지토리 Actions에 등록
 
-![](https://github.com/Zamoca42/blog/assets/96982072/c4e70695-9fa6-4603-831e-9c741bd35b20)
+![secrets](https://github.com/Zamoca42/blog/assets/96982072/c4e70695-9fa6-4603-831e-9c741bd35b20)
 
 액세스키와 비밀키, 지역까지 등록하면 AWS에 배포할 준비는 끝납니다.
+
+[vm]: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#choosing-github-hosted-runners
+[aws-docs]: https://docs.aws.amazon.com/ko_kr/singlesignon/latest/userguide/what-is.html
