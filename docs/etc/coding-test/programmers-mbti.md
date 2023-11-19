@@ -3,8 +3,8 @@ title: 성격유형 검사하기 - Python
 category: 
 	- etc.
 tag:
-	- Codingtest
-	- Programmers
+  - Codingtest
+  - Programmers
 ---
 
 프로그래머스 [성격 유형 검사하기][personal] 문제입니다.

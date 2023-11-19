@@ -40,61 +40,35 @@ vscode (IDE)에서 디버깅을 할 수 있는 방법이 없었습니다.
 ```yaml
 version: "3.9"
 
-volumes:
-  mongodb: {}
-
 services:
   nest-app:
-    container_name: get-your-feeds-NestJS
+    container_name: dumpin-admin-NestJS
     build:
       context: .
       dockerfile: docker/local.Dockerfile
     ports:
+      # app port
       - "3000:3000"
+      # debugging port
+      - "9229:9229"
     volumes:
-      - .:/app
-    depends_on:
-      - database
-    networks:
-      - mynetwork
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+    # npm run start
+    # npm run start:debug -> this is debugging mode
+    command: npm run start
+    # depends_on:
+    #   - database
+    # networks:
+    #   - mynetwork
     environment:
-      DATABASE_NAME: ${DATABASE_NAME}
-      DATABASE_USER: ${DATABASE_USER}
-      DATABASE_PASS: ${DATABASE_PASS}
-      DATABASE_URI: ${DATABASE_URI}
-      NODE_ENV: ${NODE_ENV}
-      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS}
-
-  # start the mongodb service as container
-  database:
-    image: mongo:latest
-    container_name: get-your-feeds-mongodb
-    restart: always
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongodb:/data/db
-    networks:
-      - mynetwork
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
-
-  mongo-express:
-    image: mongo-express
-    container_name: get-your-feeds-mxpress
-    restart: always
-    ports:
-      - 8081:8081
-    networks:
-      - mynetwork
-    environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: ${ME_CONFIG_MONGODB_ADMINUSERNAME}
-      ME_CONFIG_MONGODB_ADMINPASSWORD: ${ME_CONFIG_MONGODB_ADMINPASSWORD}
-      ME_CONFIG_MONGODB_URL: ${ME_CONFIG_MONGODB_URL}
-
-networks:
-  mynetwork:
+      - DATABASE_NAME
+      - DATABASE_USER
+      - DATABASE_PASS
+      - DATABASE_HOST
+      - DATABASE_URL
+      - ALLOWED_ORIGINS
+      - DATABASE_PORT
 ```
 
 ### 1. vsode에서 DevContainer 확장앱 설치
@@ -225,4 +199,4 @@ services:
 컨테이너를 시작할 때 마다 `docker compose up`을 해야하는 과정마저 줄어들고,
 리눅스 터미널을 사용해서 디버깅을 해볼 수 있다는 점에서 매력적이였습니다.
 같은 팀에서 리눅스를 OS로 쓰시는분이 계시는데 `docker compose up`으로 도커 환경과 연결할 때 DB가 연결되지 않는 현상이 있었습니다.
-DevContainer를 사용해서 해결될 수 있으면 더 좋을거 같습니다.
+그래서 로컬환경에서도 디버깅을 해보고, 도커 이미지 내의 리눅스 환경에서도 디버깅 해볼 수 있게 번경했습니다.

@@ -1,10 +1,10 @@
 ---
 title: 신고 결과 받기 - Python
-category: 
-	- etc
+category:
+  - etc.
 tag:
-	- Codingtest
-    - Programmers
+  - Codingtest
+  - Programmers
 ---
 
 프로그래머스 [신고 결과 받기][report] 문제입니다
