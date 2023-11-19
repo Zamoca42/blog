@@ -5,7 +5,6 @@ category:
   - JS & TS
 tag:
   - NestJS
-  - TypeScript
 ---
 
 React Admin에서 로그인 페이지를 만들고 Nest의 인증 모듈과 연결했을 때의 화면입니다.

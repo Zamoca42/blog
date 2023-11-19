@@ -1,10 +1,15 @@
 ---
-title: 전역 로거 사용하기
+title: 스택 트레이스로 예외 처리 상세보기(feat. winston)
 category:
   - JS & TS
 tag:
   - NestJS
 ---
+
+기존의 예외 처리 설정에서는 BadRequestException이 발생하면
+오류가 발생한 url이나 메세지 정도는 보여줬지만, 정확한 위치나 내용은 알 수 없었다.
+
+그래서 예외를 상세보는 설정을 추가하면서 내장 로거대신 winston 로거 설정도 해보려고한다.
 
 main.ts
 
