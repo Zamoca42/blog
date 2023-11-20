@@ -5,7 +5,6 @@ category:
   - JS & TS
 tag:
   - NestJS
-  - TypeScript
 ---
 
 Nest에서는 TypeORM, Prisma, Mongoose 등 다양한 ORM을 사용할 수 있기 때문에

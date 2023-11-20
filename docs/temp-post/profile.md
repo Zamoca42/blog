@@ -20,15 +20,14 @@ article: false
 
 <br/>
 
-
-|                                                                                          Main                                                                                          |
-| :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-|                                     ![NestJS][NestJS] ![NodeJS][NodeJS] ![TypeScript][TypeScript] ![JavaScript][JavaScript] ![Postgres][Postgres] ![GitHub-Actions][GitHub-Actions]                                      |
-|                                                                                    **Experienced**                                                                                     |
-|                                                   ![Python][Python] ![Django][Django] ![Vue.js][Vue.js] ![React][React] ![AWS][AWS]                                                    |
-|                                                                                   **Explore & Use**                                                                                    |
-|                                                           ![C][C] ![DynamoDB][DynamoDB] ![MongoDB][MongoDB] ![Redis][Redis]                                                            |
-|                                                                                       **Tools**                                                                                        |
+|                                                                                          Main                                                                                           |
+| :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+|                     ![NestJS][NestJS] ![NodeJS][NodeJS] ![TypeScript][TypeScript] ![JavaScript][JavaScript] ![Postgres][Postgres] ![GitHub-Actions][GitHub-Actions]                     |
+|                                                                                     **Experienced**                                                                                     |
+|                                                    ![Python][Python] ![Django][Django] ![Vue.js][Vue.js] ![React][React] ![AWS][AWS]                                                    |
+|                                                                                    **Explore & Use**                                                                                    |
+|                                                            ![C][C] ![DynamoDB][DynamoDB] ![MongoDB][MongoDB] ![Redis][Redis]                                                            |
+|                                                                                        **Tools**                                                                                        |
 | ![VS Code][VS-Code] ![Markdown][Markdown] ![Obsidian][Obsidian] ![Colab][Colab] ![ChatGPT][ChatGPT] ![Git][Git] ![Docker][Docker] ![Docker Compose][Docker-Compose] ![Swagger][Swagger] |
 
 </details>

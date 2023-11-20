@@ -13,7 +13,7 @@ vuepress도 자체도 편리했지만 설정에서 설정이나 다른 부분이
 
 ## hope 테마 소개
 
-[vuepress-theme-hope 페이지](https://vuepress-theme-hope.github.io/v2/guide/get-started/intro.html) 
+[vuepress-theme-hope 페이지](https://vuepress-theme-hope.github.io/v2/guide/get-started/intro.html)
 hope 테마에서 다음과 같은 [편리한 플러그인들](https://vuepress-theme-hope.github.io/v2/config/plugins/intro.html)을 지원해서 vuepress와 같이 설치해서 사용해보겠습니다.
 
 - vuepress-plugin-auto-catalog: Catalog automatically generation for VuePress2

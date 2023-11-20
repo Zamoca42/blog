@@ -4,7 +4,6 @@ category:
   - JS & TS
 tag:
   - NestJS
-  - TypeScript
   - Project
 ---
 

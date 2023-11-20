@@ -19,6 +19,7 @@ article: false
 객체란?
 
 ### 원시타입인 string, number, boolean에 대한 객체가 존재하는 이유 (21장)
+
 표준 빌트인 객체
 암묵적 타입변환
 

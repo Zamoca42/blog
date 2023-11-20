@@ -5,7 +5,6 @@ category:
   - JS & TS
 tag:
   - NestJS
-  - TypeScript
 ---
 
 Nest에는 애플리케이션 전체에서 처리되지 않은 모든 예외를 처리하는 예외 계층(Exceptions Layer)이 내장되어 있습니다.

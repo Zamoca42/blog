@@ -1,6 +1,13 @@
-# 성격유형 검사하기 - Python
+---
+title: 성격유형 검사하기 - Python
+category: 
+	- etc.
+tag:
+  - Codingtest
+  - Programmers
+---
 
-프로그래머스 [성격 유형 검사하기](https://school.programmers.co.kr/learn/courses/30/lessons/118666) 문제입니다.
+프로그래머스 [성격 유형 검사하기][personal] 문제입니다.
 
 문제에서 각 지표는 4개 지표로 나눠집니다.
 
@@ -31,18 +38,18 @@
 
 - `choices`의 길이 = `survey`의 길이
 
-    - `choices[i]`는 검사자가 선택한 i+1번째 질문의 선택지를 의미합니다.
-    - 1 ≤ choices의 원소 ≤ 7
+  - `choices[i]`는 검사자가 선택한 i+1번째 질문의 선택지를 의미합니다.
+  - 1 ≤ choices의 원소 ≤ 7
 
-  | choices |     뜻      |
-  | :----- | :--------- |
-  |    1    | 매우 비동의 |
-  |    2    |   비동의    |
-  |    3    | 약간 비동의 |
-  |    4    |  모르겠음   |
-  |    5    |  약간 동의  |
-  |    6    |    동의     |
-  |    7    |  매우 동의  |
+  | choices | 뜻          |
+  | :------ | :---------- |
+  | 1       | 매우 비동의 |
+  | 2       | 비동의      |
+  | 3       | 약간 비동의 |
+  | 4       | 모르겠음    |
+  | 5       | 약간 동의   |
+  | 6       | 동의        |
+  | 7       | 매우 동의   |
 
 ```python
 def solution(survey, choices):
@@ -67,6 +74,8 @@ choices = [5, 3, 2, 7, 5]
 
 출력값
 
-```
+```text
 result > "TCMA"
 ```
+
+[personal]: https://school.programmers.co.kr/learn/courses/30/lessons/118666

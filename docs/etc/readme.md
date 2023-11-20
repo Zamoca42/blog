@@ -9,6 +9,7 @@ tag:
   - Docker
   - GitHub-Actions
   - Monitoring
+  - Strategy
 comment: false
 timeline: false
 article: false

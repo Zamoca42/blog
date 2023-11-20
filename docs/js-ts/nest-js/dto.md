@@ -5,7 +5,6 @@ category:
   - JS & TS
 tag:
   - NestJS
-  - TypeScript
 ---
 
 ## DTO란?

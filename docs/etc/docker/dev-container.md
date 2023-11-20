@@ -1,89 +1,74 @@
 ---
 title: DevContainer - VSCode(IDE)에서 리눅스 환경으로 개발하고 디버깅하기
+category:
+  - etc.
+tag:
+  - Docker
+  - Debug
 ---
 
 ## DevContainer란 무엇인가?
 
 > [VS Code로 컨테이너 안에서 개발하기](https://ssowonny.medium.com/vs-code%EB%A1%9C-%EC%BB%A8%ED%85%8C%EC%9D%B4%EB%84%88-%EC%95%88%EC%97%90%EC%84%9C-%EA%B0%9C%EB%B0%9C%ED%95%98%EA%B8%B0-d8ed0950d69a)
-
+>
 > [Developing inside a Container - vscode 문서](https://code.visualstudio.com/docs/devcontainers/containers)
 
-DevContainer는 주로 Visual Studio Code와 같은 통합 개발 환경(IDE)에서 사용되며, Visual Studio Code의 확장 앱을 통해 손쉽게 구성할 수 있습니다. 이를 통해 프로젝트를 개발하는 동안 개발 환경을 컨테이너 내에서 실행하고 호스트 시스템과 분리시키는 것이 가능합니다.
+DevContainer는 주로 Visual Studio Code와 같은 통합 개발 환경(IDE)에서 사용되며,
+Visual Studio Code의 확장 앱을 통해 구성할 수 있습니다.
+이를 통해 프로젝트를 개발하는 동안 개발 환경을 컨테이너 내에서 실행하고 호스트 시스템과 분리시키는 것이 가능합니다.
 
 ![VSCode DevContainer 확장 앱](https://github.com/Zamoca42/blog/assets/96982072/5752ba51-596b-4cde-a572-ec0e39f8e8ed)
 
-DevContainer를 설정하려면 프로젝트 루트 디렉토리에 `.devcontainer` 디렉토리를 만들고, 그 안에 Dockerfile 및 환경 설정 파일을 구성해야 합니다.
+DevContainer를 설정하려면 프로젝트 루트 디렉토리에 `.devcontainer` 디렉토리를 만들고,
+그 안에 Dockerfile 및 환경 설정 파일을 구성해야 합니다.
 
 ## 왜 DevContainer인가?
 
-DevContainer를 사용하려고 생각한 이유는 `docker compose up` 명령으로 도커 환경 실행 시 vscode (IDE)에서 디버깅을 할 수 있는 방법이 없었습니다. 추가로 프리온보딩 인턴십 팀프로젝트 회의 중에 OS마다 개발환경이 적용이 안되는 분이 계셨고 그래서 방법이 없을까 검색을 해보던 중에 vscode내에서 도커를 사용하고 개발 환경을 적용해보기 위해 DevContainer를 사용하게 되었습니다.
+DevContainer를 사용하려고 생각한 이유는 `docker compose up` 명령으로 도커 환경 실행 시
+vscode (IDE)에서 디버깅을 할 수 있는 방법이 없었습니다.
+그래서 방법이 없을까 검색을 해보던 중에 vscode내에서 도커를 사용하고 개발 환경을 적용해보기 위해 DevContainer를 사용하게 되었습니다.
 
 ## 설정 과정
 
 > [DevContainer 만들기 - vscode 문서](https://code.visualstudio.com/docs/devcontainers/create-dev-container)
 
-저는 이미 프로젝트를 생성하고 docker-compose.yml이 설정되어 있어서 이미 설정된 프로젝트를 기준으로 DevContainer를 만들어 보겠습니다.
+저는 이미 프로젝트를 생성하고 docker-compose.yml이 설정되어 있어서
+이미 설정된 프로젝트를 기준으로 DevContainer를 만들어 보겠습니다.
 
 **미리 설정되어 있는 루트 디렉터리의 docker-compose.yml**
 
 ```yaml
 version: "3.9"
 
-volumes:
-  mongodb: {}
-
 services:
   nest-app:
-    container_name: get-your-feeds-NestJS
+    container_name: dumpin-admin-NestJS
     build:
       context: .
       dockerfile: docker/local.Dockerfile
     ports:
+      # app port
       - "3000:3000"
+      # debugging port
+      - "9229:9229"
     volumes:
-      - .:/app
-    depends_on:
-      - database
-    networks:
-      - mynetwork
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+    # npm run start
+    # npm run start:debug -> this is debugging mode
+    command: npm run start
+    # depends_on:
+    #   - database
+    # networks:
+    #   - mynetwork
     environment:
-      DATABASE_NAME: ${DATABASE_NAME}
-      DATABASE_USER: ${DATABASE_USER}
-      DATABASE_PASS: ${DATABASE_PASS}
-      DATABASE_URI: ${DATABASE_URI}
-      NODE_ENV: ${NODE_ENV}
-      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS}
-
-  # start the mongodb service as container
-  database:
-    image: mongo:latest
-    container_name: get-your-feeds-mongodb
-    restart: always
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongodb:/data/db
-    networks:
-      - mynetwork
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
-
-  mongo-express:
-    image: mongo-express
-    container_name: get-your-feeds-mxpress
-    restart: always
-    ports:
-      - 8081:8081
-    networks:
-      - mynetwork
-    environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: ${ME_CONFIG_MONGODB_ADMINUSERNAME}
-      ME_CONFIG_MONGODB_ADMINPASSWORD: ${ME_CONFIG_MONGODB_ADMINPASSWORD}
-      ME_CONFIG_MONGODB_URL: ${ME_CONFIG_MONGODB_URL}
-
-networks:
-  mynetwork:
+      - DATABASE_NAME
+      - DATABASE_USER
+      - DATABASE_PASS
+      - DATABASE_HOST
+      - DATABASE_URL
+      - ALLOWED_ORIGINS
+      - DATABASE_PORT
 ```
 
 ### 1. vsode에서 DevContainer 확장앱 설치
@@ -197,13 +182,13 @@ services:
 
 원격 연결을 종료하는 방법은 두 가지 방법이 있는 것을 확인했습니다.
 
-1. 왼쪽 아래 원격 컨테이너를 누르고 vscode 명령팔레트에서 원격 연결 닫기로 나가기
+#### 1. 왼쪽 아래 원격 컨테이너를 누르고 vscode 명령팔레트에서 원격 연결 닫기로 나가기
 
 ![왼쪽 아래 원격 컨테이너 누르기](https://github.com/Zamoca42/blog/assets/96982072/5588f9b5-746d-4158-8b52-ae8520fc32ca)
 
 ![원격 연결 닫기 선택](https://github.com/Zamoca42/blog/assets/96982072/d1efc0ac-7ba0-4a82-811b-3c392a681349)
 
-2. 원격 탐색기에서 원격 연결 종료시키기
+#### 2. 원격 탐색기에서 원격 연결 종료시키기
 
 왼쪽 사이드바에서 원격 탐색기를 선택하고 해당 컨테이너에서 원격 연결을 시작하거나 실행 중인 컨테이너를 종료할 수 있습니다.
 
@@ -214,4 +199,4 @@ services:
 컨테이너를 시작할 때 마다 `docker compose up`을 해야하는 과정마저 줄어들고,
 리눅스 터미널을 사용해서 디버깅을 해볼 수 있다는 점에서 매력적이였습니다.
 같은 팀에서 리눅스를 OS로 쓰시는분이 계시는데 `docker compose up`으로 도커 환경과 연결할 때 DB가 연결되지 않는 현상이 있었습니다.
-DevContainer를 사용해서 해결될 수 있으면 더 좋을거 같습니다.
+그래서 로컬환경에서도 디버깅을 해보고, 도커 이미지 내의 리눅스 환경에서도 디버깅 해볼 수 있게 번경했습니다.

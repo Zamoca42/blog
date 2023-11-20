@@ -1,4 +1,10 @@
-# merge
+---
+title: merge
+category:
+  - etc.
+tag:
+  - Git
+---
 
 git에서 브랜치와 다른 브랜치를 합치는 명령어가 `merge`
 
@@ -10,13 +16,13 @@ git에서 브랜치와 다른 브랜치를 합치는 명령어가 `merge`
 
 `main`에 `post`를 합치고 싶다면 `main` 브랜치로 이동
 
-```
+```bash
 git checkout main
 ```
 
 `main`브랜치에서 `post`를 합치기
 
-```
+```bash
 git merge post
 ```
 
