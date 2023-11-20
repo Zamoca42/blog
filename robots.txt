@@ -2,4 +2,4 @@
 User-agent:*
 Disallow:
 
-Sitemap: https://zamoca.space/blog/sitemap.xml
+Sitemap: https://zamoca.space/sitemap.xml
