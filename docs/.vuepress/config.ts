@@ -4,7 +4,6 @@ import { searchPlugin } from "@vuepress/plugin-search";
 import { googleAnalyticsPlugin } from "@vuepress/plugin-google-analytics";
 
 export default defineUserConfig({
-  dest: "dist",
   title: "Zamoca Space",
   theme,
   plugins: [
