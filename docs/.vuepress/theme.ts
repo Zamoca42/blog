@@ -3,7 +3,7 @@ import navbar from "./navbar";
 import sidebar from "./sidebar";
 
 export default hopeTheme({
-  hostname: "https://zamoca42.github.io",
+  hostname: "https://zamoca.space",
 
   author: {
     name: "추연규",
