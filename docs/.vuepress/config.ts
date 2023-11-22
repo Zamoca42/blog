@@ -13,6 +13,9 @@ export default defineUserConfig({
     googleAnalyticsPlugin({
       id: "G-CESFSZCSP4",
     }),
+    googleAnalyticsPlugin({
+      id: "G-2JERBGBCM8",
+    }),
   ],
   head: [
     [
