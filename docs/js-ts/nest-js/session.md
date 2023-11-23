@@ -1,5 +1,5 @@
 ---
-title: 세션 인증 (express-session)
+title: 세션 쿠키 인증 (express-session)
 category:
   - JS & TS
 tag:
@@ -16,8 +16,6 @@ NestJS에서 [express-session][express-session]으로 세션 인증을 구현해
   - <https://inpa.tistory.com/entry/EXPRESS-%F0%9F%93%9A-express-session-%EB%AF%B8%EB%93%A4%EC%9B%A8%EC%96%B4>
 
 두 가지 링크를 참고해서 세션 동작과정을 정리했습니다.
-
-![세션 동작 과정]()
 
 1. 클라이언트에서 로그인 정보를 서버에 전송
 
@@ -194,9 +192,34 @@ export class AuthService {
 
 ## 로그인 여부 확인
 
+로그인 요청 전에 로그인이 되어있는지 확인하는 절차를 `UseGuard`를 이용해서 확인하겠습니다.
+세션에서 로그인 되어있는지 확인하는 방법은 세션ID에 해당하는 user 객체가 들어있는지 여부로 확인할 수 있습니다.
+
 ![출처: https://slides.com/yariv-gilad/nest-js-request-lifecycle/#/1][lifecycle]
 
-로그인 유저가 있는지 확인하려면 결국 세션 DB에 접근해야합니다.
+쿠키에는 세션ID와 정보들이 암호화되서 클라이언트에 저장되어있고 Controller에 전달되기 전에 Guard에서
+로그인 여부를 확인해볼 수 있습니다.
+
+```js
+//import ...
+@Injectable()
+export class LoggedCheckGuard implements CanActivate {
+  canActivate(context: ExecutionContext): boolean {
+    const request = context.switchToHttp().getRequest();
+    const userInfo = request.session.user;
+    const isLoginRequest = request.url.includes("login");
+
+    if (isLoginRequest && userInfo) {
+      throw new BadRequestException("이미 로그인한 사용자입니다.");
+    }
+
+    return true;
+  }
+}
+```
+
+세션 유저가 존재하는데 로그인 요청을 보내게되면 이미 로그인한 사용자라는 예외처리를 했습니다.
+로그인 유저가 있는지 확인하려면 결국 세션 DB에 접근해야하지만 빠른 예외처리가 가능합니다.
 
 ## 세션 스토어
 
