@@ -1,0 +1,1 @@
+import{_ as t}from"./app-cd06214a.js";const o=async()=>{try{const{pageviewCount:e}=await t(()=>import("./app-cd06214a.js").then(r=>r.M),[]);return e({serverURL:"https://waline-comment-zamoca42s-projects.vercel.app/"})}catch{console.error("@waline/client is not installed!");return}};export{o as updatePageview};
