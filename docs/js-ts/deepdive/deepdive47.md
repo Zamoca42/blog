@@ -1,5 +1,5 @@
 ---
-title: 46. 제너레이터와 async/await
+title: 47. 에러처리
 category:
   - JS & TS
 tag:
