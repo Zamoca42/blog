@@ -1,5 +1,5 @@
 ---
-title: 요청 시도 횟수 제한하기
+title: API 요청 시도 횟수 제한하기
 category:
   - JS & TS
 tag:
@@ -12,17 +12,17 @@ tag:
 
 직접 세션에 로그인 시도를 기록해야하는 경우 로직을 가드로 작성해야한다.
 한가지 문제는 세션의 경우 세션을 삭제하면 로그인 시도 횟수도 초기화 된다는 것이다.
-그래서 로그인 시도에 ratelimit을 사용해보기로 했다.
+그래서 로그인 시도에 express-rate-limit을 사용해보기로 했다.
 
-ratelimit은 시간과 요청횟수를 지정해서 일정 시간이상 요청횟수가 넘어가면 요청을 제한하는 기능이다.
-트래픽에 적은 admin 서버에 ratelimit을 도입하려는 이유는
-예전 aws로 블로그를 배포해서 사용했을 때 크롤링 봇으로 요청이 많이 들어와서 서버비용이 나간 경험이 있어서다.
+RateLimiting은 시간과 요청횟수를 지정해서 일정 시간이상 요청횟수가 넘어가면 요청을 제한하는 기능이다.
+트래픽에 적은 admin 서버에 RateLimiting을 도입하려는 이유는
+예전 aws로 블로그를 배포해서 사용했을 때 봇으로 의심되는 요청이 많이 들어와서 서버비용이 나간 경험이 있어서다.
 robots.txt를 뚫고 들어오는 봇이라도 횟수를 제한하면 트래픽 비용을 줄일 수 있지 않을까?
 로그인 시도도 express-rate-limit으로 제한하고 전체 요청 수도 제한하는 설정을 해볼 것이다.
 
-![글을 작성하는 중에도 봇의 요청이 들어와있다](https://github.com/develop-pix/dump-in-Admin-BE/assets/96982072/3440d390-41fe-4a5d-b7f0-3416a68511dd)
+![글을 작성하는 중에도 수상한 요청이 들어와있다](https://github.com/Zamoca42/blog/assets/96982072/92f42a5f-4940-4738-a07a-d9260bfd9d66)
 
-Nest는 `@nest/throttler`라는 라이브러리로 ratelimit을 지원하고
+Nest는 `@nest/throttler`라는 라이브러리로 RateLimiting을 지원하고
 express에서는 `express-rate-limit`이라는 라이브러리가 있다.
 
 둘 다 설정하는 방법은 비슷하다. 서버 인스턴스가 여러개로 늘어날 경우, 요청 남은 횟수를 서버 메모리가 아닌
