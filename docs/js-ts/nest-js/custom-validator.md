@@ -1,5 +1,6 @@
 ---
 title: Custom validation 만들기
+order: 7
 category:
   - JS & TS
 tag:
