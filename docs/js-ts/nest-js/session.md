@@ -1,5 +1,5 @@
 ---
-title: 세션 쿠키 인증 (express-session)
+title: 세션 쿠키 인증/인가
 category:
   - JS & TS
 tag:

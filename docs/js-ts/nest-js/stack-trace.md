@@ -1,9 +1,10 @@
 ---
-title: 스택 트레이스로 예외 처리 상세보기 (feat. winston)
+title: 스택 트레이스로 예외 처리 상세보기
 category:
   - JS & TS
 tag:
   - NestJS
+  - Winston
 ---
 
 기존의 예외 처리 설정에서는 BadRequestException이 발생하면
