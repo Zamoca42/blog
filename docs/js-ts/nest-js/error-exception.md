@@ -1,5 +1,5 @@
 ---
-title: 예외 처리하기(Exception Filter)
+title: 전역으로 예외 처리 적용하기
 order: 5
 category:
   - JS & TS
