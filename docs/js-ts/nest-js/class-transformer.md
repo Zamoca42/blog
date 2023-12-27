@@ -1,10 +1,11 @@
 ---
-title: 응답 객체 직렬화하기 (class-transformer)
+title: 응답 객체 직렬화하기
 order: 6
 category:
   - JS & TS
 tag:
   - NestJS
+  - Class-Transformer
 ---
 
 요청 객체를 역직렬화 과정과 마찬가지로 클라이언트에 데이터를 전달할 때

@@ -1,10 +1,11 @@
 ---
-title: 요청 객체 역직렬화하기 (class-validator)
+title: 요청 객체 역직렬화하기
 order: 5
 category:
   - JS & TS
 tag:
   - NestJS
+  - Class-Validator
 ---
 
 클라이언트에서 HTTP 요청시 JSON이나 쿼리스트링의 경우 클래스 인스턴스로 변환하는 역직렬화와 유효성 검사과정이 필요하다.

@@ -4,7 +4,7 @@ category:
   - JS & TS
 tag:
   - NestJS
-  - Project
+  - Express
 ---
 
 외부에서 로그인 시도할 때 횟수에 제약이 없다는 것은 무작위 반복해서 아이디와 비밀번호를 대입해도 막을 방법이 없다.
