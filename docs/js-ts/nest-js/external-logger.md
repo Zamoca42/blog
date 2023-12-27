@@ -1,5 +1,5 @@
 ---
-title: 외부 로거 사용하기 (feat.winston)
+title: 외부 로거 사용하기 - winston
 category:
   - JS & TS
 tag:
