@@ -7,111 +7,200 @@ tag:
   - NestJS
 ---
 
-## 데이터 검증하기
+클라이언트에서 HTTP 요청시 JSON이나 쿼리스트링의 경우 클래스 인스턴스로 변환하는 역직렬화와 유효성 검사과정이 필요하다.
 
-클라이언트에서 넘어오는 데이터는 어떻게 검증(validation)할 수 있을까?
+이 부분은 `class-validator` 패키지가 필요하다.
+`class-validator` 데코레이터를 기반으로 Dto들의 검증을 담당한다.
 
-class-validator와 global scoped pipes로 원하지 않는 데이터를 제외하고 받아올 수 있습니다.
+## class-validator 설치
 
-이전 로그인 구현하기에서 클라이언트 부분에서 Controller로 넘어오는 데이터를 검증해보겠습니다.
-
-`auth`폴더 아래에 `dto`폴더를 만들고 `auth.dto.ts` 파일을 만듭니다.
-예제는 NestJS 문서를 참고했습니다.
-
-**auth/dto/auth.dto.ts**
-
-```typescript
-import { IsString, MinLength, MaxLength } from "class-validator";
-
-export class LoginRequestDto {
-  @IsString()
-  @MinLength(3)
-  @MaxLength(10)
-  username: string;
-
-  @IsString()
-  @MinLength(8)
-  @MaxLength(15)
-  password: string;
-}
-
-export class LoginResponseDto {
-  username: string;
-}
+```bash
+npm install --save class-validator
 ```
 
-`LoginRequestDto`에서 클라이언트에서 넘어온 데이터가 문자인지 그리고 최소길이, 최대길이를 만족하는지 decorator를 통해 검증합니다.
+## 글로벌 파이프
 
-데이터 검증이 완전히 작동하려면 `src/main.ts`에서 설정이 필요합니다.
+파이프는 요청 객체를 원하는 형식으로 변환하고, 데이터가 유효하지 않은 경우 예외처리를 목적으로 사용한다.
+부트스트랩에서 `useGlobalPipes` 설정으로 `ValidationPipe`를 설정해 전역으로 파이프 설정을 사용할 수 있다.
 
 **src/main.ts**
 
-```typescript
-import { NestFactory } from "@nestjs/core";
-import { AppModule } from "./app.module";
-import { ValidationPipe } from "@nestjs/common";
-
+```ts
 async function bootstrap(): Promise<void> {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    bufferLogs: true,
+  });
+  const pipeOptions: ValidationPipeOptions = {
+    whitelist: true,
+    transform: true,
+    forbidNonWhitelisted: true,
+  };
 
-  app.useGlobalPipes(
-    new ValidationPipe({
-      whitelist: true,
-      transform: true,
-      forbidNonWhitelisted: true,
-    })
-  );
-
-  await app.listen(3000);
+  //...
+  app.useGlobalPipes(new ValidationPipe(pipeOptions));
+  //...
+  await app.listen(+process.env.APP_SERVER_PORT);
 }
-bootstrap();
 ```
 
-전체 프로젝트에서 DTO의 validation이 작동할 수 있게 `useGlobalPipes`를 통해서 설정했습니다.
-다른 모듈이 생성되더라도 따로 설정해줄 필요없이 validation이 가능합니다.
+이렇게 파이프를 등록하면 객체를 `plainToInstance`로 변환할 필요가 없다.
 
-- [Global-scoped-pipes](https://docs.nestjs.com/pipes#global-scoped-pipes)
+**src/review/review.service.ts**
 
-`ValidationPipe`는 validator가 작동할 때 어떻게 동작할지 설정할 수 있습니다.
+```ts
+//...
 
-ValidationPipe의 옵션은 [공식문서][document]에 자세히 설명되어 있습니다
+@Injectable()
+export class ReviewService {
+  constructor(private readonly reviewRepository: ReviewRepository) {}
 
-**auth/auth.controller.ts**
+  //...
 
-```typescript
-import {
-  Controller,
-  Post,
-  HttpCode,
-  HttpStatus,
-  Body,
-  UseGuards,
-} from "@nestjs/common";
-import { AuthService } from "./auth.service";
-import { AuthGuard } from "@nestjs/passport";
-import { LoginRequestDto, LoginResponseDto } from "./dto/auth.dto";
+  /**
+   * @param id - 삭제할 리뷰 id
+   * @desc 해당 리뷰의 is_deleted 컬럼을 true로 수정 (soft)
+   */
+  async removeReview(id: number): Promise<boolean> {
+    const isExistReview = this.reviewRepository.hasId(Review.byId(id));
 
-@Controller("auth")
-export class AuthController {
-  constructor(private authService: AuthService) {}
+    if (!isExistReview) {
+      throw new NotFoundException("리뷰를 찾지 못했습니다.");
+    }
 
-  // @UseGuards(AuthGuard('local'))
-  @HttpCode(HttpStatus.OK)
-  @Post("login")
-  async login(@Body() reqUser: LoginRequestDto): Promise<LoginResponseDto> {
-    return this.authService.validateUser(reqUser.username, reqUser.password);
+    await this.reviewRepository.save(
+      plainToInstance(Review, { id, isDeleted: true })
+    ); // 요청받은 객체를 인스턴스로 변환
+
+    return true;
   }
 }
 ```
 
-`AuthController`에서 local 전략 대신 `LoginRequestDto`를 넣고
-클라이언트에서 넘어오는 username과 password를 보겠습니다
+아래와 같이 `plainToInstance` 없이 곧바로 인스턴스를 사용할 수 있다.
 
-username에서 문자열이 아닌 타입이 넘어오면 어떻게 될까요?
+```ts
+//...
 
-![validator](https://github.com/Zamoca42/blog/assets/96982072/fae68fb2-b407-4fc9-9925-f3550455488c)
+@Injectable()
+export class ReviewService {
+  constructor(private readonly reviewRepository: ReviewRepository) {}
 
-username에 "zamoca"대신 숫자 11을 넣으면 `LoginRequestDto`의 username에서 validator에
-통과하지 못했기 때문에 `Bad Request Exception`이 발생하는 것을 볼 수 있습니다
+  //...
 
-[document]: https://docs.nestjs.com/techniques/validation#using-the-built-in-validationpipe
+  /**
+   * @param id - 삭제할 리뷰 id
+   * @desc 해당 리뷰의 is_deleted 컬럼을 true로 수정 (soft)
+   */
+  async removeReview(id: number): Promise<boolean> {
+    const isExistReview = this.reviewRepository.hasId(Review.byId(id));
+
+    if (!isExistReview) {
+      throw new NotFoundException("리뷰를 찾지 못했습니다.");
+    }
+
+    await this.reviewRepository.save({ id, isDeleted: true }); //전역 파이프 설정 후 plainToInstance 제거
+
+    return true;
+  }
+}
+```
+
+## 유효성 검사
+
+데코레이터를 사용해서 Dto에서 쿼리스트링이나 요청 데이터가 유효한지 검사할 수 있다.
+
+**src/common/pagination.dto.ts**
+
+```ts
+import { ApiProperty } from "@nestjs/swagger";
+import { Expose, Type } from "class-transformer";
+import { IsInt, IsNotEmpty, Min } from "class-validator";
+
+export interface PaginationProps {
+  take: number;
+  skip: number;
+  page: number;
+}
+
+export class PaginationDto implements PaginationProps {
+  @ApiProperty({
+    description: "리스트에 요구할 페이지 숫자",
+    required: true,
+    example: 1,
+    default: 1,
+  })
+  @IsInt()
+  @Min(0)
+  @Type(() => Number)
+  @IsNotEmpty()
+  @Expose()
+  page: number;
+
+  @ApiProperty({
+    description: "리스트에 요구할 페이지당 항목 수",
+    required: true,
+    example: 10,
+    default: 10,
+  })
+  @IsInt()
+  @Min(0)
+  @IsNotEmpty()
+  @Type(() => Number)
+  @Expose()
+  perPage: number;
+
+  get skip(): number {
+    return this.page < 0 ? 0 : (this.page - 1) * (this.perPage ?? 10);
+  }
+
+  get take(): number {
+    return this.perPage || 10;
+  }
+
+  getPageProps(): PaginationProps {
+    return {
+      take: this.take,
+      skip: this.skip,
+      page: this.page,
+    };
+  }
+
+  decodeString(encodedString: string): string {
+    if (typeof encodedString === "undefined") return undefined;
+    return decodeURIComponent(encodedString);
+  }
+}
+```
+
+**src/hashtag/hashtag.controller.ts**
+
+```ts
+@ApiTags("해시태그")
+@Controller("hashtag")
+export class HashtagController {
+  constructor(private readonly hashtagService: HashtagService) {}
+
+  @Get()
+  @SwaggerAPI({
+    name: "해시태그 목록 조회",
+    model: GetHashtagListDto,
+    isPagination: true,
+  })
+  async findAllHashtags(
+    @Query() request: PaginationDto
+  ): Promise<ResponseEntity<Page<GetHashtagListDto>>> {
+    const [response, count] = await this.hashtagService.findAllHashtags(
+      request.getPageProps()
+    );
+
+    return ResponseEntity.OK_WITH<Page<GetHashtagListDto>>(
+      "해시태그 목록입니다.",
+      Page.create(request.getPageProps(), count, response)
+    );
+  }
+}
+```
+
+유효성 검사가 잘 작동하는지 테스트코드를 작성하거나 동적테스트를 해볼 수 있다.
+
+![perPage에 0이하의 값을 넣으면 400 에러가 발생한다.](https://github.com/develop-pix/dump-in-Admin-BE/assets/96982072/f00427ae-040c-416b-aea9-1bcf5ab218eb)
