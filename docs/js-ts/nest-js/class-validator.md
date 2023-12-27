@@ -10,7 +10,7 @@ tag:
 클라이언트에서 HTTP 요청시 JSON이나 쿼리스트링의 경우 클래스 인스턴스로 변환하는 역직렬화와 유효성 검사과정이 필요하다.
 
 이 부분은 `class-validator` 패키지가 필요하다.
-`class-validator` 데코레이터를 기반으로 Dto들의 검증을 담당한다.
+[`class-validator`][class-validator]는 데코레이터를 기반으로 Dto들의 검증을 담당한다.
 
 ## class-validator 설치
 
@@ -109,7 +109,7 @@ export class ReviewService {
 
 데코레이터를 사용해서 Dto에서 쿼리스트링이나 요청 데이터가 유효한지 검사할 수 있다.
 
-**src/common/pagination.dto.ts**
+**src/common/get-pagination-query.dto.ts**
 
 ```ts
 import { ApiProperty } from "@nestjs/swagger";
@@ -204,3 +204,5 @@ export class HashtagController {
 유효성 검사가 잘 작동하는지 테스트코드를 작성하거나 동적테스트를 해볼 수 있다.
 
 ![perPage에 0이하의 값을 넣으면 400 에러가 발생한다.](https://github.com/develop-pix/dump-in-Admin-BE/assets/96982072/f00427ae-040c-416b-aea9-1bcf5ab218eb)
+
+[class-validator]: https://github.com/typestack/class-validator
