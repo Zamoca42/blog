@@ -206,4 +206,10 @@ export class HashtagController {
 
 ![perPage에 0이하의 값을 넣으면 400 에러가 발생한다.](https://github.com/develop-pix/dump-in-Admin-BE/assets/96982072/f00427ae-040c-416b-aea9-1bcf5ab218eb)
 
+## 참고
+
+:pushpin: NestJS로 배우는 백엔드 프로그래밍 - 한용재
+
+:pushpin: <https://jojoldu.tistory.com/610>
+
 [class-validator]: https://github.com/typestack/class-validator

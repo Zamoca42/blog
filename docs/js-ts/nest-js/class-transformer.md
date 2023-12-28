@@ -186,5 +186,9 @@ export class HashtagController {
 }
 ```
 
+:pushpin: NestJS로 배우는 백엔드 프로그래밍 - 한용재
+
+:pushpin: <https://jojoldu.tistory.com/610>
+
 [class-transformer]: https://github.com/typestack/class-transformer
 [lifecycle]: https://github.com/Zamoca42/blog/assets/96982072/9decee8b-43af-4713-84af-e3969ed923a8
