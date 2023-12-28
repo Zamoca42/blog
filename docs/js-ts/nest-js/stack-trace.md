@@ -1,5 +1,5 @@
 ---
-title: 스택 트레이스로 예외 처리 상세보기
+title: 스택 트레이스로 에러 추적하기
 category:
   - JS & TS
 tag:

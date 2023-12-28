@@ -1,6 +1,6 @@
 ---
 title: 고객정보 API 만들기
-order: 6
+order: 8
 category:
   - JS & TS
 tag:
