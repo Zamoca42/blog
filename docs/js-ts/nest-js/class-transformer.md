@@ -6,6 +6,7 @@ category:
 tag:
   - NestJS
   - Class-Transformer
+star: true
 ---
 
 요청 객체를 역직렬화 과정과 마찬가지로 클라이언트에 데이터를 전달할 때

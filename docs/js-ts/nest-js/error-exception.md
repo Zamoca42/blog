@@ -1,6 +1,6 @@
 ---
 title: 전역으로 예외 처리 적용하기
-order: 5
+order: 7
 category:
   - JS & TS
 tag:

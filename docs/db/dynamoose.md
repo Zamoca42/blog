@@ -1,10 +1,12 @@
 ---
-title: 데이터베이스 연결하기
+title: DynamoDB 연결하기 with NestJS
 order: 4
 category:
   - JS & TS
 tag:
   - NestJS
+  - DynamoDB
+  - Dynamoose
 ---
 
 Nest에서는 TypeORM, Prisma, Mongoose 등 다양한 ORM을 사용할 수 있기 때문에
