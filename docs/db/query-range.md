@@ -5,6 +5,7 @@ category:
 tag:
   - NestJS
   - PostgreSQL
+  - TypeORM
 ---
 
 공공데이터로 맛집 목록을 받아와서 지도에 내 위치 주변 맛집을 보여주는 API를 만들었습니다.
