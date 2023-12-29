@@ -22,9 +22,9 @@ tag:
 }
 ```
 
-클라이언트에 이런 API로 보내줘야합니다
+클라이언트에 이런 API로 보내줘야합니다.
 
-[데이터베이스 연결하기](./database.md)에서 고객정보 스키마는 이렇게 작성했습니다.
+[데이터베이스 연결하기](../../db/dynamoose.md)에서 고객정보 스키마는 이렇게 작성했습니다.
 
 ```typescript
 export const customerMetaSchema = new Schema({
