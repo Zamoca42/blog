@@ -11,7 +11,7 @@ export default sidebar({
     },
     "dynamoose",
     "query-range",
-    "typeorm",
+    "transaction-rollback",
   ],
   "/js-ts/": [
     "",
