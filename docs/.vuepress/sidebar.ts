@@ -9,6 +9,9 @@ export default sidebar({
       collapsible: true,
       children: "structure",
     },
+    "dynamoose",
+    "query-range",
+    "typeorm",
   ],
   "/js-ts/": [
     "",
