@@ -8,6 +8,7 @@ tag:
   - TypeORM
   - ORM
   - NestJS
+star: true
 ---
 
 현재 진행중인 프로젝트에서 이벤트를 생성하고 수정하는 기능을 만들려고한다.
