@@ -15,7 +15,7 @@ star: true
 
 ![어디서 많이 본 로직이 보였다.](https://github.com/develop-pix/dump-in-Admin-BE/assets/96982072/ef451050-bdfe-4e59-a4c1-7030c6f181aa)
 
-현재 프로젝트에서도 단건으로 조회할 때 데이터가 없으면 바로 예외처리를 해주는 로직으로 설정하고있었다.
+TypeORM을 사용하는 프로젝트에서 단건으로 조회할 때 데이터가 없으면 바로 예외처리를 해주는 로직으로 설정하고있었다.
 
 ```ts
 @Injectable()
@@ -29,7 +29,7 @@ export class ReviewService {
   async findOneReviewById(id: number): Promise<Review> {
     const review = await this.reviewRepository.findOneReview(Review.byId(id));
     if (!review) {
-      throw new NotFoundException("리뷰를 찾지 못했습니다.");
+      throw new NotFoundException("리뷰를 찾지 못했습니다."); //HTTP 예외처리
     }
     return review;
   }
@@ -40,8 +40,8 @@ export class ReviewService {
 
 위 리뷰 서비스의 메서드와 블로그의 내용을 읽어보고 드는 문제를 정리하자면 다음과 같다.
 
-1. 정상적인 흐름에서 예외처리되고있다는 점
-2. 서비스 레이어에서 HTTP예외를 처리하고 있다는 점
+1. 정상적인 흐름에서 예외 처리 되고 있다는 점
+2. 서비스 레이어에서 HTTP 예외를 처리하고 있다는 점
 
 확실히 class-validator에서 검증 decorator를 Dto에서 적용한다고 생각해봤을 때 레이어에 안맞는 예외처리라고 느꼈다.
 
@@ -342,7 +342,7 @@ export class AuthController {
 
 ![정상적인 로그인 확인](https://github.com/develop-pix/dump-in-Admin-BE/assets/96982072/ce7dda1e-f8fe-4075-9fd0-e69d11d9afd3)
 
-![세션 데이터가 들어왔는지 확인](https://github.com/develop-pix/dump-in-Admin-BE/assets/96982072/6663b3de-7b0f-4a5b-9e16-3b9f9a8cb989)
+![쿠키도 정상적으로 받아왔는지 확인](https://github.com/develop-pix/dump-in-Admin-BE/assets/96982072/20c6e2cf-a52f-4c84-adb5-88708a2cc325)
 
 ## 참고 링크
 
