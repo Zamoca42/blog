@@ -1,0 +1,1 @@
+import{_ as t}from"./plugin-vue_export-helper-c27b6911.js";import{o as e,c as r}from"./app-76b20676.js";const o={};function c(n,_){return e(),r("div")}const m=t(o,[["render",c],["__file","frontmatter.html.vue"]]);export{m as default};
