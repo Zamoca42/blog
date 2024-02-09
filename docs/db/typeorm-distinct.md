@@ -1,5 +1,5 @@
 ---
-title: TypeORM - DISTINCT 쿼리
+title: TypeORM - DISTINCT
 description: TypeORM에서 목록 조회시 DISTINCT 쿼리가 생기는 이유에 대해 정리했다.
 category:
   - DB
