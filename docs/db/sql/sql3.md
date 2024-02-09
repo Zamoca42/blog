@@ -1,6 +1,10 @@
 ---
-title: 11 ~ 15강
+title: (SQL 첫걸음) 11 ~ 15강
 order: 3
+category:
+  - DB
+tag:
+  - SQL
 ---
 
 > SQL 첫걸음 11 ~ 15강의 내용입니다
@@ -218,7 +222,7 @@ SELECT *, price * quantity AS amount FROM sample34
 한편 WHERE 구에서는 별명을 사용할 수 없었습니다.
 서버에서 내부처리가 다음과 같은 순으로 처리되기 때문.
 
-```
+```sql
 WHERE 구 -> SELECT 구 -> ORDER BY 구
 ```
 
@@ -226,7 +230,7 @@ WHERE 구 -> SELECT 구 -> ORDER BY 구
 
 연산자 외에 함수를 사용해 연산할 수 있습니다.
 
-```
+```sql
 함수(인수1, 인수2...)
 ```
 
