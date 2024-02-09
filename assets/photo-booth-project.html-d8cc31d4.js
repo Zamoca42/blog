@@ -1,1 +1,0 @@
-import{_ as o}from"./plugin-vue_export-helper-c27b6911.js";import{o as t,c as e}from"./app-dacd6e87.js";const c={};function r(_,n){return t(),e("div")}const f=o(c,[["render",r],["__file","photo-booth-project.html.vue"]]);export{f as default};
