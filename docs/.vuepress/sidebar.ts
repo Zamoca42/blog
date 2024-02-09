@@ -4,7 +4,7 @@ export default sidebar({
   "/db/": [
     "",
     {
-      text: "SQL 첫걸음",
+      text: "SQL",
       prefix: "sql/",
       collapsible: true,
       children: "structure",

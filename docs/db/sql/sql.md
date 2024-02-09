@@ -1,6 +1,10 @@
 ---
-title: 1 ~ 5강
+title: (SQL 첫걸음) 1 ~ 5강
 order: 1
+category:
+  - DB
+tag:
+  - SQL
 prev: false
 ---
 

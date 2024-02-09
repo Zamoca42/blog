@@ -1,9 +1,9 @@
 ---
-title: SQL-subquery
+title: SQL - subquery
 category:
   - DB
 tag:
-  - Subquery
+  - SQL
 ---
 
 > <https://youtu.be/lwmwlA2WhFc?si=Szgl3bDlly7CF266>
@@ -27,23 +27,23 @@ SELECT, INSERT, UPDATE, DELETE 쿼리문에 포함된 쿼리를 말한다.
 
 **Department**
 
-- column
-  - id, name, leader_id
+| id  | name | leader_id |
+| --- | ---- | --------- |
 
 **Employee**
 
-- column
-  - id, name, birth_date, sex, positon, salary, dept_id(department)
+| id  | name | birth_date | sex | positon | salary | dept_id(department) |
+| --- | ---- | ---------- | --- | ------- | ------ | ------------------- |
 
 **Project**
 
-- column
-  - id, name, leader_id, start_date, end_date
+| id  | name | leader_id | start_date | end_date |
+| --- | ---- | --------- | ---------- | -------- |
 
 **Works_on**
 
-- column
-  - empl_id(employee), proj_id(project)
+| empl_id(employee) | proj_id(project) |
+| ----------------- | ---------------- |
 
 ## SELECT with subquery 예제
 
@@ -60,7 +60,11 @@ SELECT id, name, birth_date FROM employee WHERE birth_date < '1992-08-04';
 서브쿼리를 사용하지 않으면 두 개의 쿼리를 순차적으로 실행해서 결과를 찾아야한다.
 
 ```sql
-SELECT id, name, birth_date FROM employee WHERE birth_date < (SELECT birth_date FROM employee WHERE id = 14);
+SELECT id, name, birth_date 
+FROM employee 
+WHERE birth_date < (
+  SELECT birth_date FROM employee WHERE id = 14
+  );
 ```
 
 서브쿼리를 이용하면 두 개의 쿼리를 하나로 합쳐서 하나의 쿼리로 실행해 결과를 찾는다.
