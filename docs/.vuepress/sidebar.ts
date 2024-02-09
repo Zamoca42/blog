@@ -60,6 +60,12 @@ export default sidebar({
       collapsible: true,
       children: "structure",
     },
+    {
+      text: "HTTP 완벽 가이드",
+      prefix: "http/",
+      collapsible: true,
+      children: "structure",
+    },
     "grafana-prometheus-in-django",
     "github-flow",
     "git-flow",
