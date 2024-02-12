@@ -1,5 +1,5 @@
 ---
-title: linux에 node & npm 설치
+title: 우분투에 node & npm 설치
 category:
   - Infra.
 tag:
@@ -14,7 +14,7 @@ order: 2
 NestJS로 구성된 서버를 실행하려면 node와 npm이 있어야 패키지를 관리하고 실행할 수 있다.
 하지만 기본적으로 EC2 인스턴스를 만들면 Node.js와 npm 등이 설치되어 있지 않다.
 
-그래서 기본 제공되는 unbuntu 이미지에 Node와 npm, pm2를 설치하고
+그래서 aws에서 ec2 인스턴스를 만들 때 기본 제공되는 unbuntu 이미지에 Node.js와 npm 설치하고
 git clone으로 레포지토리까지 설정을 한 다음,
 초기 설정한 볼륨을 이미지(AMI)로 만들어서 자동으로 생성된 인스턴스에 초기설정이 필요없게 만들려고 한다.
 
@@ -43,6 +43,7 @@ v18.19.0
 ## 글로벌 환경에서 패키지 설치하기
 
 그 다음 글로벌 환경에서 pm2를 설치한다.
+pm2는 이 후에 서버를 실행하고 pm2로 프로세스를 관리하는 용도로 사용한다.
 
 ```bash
 npm install -g pm2
