@@ -2,7 +2,7 @@
 title: S3에 정적 웹페이지 배포하기
 order: 3
 category:
-  - etc.
+  - Infra.
 tag:
   - CD
 ---

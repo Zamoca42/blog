@@ -2,7 +2,7 @@
 title: CI/CD란?
 order: 1
 category:
-  - etc.
+  - Infra.
 tag:
   - CI
   - CD

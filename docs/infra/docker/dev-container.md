@@ -1,7 +1,7 @@
 ---
 title: DevContainer - VSCode(IDE)에서 리눅스 환경으로 개발하고 디버깅하기
 category:
-  - etc.
+  - Infra.
 tag:
   - Docker
   - Debug

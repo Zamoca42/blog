@@ -2,7 +2,7 @@
 title: GitHub Actions
 order: 2
 category:
-  - etc.
+  - Infra.
 tag:
   - CI
   - CD

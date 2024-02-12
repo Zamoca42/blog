@@ -43,14 +43,19 @@ export default sidebar({
       children: "structure",
     },
     {
-      text: "GitHub Actions로 배포 자동화",
-      prefix: "github-actions/",
+      text: "회고",
+      prefix: "retrospect/",
       collapsible: true,
       children: "structure",
     },
+    "github-flow",
+    "git-flow",
+  ],
+  "/infra/": [
+    "",
     {
-      text: "회고",
-      prefix: "retrospect/",
+      text: "GitHub Actions로 배포 자동화",
+      prefix: "github-actions/",
       collapsible: true,
       children: "structure",
     },
@@ -66,8 +71,12 @@ export default sidebar({
       collapsible: true,
       children: "structure",
     },
+    {
+      text: "오토 스케일링 적용하기",
+      prefix: "auto-scaling/",
+      collapsible: true,
+      children: "structure",
+    },
     "grafana-prometheus-in-django",
-    "github-flow",
-    "git-flow",
   ],
 });

@@ -11,6 +11,10 @@ export default navbar([
     link: "/db/",
   },
   {
+    text: "Infra.",
+    link: "/infra/",
+  },
+  {
     text: "etc.",
     link: "/etc/",
   },
