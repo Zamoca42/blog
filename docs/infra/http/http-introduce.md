@@ -1,7 +1,7 @@
 ---
 title: 1. http 기본정리
 category:
-  - etc.
+  - Infra.
 tag:
   - Http
 ---

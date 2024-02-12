@@ -1,7 +1,7 @@
 ---
 title: 프로메테우스 - 그라파나 in Django
 category:
-  - etc.
+  - Infra.
 tag:
   - Monitoring
 ---

@@ -6,9 +6,6 @@ tag:
   - Git
   - Retrospect
   - Test
-  - Docker
-  - GitHub-Actions
-  - Monitoring
   - Strategy
 comment: false
 timeline: false
@@ -23,5 +20,4 @@ article: false
 - [git](./git/)
 - [GitHub-flow](github-flow.md)
 - [Git-flow](git-flow.md)
-- [GitHub Actions](./github-actions/)
 - [회고](./retrospect/)

@@ -1,7 +1,7 @@
 ---
 title: 2. URL과 리소스
 category:
-  - etc.
+  - Infra.
 tag:
   - Http
 ---
