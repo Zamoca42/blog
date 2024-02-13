@@ -1,5 +1,5 @@
 ---
-title: sparse-checkout으로 필요한 디렉터리만 clone하기
+title: 필요한 디렉터리만 clone하기
 category:
   - Infra.
 tag:
@@ -15,7 +15,7 @@ order: 3
 > ├─ package-lock.json
 > └─ package.json
 
-GitHub repository에서 frontend 디렉터리를 제외한 나머지 파일 및 디렉터리를 clone해서 가져오려면 어떻게 해야할까?
+GitHub 레포지토리에서 frontend 디렉터리를 제외한 나머지 파일 및 디렉터리를 clone해서 가져오려면 어떻게 해야할까?
 
 ec2 인스턴스에 서버의 포함된 패키지와 클라이언트에 포함된 패키지까지 설치하면
 서버를 구동하는데 불필요한 패키지까지 설치해야하므로 그만큼 효율적이지 못하다.
@@ -47,7 +47,7 @@ git remote add origin <project-url>
 
 ## 필요한 디렉터리만 clone하기
 
-그다음 sparse-checkout을 설정하자.
+그 다음 sparse-checkout을 설정하자.
 
 ```bash
 git sparse-checkout set 'backend/'
