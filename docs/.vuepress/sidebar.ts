@@ -71,12 +71,8 @@ export default sidebar({
       collapsible: true,
       children: "structure",
     },
-    {
-      text: "오토 스케일링 적용하기",
-      prefix: "auto-scaling/",
-      collapsible: true,
-      children: "structure",
-    },
     "grafana-prometheus-in-django",
+    "node-install",
+
   ],
 });
