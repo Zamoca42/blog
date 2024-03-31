@@ -4,6 +4,8 @@ category:
   - Infra.
 tag:
   - Http
+timeline: false
+article: false
 ---
 
 URL(Uniform Resource Locator)은 인터넷의 리소스를 가리키는 표준이름이다.

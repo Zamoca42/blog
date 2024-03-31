@@ -17,8 +17,6 @@ export default hopeTheme({
       Email: "mailto:suntail2002@naver.com",
       Gmail: "mailto:suntail93@gmail.com",
       Linkedin: "https://www.linkedin.com/in/연규-추-951017276",
-      Instagram: "https://instagram.com/suntail2012",
-      Steam: "https://steamcommunity.com/id/starlake21/",
     }
   },
 
