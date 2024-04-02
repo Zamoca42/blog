@@ -4,6 +4,8 @@ category:
   - Infra.
 tag:
   - Http
+timeline: false
+article: false
 ---
 
 HTTP가 인터넷 배달원이라면, HTTP 메시지는 무언가 담아 보내는 소포와 같다.

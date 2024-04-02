@@ -6,9 +6,6 @@ article: false
 
 ![header](https://capsule-render.vercel.app/api?type=waving&color=7fbcd2&section=header&text=Chu%20Yeon%20Kyu&fontColor=e1ffee&height=200)
 
-**"JavaScript의 프로토타입기반 객체지향 언어를 좋아합니다."**
-
-**"TypeScript을 활용해서 효율적이고 생산적인 개발 방법에 대해 고민하고 있습니다."**
 <br/>
 
 | :pencil: **Tech Blog**  | [![Blog][Blog]][Blog-url]                                                  |
@@ -20,15 +17,15 @@ article: false
 
 <br/>
 
-|                                                                                          Main                                                                                           |
-| :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-|                     ![NestJS][NestJS] ![NodeJS][NodeJS] ![TypeScript][TypeScript] ![JavaScript][JavaScript] ![Postgres][Postgres] ![GitHub-Actions][GitHub-Actions]                     |
-|                                                                                     **Experienced**                                                                                     |
-|                                                    ![Python][Python] ![Django][Django] ![Vue.js][Vue.js] ![React][React] ![AWS][AWS]                                                    |
-|                                                                                    **Explore & Use**                                                                                    |
-|                                                            ![C][C] ![DynamoDB][DynamoDB] ![MongoDB][MongoDB] ![Redis][Redis]                                                            |
-|                                                                                        **Tools**                                                                                        |
-| ![VS Code][VS-Code] ![Markdown][Markdown] ![Obsidian][Obsidian] ![Colab][Colab] ![ChatGPT][ChatGPT] ![Git][Git] ![Docker][Docker] ![Docker Compose][Docker-Compose] ![Swagger][Swagger] |
+|                                                                                                   Main                                                                                                    |
+| :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+|                                         ![NestJS][NestJS] ![NodeJS][NodeJS] ![TypeScript][TypeScript] ![JavaScript][JavaScript] ![Postgres][Postgres] ![AWS][AWS]                                         |
+|                                                                                              **Experienced**                                                                                              |
+|                                                                   ![Python][Python] ![Django][Django] ![Vue.js][Vue.js] ![React][React]                                                                   |
+|                                                                                             **Explore & Use**                                                                                             |
+|                                                                               ![C][C] ![Next.js][NextJS] ![Prisma][Prisma]                                                                                |
+|                                                                                                 **Tools**                                                                                                 |
+| ![VS Code][VS-Code] ![Markdown][Markdown] ![Obsidian][Obsidian] ![ChatGPT][ChatGPT] ![Git][Git] ![Docker][Docker] ![Docker Compose][Docker-Compose] ![Swagger][Swagger] ![GitHub-Actions][GitHub-Actions] |
 
 </details>
 
@@ -71,16 +68,14 @@ article: false
 [React]: https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white
 [AWS]: https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=AmazonAWS&logoColor=white
 [C]: https://img.shields.io/badge/C-A8B9CC?style=for-the-badge&logo=C&logoColor=white
-[DynamoDB]: https://img.shields.io/badge/DynamoDB-4053D6?style=for-the-badge&logo=AmazonDynamoDB&logoColor=white
-[MongoDB]: https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=MongoDB&logoColor=white
-[Redis]: https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=Redis&logoColor=white
 [VS-Code]: https://img.shields.io/badge/VS%20Code-0078d7?style=for-the-badge&logo=visual-studio-code&logoColor=white
 [Markdown]: https://img.shields.io/badge/Markdown-%23000000?style=for-the-badge&logo=markdown&logoColor=white
 [Obsidian]: https://img.shields.io/badge/Obsidian-%23483699?style=for-the-badge&logo=obsidian&logoColor=white
-[Colab]: https://img.shields.io/badge/Colab-%23F46800?style=for-the-badge&logo=googlecolab&logoColor=white
 [ChatGPT]: https://img.shields.io/badge/ChatGPT-%23000000?style=for-the-badge&logo=openai&logoColor=white
 [Swagger]: https://img.shields.io/badge/Swagger-%85EA2D?style=for-the-badge&logo=swagger&logoColor=white
 [GitHub-Actions]: https://img.shields.io/badge/GitHub%20Actions-%23000000?style=for-the-badge&logo=githubactions&logoColor=white
+[NextJS]: https://img.shields.io/badge/Next%2Ejs-%23000000?style=for-the-badge&logo=nextdotjs&logoColor=white
+[Prisma]: https://img.shields.io/badge/Prisma-%232D3748?style=for-the-badge&logo=prisma&logoColor=white
 
 <!--URL-LINK-->
 
