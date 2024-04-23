@@ -27,6 +27,7 @@ export default sidebar({
       collapsible: true,
       children: "structure",
     },
+    "date-fns"
   ],
   "/etc/": [
     "",
