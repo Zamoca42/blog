@@ -2,7 +2,7 @@
 title: DynamoDB 연결하기 with NestJS
 order: 4
 category:
-  - JS & TS
+  - DB
 tag:
   - NestJS
   - DynamoDB
