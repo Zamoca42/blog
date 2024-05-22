@@ -126,5 +126,5 @@ const UTCDate = new UTCDate().getTime();
 const DateWithTimeZone = new Date();
 
 console.log(DateWithTimeZone.toString()); // Tue Apr 23 2024 23:59:41 GMT+0900 (대한민국 표준시)
-console.log(date === DateWithTimeZone.getTime()); //true
+console.log(UTCDate === DateWithTimeZone.getTime()); //true
 ```
