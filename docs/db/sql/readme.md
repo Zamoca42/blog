@@ -1,5 +1,5 @@
 ---
-title: DB
+title: SQL
 comment: false
 next: false
 timeline: false
@@ -10,3 +10,9 @@ category:
 tag:
   - SQL
 ---
+
+<br/>
+
+- Database, SQL관련 공부한 내용을 기록합니다
+
+#### 목차

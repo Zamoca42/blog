@@ -1,7 +1,7 @@
 ---
 title: 맛집 목록 가져와서 지도에 표시하기
 category:
-  - JS & TS
+  - DB
 tag:
   - NestJS
   - PostgreSQL
